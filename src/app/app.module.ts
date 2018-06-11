@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 // Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from "@angular/flex-layout";
 import {
   MatButtonModule,
   MatCheckboxModule
@@ -27,6 +28,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    FlexLayoutModule,
     // Materials
     MatButtonModule,
     MatCheckboxModule

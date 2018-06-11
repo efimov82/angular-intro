@@ -1,7 +1,13 @@
 <app-header></app-header>
 
-<app-breadcrumbs></app-breadcrumbs>
-<div class="content">
-  <app-courses></app-courses>
+<div class="content" fxLayout fxLayout.xs="column" fxLayoutAlign="left" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxLayout fxFlexOffset="50px" fxFlexOffset.xs="0">
+    <app-breadcrumbs></app-breadcrumbs>
+  </div>
+
+  <div fxLayout fxFlexOffset="50px" fxFlexOffset.xs="0">
+    <app-courses></app-courses>
+  </div>
+</div>
 
 <app-footer></app-footer>
