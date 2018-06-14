@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 
 // Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatToolbarModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { CourseComponent } from './components/course/course.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     FooterComponent,
     LogoComponent,
     CoursesComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    CourseComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -31,7 +34,8 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     FlexLayoutModule,
     // Materials
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
