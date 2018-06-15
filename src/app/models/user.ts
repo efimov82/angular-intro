@@ -1,4 +1,4 @@
-import { UserInterface } from "../interfaces/user";
+import { UserInterface } from '../interfaces/user';
 
 export class User implements UserInterface {
   Id: number;

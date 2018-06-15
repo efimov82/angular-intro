@@ -18,6 +18,7 @@ import { CoursesComponent } from './pages/courses/courses.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { CourseComponent } from './components/course/course.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     CoursesComponent,
     BreadcrumbsComponent,
     CourseComponent,
+    UserInfoComponent,
   ],
   imports: [
     BrowserAnimationsModule,
