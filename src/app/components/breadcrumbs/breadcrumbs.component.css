@@ -1,7 +1,14 @@
 .c-breadcrumbs{
-  margin: 20px;
-  font-family: 'Raleway', sans-serif;
-
   font-size: 16px;
+  list-style: none;
+  margin: 20px;
+}
 
+.c-breadcrumbs li {
+  display: inline-block;
+  margin: 0 20px;
+}
+
+a:hover {
+  flood-color: red;
 }
