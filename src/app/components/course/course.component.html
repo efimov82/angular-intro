@@ -1,6 +1,16 @@
 <div class="row">
-  <div class="col">{{ course.Id }}</div>
-  <div class="col">{{ course.Title }}</div>
-  <div class="col">{{ course.DateCreation | date }}</div>
-  <div><button>Edit</button> <button>Delete</button></div>
+  <div>
+    <div fxFlex="20%" class="title">#{{ course.Id }} {{ course.Title }}</div>
+    <div fxFlex></div>
+    <div fxFlex="20%" class="date-creation">{{ course.Duration }} min {{ course.DateCreation | date }}</div>
+    <div fxFlex="20%" class="div-edit">
+      <button>Edit</button>
+    </div>
+  </div>
+  <div>
+    <div fxFlex="80%">{{ course.Description }}</div>
+    <div fxFlex="20%" class="div-delete">
+      <button>Delete</button>
+    </div>
+  </div>
 </div>

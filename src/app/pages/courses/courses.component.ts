@@ -9,15 +9,19 @@ import { Course } from '../../models/course';
 })
 export class CoursesComponent implements OnInit {
   courses: Course[];
+  numStartItem = 0;
+  countItems = 2;
 
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.courses = this.coursesService.find();
+    this.courses = this.coursesService.find(this.numStartItem, this.countItems);
   }
 
   loadMore() {
-    // TODO
+    this.numStartItem += this.countItems;
+    this.coursesService.find(this.numStartItem, this.countItems)
+      .map(course => this.courses.push(course));
   }
 
 }

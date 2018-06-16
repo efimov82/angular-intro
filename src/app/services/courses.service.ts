@@ -8,7 +8,7 @@ export class CoursesService {
 
   constructor() { }
 
-  find() {
-    return coursesList;
+  find(start: number, countItems: number = 20) {
+    return coursesList.slice(start, start + countItems);
   }
 }
