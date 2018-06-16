@@ -5,7 +5,7 @@ import { Course } from '../../models/course';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.css']
+  styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
   courses: Course[];
@@ -14,6 +14,10 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
     this.courses = this.coursesService.find();
+  }
+
+  loadMore() {
+    // TODO
   }
 
 }

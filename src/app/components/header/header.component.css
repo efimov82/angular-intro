@@ -2,3 +2,8 @@
   margin: 10px;
   color: blueviolet;
 }
+
+.user-info {
+  text-align: right;
+  margin: 20px;
+}

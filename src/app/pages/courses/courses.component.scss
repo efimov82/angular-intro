@@ -1,0 +1,19 @@
+.add-course-button{
+  text-align: right;
+}
+
+.row {
+  display: flex;
+}
+
+.load-more {
+  margin: 20px;
+  text-align: center;
+  background-color: #eee;
+
+  .btn-load-more {
+    width: 140px;
+    height: 25px;
+    
+  }
+}

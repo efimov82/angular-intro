@@ -11,5 +11,7 @@
   <div *ngFor="let course of courses" class="row">
     <app-course [course]=course></app-course>
   </div>
-  <div>Load More</div>
+  <div class="load-more">
+    <button (click)="loadMore()" class="btn-load-more">Load More</button>
+  </div>
 </div>
