@@ -2,15 +2,15 @@
   <div>
     <div fxFlex="20%" class="title">#{{ course.Id }} {{ course.Title }}</div>
     <div fxFlex></div>
-    <div fxFlex="20%" class="date-creation">{{ course.Duration }} min {{ course.DateCreation | date }}</div>
+    <div fxFlex="20%" class="date-creation">Duration: {{ course.Duration }} min, {{ course.DateCreation | date }}</div>
     <div fxFlex="20%" class="div-edit">
-      <button>Edit</button>
+      <button mat-button color="primary">Edit</button>
     </div>
   </div>
   <div>
     <div fxFlex="80%">{{ course.Description }}</div>
     <div fxFlex="20%" class="div-delete">
-      <button>Delete</button>
+      <button mat-button color="warn">Delete</button>
     </div>
   </div>
 </div>

@@ -1,13 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 // Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
 import {
   MatButtonModule,
   MatCheckboxModule,
-  MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule
+  MatToolbarModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -20,6 +26,12 @@ import { CourseComponent } from './components/course/course.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { SearchCourseComponent } from './components/search-course/search-course.component';
+
+const appRoutes: Routes = [
+  // { path: 'courses/add', component: AddCourseComponent },
+
+  { path: '**', component: CoursesComponent }
+];
 
 @NgModule({
   declarations: [
@@ -44,7 +56,13 @@ import { SearchCourseComponent } from './components/search-course/search-course.
     LayoutModule,
     MatSidenavModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
+    // Routing
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

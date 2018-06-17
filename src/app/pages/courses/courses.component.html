@@ -1,22 +1,23 @@
-<p>
-  Courses
-</p>
+<h1>
+  Courses list
+</h1>
 <div class="panel">
   <div fxFlex="35%">
     <app-search-course></app-search-course>
   </div>
   <div fxFlex></div>
-  <div fxFlex="20%" class="add-course-button">
-    <button>Add Course</button>
+  <div fxFlex="20%" class="div-add-course">
+    <a mat-button color="primary" class="button-add-course" [routerLink]="['/courses/add']">Add Course</a>
   </div>
 </div>
 
 <div class="container">
-  <div *ngFor="let course of courses">
+  <div *ngFor="let course of courses; let index=index; let odd=odd; let even=even;"
+    [ngClass]="{ odd: odd, even: even }">
     <app-course [course]=course></app-course>
   </div>
 </div>
 
 <div class="load-more">
-  <button (click)="loadMore()" class="btn-load-more">Load More</button>
+  <button mat-button (click)="loadMore()" class="btn-load-more">Load More</button>
 </div>

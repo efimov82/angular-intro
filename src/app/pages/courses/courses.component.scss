@@ -1,9 +1,17 @@
-.add-course-button{
+.div-add-course {
   text-align: right;
+  color: green;
 }
 
-.panel {
-  // display: block;
+.button-add-course {
+  background-color: #ddd;
+}
+
+.even { 
+  background-color: #f1f9df;
+}
+.odd { 
+  background-color: #f5ffdd;
 }
 
 .container {
@@ -11,12 +19,11 @@
 }
 
 .load-more {
-  
   text-align: center;
   background-color: #eee;
 
   .btn-load-more {
-    width: 140px;
-    height: 25px;
+    width: 240px;
+    height: 35px;
   }
 }
