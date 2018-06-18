@@ -6,10 +6,9 @@ import { SearchCourseComponent } from './components/search-course/search-course.
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialsModule } from '../materials/materials.module';
 import { SharedModule } from '../shared/shared.module';
+import { NotFoundComponent } from '../not-found/not-found.component';
+import { coursesRoutes } from './courses.routes';
 
-const coursesRoutes: Routes = [
-  { path: '**', component: CoursesComponent }
-];
 
 const COMPONENTS = [
   CourseComponent,
@@ -29,7 +28,8 @@ const COMPONENTS = [
     ),
   ],
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    NotFoundComponent
   ],
   exports: [
     ...COMPONENTS

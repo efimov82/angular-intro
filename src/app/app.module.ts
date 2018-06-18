@@ -10,12 +10,13 @@ import { AppComponent } from './app.component';
 
 import { CoursesModule } from './courses/courses.module';
 import { SharedModule } from './shared/shared.module';
-import { CoursesComponent } from './courses/pages/courses/courses.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { coursesRoutes } from './courses/courses.routes';
 
 const appRoutes: Routes = [
-  // { path: 'courses/add', component: AddCourseComponent },
-
-  { path: '**', component: CoursesComponent }
+  ...coursesRoutes,
+  { path: '', redirectTo: '/courses', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
