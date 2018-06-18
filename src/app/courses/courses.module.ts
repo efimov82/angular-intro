@@ -1,16 +1,21 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoursesComponent } from './pages/courses/courses.component';
-import { CourseComponent } from './components/course/course.component';
-import { SearchCourseComponent } from './components/search-course/search-course.component';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
 import { MaterialsModule } from '../materials/materials.module';
 import { SharedModule } from '../shared/shared.module';
-import { NotFoundComponent } from '../not-found/not-found.component';
+// Routing
 import { coursesRoutes } from './courses.routes';
-
+// Components
+import { CoursesComponent } from './pages/courses/courses.component';
+import {
+  AddCourseComponent,
+  CourseComponent,
+  SearchCourseComponent
+} from './components';
 
 const COMPONENTS = [
+  AddCourseComponent,
   CourseComponent,
   CoursesComponent,
   SearchCourseComponent,
@@ -29,7 +34,6 @@ const COMPONENTS = [
   ],
   declarations: [
     ...COMPONENTS,
-    NotFoundComponent
   ],
   exports: [
     ...COMPONENTS

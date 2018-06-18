@@ -1,8 +1,13 @@
 import { Routes } from '@angular/router';
 import { CoursesComponent } from './pages/courses/courses.component';
-import { NotFoundComponent } from '../not-found/not-found.component';
+import { AddCourseComponent } from './components/add-course/add-course.component';
 
 export const coursesRoutes: Routes = [
-  { path: 'courses', component: CoursesComponent },
-  { path: '**', component: NotFoundComponent }
+  {
+    path: 'courses',
+    children: [
+      { path: '', component: CoursesComponent, },
+      { path: 'add', component: AddCourseComponent }
+    ]
+  },
 ];
