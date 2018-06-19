@@ -1,7 +1,7 @@
-export interface CourseInterface {
-  Id: number;
-  Title: string;
-  DateCreation: Date; 
-  Duration: number;
-  Description: string;
+export interface Course {
+  id: number;
+  title: string;
+  dateCreation: Date;
+  duration: number;
+  description: string;
 }

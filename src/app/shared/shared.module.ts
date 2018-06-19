@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 import { MaterialsModule } from '../materials/materials.module';
 
-import { 
+import {
   BreadcrumbsComponent,
   HeaderComponent,
   FooterComponent,
@@ -13,10 +14,10 @@ import {
  } from './components';
 
 const COMPONENTS = [
+  BreadcrumbsComponent,
   HeaderComponent,
   FooterComponent,
   LogoComponent,
-  BreadcrumbsComponent,
   NotFoundComponent,
   UserInfoComponent,
 ];
@@ -25,6 +26,7 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     MaterialsModule,
+    RouterModule,
   ],
   declarations: [
     ...COMPONENTS

@@ -1,46 +1,53 @@
-import { Course } from '../models/course';
+import { Course } from '../interfaces/course';
 
-export const coursesList = [
-  <Course>{
-    Id: 1,
-    Title: 'First course',
-    DateCreation: new Date('2018-04-10 12:00:00'),
-    Duration: 124,
-    Description: 'Description of First Angular course.',
+export const coursesList: Course[] = [
+  {
+    id: 1,
+    title: 'First course',
+    dateCreation: new Date('2018-04-10 12:00:00'),
+    duration: 124,
+    description: 'Description of First Angular course.',
   },
-  <Course>{
-    Id: 2,
-    Title: 'Second course',
-    DateCreation: new Date('2018-03-14 14:00:00'),
-    Duration: 250,
-    Description: 'Description of Second course.',
+  {
+    id: 1,
+    title: 'First course',
+    dateCreation: new Date('2018-04-10 12:00:00'),
+    duration: 124,
+    description: 'Description of First Angular course.',
   },
-  <Course>{
-    Id: 3,
-    Title: 'Last course',
-    DateCreation: new Date('2017-12-09 14:00:00'),
-    Duration: 350,
-    Description: 'Description of Last course.',
+  {
+    id: 2,
+    title: 'Second course',
+    dateCreation: new Date('2018-03-14 14:00:00'),
+    duration: 250,
+    description: 'Description of Second course.',
   },
-  <Course>{
-    Id: 4,
-    Title: 'Angular 6 course',
-    DateCreation: new Date('2018-04-12 14:00:00'),
-    Duration: 650,
-    Description: 'Description of Angular6 course.',
+  {
+    id: 3,
+    title: 'Last course',
+    dateCreation: new Date('2017-12-09 14:00:00'),
+    duration: 350,
+    description: 'Description of Last course.',
   },
-  <Course>{
-    Id: 5,
-    Title: 'Last course',
-    DateCreation: new Date('2016-10-24 14:00:00'),
-    Duration: 350,
-    Description: 'Description of Last course.',
+  {
+    id: 4,
+    title: 'Angular 6 course',
+    dateCreation: new Date('2018-04-12 14:00:00'),
+    duration: 650,
+    description: 'Description of Angular6 course.',
   },
-  <Course>{
-    Id: 6,
-    Title: 'Last course',
-    DateCreation: new Date('2018-06-19 14:00:00'),
-    Duration: 350,
-    Description: 'Description of Last course.',
+  {
+    id: 5,
+    title: 'Last course',
+    dateCreation: new Date('2016-10-24 14:00:00'),
+    duration: 350,
+    description: 'Description of Last course.',
+  },
+  {
+    id: 6,
+    title: 'Last course',
+    dateCreation: new Date('2018-06-19 14:00:00'),
+    duration: 350,
+    description: 'Description of Last course.',
   }
 ];
