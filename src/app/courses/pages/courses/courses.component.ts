@@ -25,4 +25,8 @@ export class CoursesComponent implements OnInit {
       .map(course => this.courses.push(course));
   }
 
+  delete(course: Course) {
+    console.log(course);
+    this.coursesService.delete(course);
+  }
 }

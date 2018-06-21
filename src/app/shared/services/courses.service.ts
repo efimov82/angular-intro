@@ -11,4 +11,10 @@ export class CoursesService {
   find(start: number, countItems: number = 20) {
     return coursesList.slice(start, start + countItems);
   }
+
+  delete(course) {
+    coursesList.filter(item => item == course );
+    // coursesList = coursesList2;
+    console.log(coursesList);
+  }
 }

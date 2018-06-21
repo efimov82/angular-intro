@@ -14,7 +14,7 @@
 <div class="container">
   <div *ngFor="let course of courses; let index=index; let odd=odd; let even=even;"
     [ngClass]="{ odd: odd, even: even }">
-    <app-course [course]=course></app-course>
+    <app-course [course]=course (delete)=delete(course)></app-course>
   </div>
 </div>
 

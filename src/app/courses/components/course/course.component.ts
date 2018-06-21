@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Course } from '../../../shared/interfaces/course';
 
 @Component({
@@ -8,8 +8,13 @@ import { Course } from '../../../shared/interfaces/course';
 })
 export class CourseComponent implements OnInit {
   @Input() course:  Course;
+  @Output() delete: EventEmitter<Course> = new EventEmitter();
 
   ngOnInit() {
+  }
+
+  deleteCourse() {
+    this.delete.emit(this.course);
   }
 
 }
