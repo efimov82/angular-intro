@@ -1,16 +1,21 @@
-<div class="row">
-  <div>
+<mat-card>
+  <mat-card-content>
+
     <div fxFlex="20%" class="title">#{{ course.id }} {{ course.title }}</div>
-    <div fxFlex></div>
-    <div fxFlex="20%" class="date-creation">Duration: {{ course.duration }} min, {{ course.dateCreation | date }}</div>
-    <div fxFlex="20%" class="div-edit">
-      <button mat-button color="primary">Edit</button>
+
+    <div fxFlex class="date-creation">Duration: {{ course.duration }} min,
+      {{ course.dateCreation | date }}
+      {{ course.description }}
     </div>
-  </div>
-  <div>
-    <div fxFlex="80%">{{ course.description }}</div>
-    <div fxFlex="20%" class="div-delete">
-      <button mat-button color="warn" (click)="deleteCourse()">Delete</button>
+
+    <div fxFlex="10%" class="div-edit">
+      <button mat-mini-fab class="btn-edit">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" (click)="deleteCourse()">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
     </div>
-  </div>
-</div>
+  </mat-card-content>
+
+</mat-card>

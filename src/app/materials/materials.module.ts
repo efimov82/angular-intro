@@ -4,25 +4,31 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
   MatButtonModule,
+  MatCardModule,
+  MatGridListModule,
   MatCheckboxModule,
   MatToolbarModule,
   MatSidenavModule,
   MatIconModule,
   MatInputModule,
-  MatListModule
+  MatListModule,
 } from '@angular/material';
+
 import { LayoutModule } from '@angular/cdk/layout';
 
 const COMPONENTS = [
   // Materials
   MatButtonModule,
+  MatCardModule,
   MatCheckboxModule,
-  MatToolbarModule,
-  LayoutModule,
-  MatSidenavModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
+  MatSidenavModule,
   MatListModule,
+  MatToolbarModule,
+
+  LayoutModule,
   // Flex
   FlexLayoutModule,
 ];

@@ -1,11 +1,67 @@
+<!-- <mat-grid-list [cols]="3" rowHeight="32px" (window:resize)="onResize($event)" class="header">
+  <mat-grid-tile>
+    <div class="div-header">
+      <app-header></app-header>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>
+    <app-user-info></app-user-info>
+  </mat-grid-tile>
 
-<div layout="row">
+</mat-grid-list>
+
+<mat-grid-list [cols]="1" rowHeight="600px" (window:resize)="onResize($event)">
+  <mat-grid-tile [colspan]="1">
+    <router-outlet></router-outlet>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list [cols]="1" rowHeight="40px" (window:resize)="onResize($event)">
+  <mat-grid-tile>
+    <app-footer></app-footer>
+
+  </mat-grid-tile>
+</mat-grid-list> -->
+
+
+<!-- <mat-grid-list cols="1" rowHeight="32px" class="header">
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <div class="div-header">
+      <app-header></app-header>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <div class="div-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <div class="div-footer"><app-footer></app-footer></div>
+  </mat-grid-tile>
+</mat-grid-list> -->
+
+<!-- <mat-grid-list cols="4" class="content">
+  <mat-grid-tile [colspan]="4" [rowspan]="1">
+    <router-outlet></router-outlet>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="1" rowHeight="14px" class="footer">
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <app-footer></app-footer>
+  </mat-grid-tile> -->
+
+
+<div layout="row" class="header">
   <div flex><app-header></app-header></div>
 </div>
-
+<!--
 <div layout="row">
   <app-breadcrumbs></app-breadcrumbs>
-</div>
+</div> -->
 
 <div layout="row" class="content">
   <router-outlet></router-outlet>

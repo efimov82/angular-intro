@@ -32,7 +32,8 @@ const COMPONENTS = [
     ...COMPONENTS
   ],
   exports: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    MaterialsModule,
   ],
 })
 export class SharedModule { }

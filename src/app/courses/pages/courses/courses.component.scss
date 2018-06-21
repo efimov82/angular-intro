@@ -1,3 +1,11 @@
+@import 'src/styles/variables.scss';
+
+.head {
+  background: linear-gradient(to right, $page-brg-color-header-left , $page-brg-color-header-right);
+  height: 140px;
+  padding: 0 10%;
+}
+
 .div-add-course {
   text-align: right;
   color: green;
@@ -7,10 +15,10 @@
   background-color: #ddd;
 }
 
-.even { 
+.even {
   background-color: #f1f9df;
 }
-.odd { 
+.odd {
   background-color: #f5ffdd;
 }
 

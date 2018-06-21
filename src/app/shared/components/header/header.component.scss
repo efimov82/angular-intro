@@ -1,0 +1,16 @@
+@import 'src/styles/variables.scss';
+
+.c-logo {
+  margin: 10px 0 0 20px;
+  color: blueviolet;
+}
+
+.user-info {
+  text-align: right;
+  margin: 10px 20px 0 0;
+}
+
+.header {
+  height: 40px;
+  background: linear-gradient(to right, $header-bgr-color-left , $header-bgr-color-right);
+}

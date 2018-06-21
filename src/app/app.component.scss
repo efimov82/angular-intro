@@ -1,0 +1,26 @@
+.header {
+  height: 40px;
+}
+
+.content {
+}
+@import 'src/styles/variables.scss';
+
+.header {
+  background: linear-gradient(to right, $header-bgr-color-left , $header-bgr-color-right);
+
+
+}
+
+.div-header > ::ng-deep figure {
+  justify-content: flex-start !important;
+}
+
+.footer {
+  //margin: 10px;
+}
+
+.logo {
+  align-content: left;
+}
+
