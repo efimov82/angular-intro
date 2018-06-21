@@ -26,7 +26,7 @@ export class CoursesComponent implements OnInit {
   }
 
   delete(course: Course) {
-    console.log(course);
     this.coursesService.delete(course);
+    console.log(this.coursesService.find(0, 10));
   }
 }

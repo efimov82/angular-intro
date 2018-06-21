@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { coursesList } from '../mocks/courses';
+import { Course } from '../interfaces/course';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
+  courses: Course[];
 
-  constructor() { }
+  constructor() {
+    this.courses = coursesList;
+   }
 
   find(start: number, countItems: number = 20) {
-    return coursesList.slice(start, start + countItems);
+    return this.courses.slice(start, start + countItems);
   }
 
   delete(course) {
-    coursesList.filter(item => item == course );
-    // coursesList = coursesList2;
-    console.log(coursesList);
+    this.courses = this.courses.filter(item => item !== course );
   }
 }

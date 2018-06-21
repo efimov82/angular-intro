@@ -1,6 +1,6 @@
 import { Course } from '../interfaces/course';
 
-export var coursesList: Course[] = [
+export const coursesList: Course[] = [
   {
     id: 1,
     title: 'First course',
