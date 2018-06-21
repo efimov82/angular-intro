@@ -1,17 +1,17 @@
 <div class="head">
-  <div fxFlex="35%">
+  <div class="search" fxLayout="row" fxLayoutAlign="start end">
     <app-search-course></app-search-course>
-  </div>
-  <div fxFlex></div>
-  <div fxFlex="20%" class="div-add-course">
-    <a mat-button color="primary" class="button-add-course" routerLink="add">Add Course</a>
+
+    <button mat-button class="btn-add-course" (click)="add()">
+      <fa name="plus"></fa> Add Course
+    </button>
   </div>
 </div>
 
 <div class="container">
-  <div *ngFor="let course of courses; let index=index; let odd=odd; let even=even;"
-    [ngClass]="{ odd: odd, even: even }">
-    <app-course [course]=course (delete)=delete(course)></app-course>
+  <p>All courses: 34</p>
+  <div *ngFor="let course of courses; let index=index;">
+    <app-course [course]=course (delete)=delete(course) class="course-item"></app-course>
   </div>
 </div>
 

@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { MaterialsModule } from '../materials/materials.module';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import {
   BreadcrumbsComponent,
@@ -26,6 +27,7 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     MaterialsModule,
+    AngularFontAwesomeModule,
     RouterModule,
   ],
   declarations: [
@@ -33,6 +35,7 @@ const COMPONENTS = [
   ],
   exports: [
     ...COMPONENTS,
+    AngularFontAwesomeModule,
     MaterialsModule,
   ],
 })

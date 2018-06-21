@@ -2,33 +2,35 @@
 
 .head {
   background: linear-gradient(to right, $page-brg-color-header-left , $page-brg-color-header-right);
-  height: 140px;
+  height: 126px;
   padding: 0 10%;
+
+  .search {
+    padding: 25px 0 0 0;
+  }
 }
 
-.div-add-course {
-  text-align: right;
-  color: green;
-}
-
-.button-add-course {
-  background-color: #ddd;
-}
-
-.even {
-  background-color: #f1f9df;
-}
-.odd {
-  background-color: #f5ffdd;
+.btn-add-course {
+  border: 1px solid $font-color-header;
+  border-radius: 4px;
+  color: $font-color-header;
+  font-size: $font-size-small;
+  height: 34px;
+  margin: 0 0 0 10px;
 }
 
 .container {
-  margin: 20px 0 20px;
+  padding: 0 10%;
+  // margin: 20px 0 20px;
+
+  .course-item {
+    margin: 0 15px;
+  }
 }
 
 .load-more {
   text-align: center;
-  background-color: #eee;
+  // background-color: #eee;
 
   .btn-load-more {
     width: 240px;
