@@ -1,31 +1,57 @@
 @import 'src/styles/variables.scss';
 
 .card {
-  margin: 0 0 20px 0;
-  border: 1px solid #ededed;
+  border: 1px solid $color-borders;
   border-radius: 5px;
+  margin: 0 0 20px 0;
 
   .content {
+    height: 126px;
     margin: 0;
 
     .image {
-      margin: 0px;
-      display: inline-block;
-      overflow: hidden;
       border-radius: 5px 0 0 5px;
+      display: inline-block;
+      width: 230px;
+      overflow: hidden;
+      margin: 0px;
     }
 
     .course-block {
-      padding: 10px;
-      font-size: $font-size-common;
 
-      .date-creation {
+      padding: 20px 15px;
+
+      .title {
+        color: $color-head-text;
         font-size: $font-size-big;
-        font-style: italic;
+        font-weight: 400;
+        margin: 0 0 15px 0;
+      }
+
+      .description {
+        font-size: $font-size-common;
+        height: 45px;
       }
 
       .info {
-        display: inline;
+        display: flex;
+
+        .author, .duration, .date {
+          font-size: $font-size-middle;
+          fa {
+            color: $color-head-text;
+            font-size: $font-size-common;
+            margin: 0 8px 0 0;
+          }
+
+          span {
+            color: $font-color-secondary;
+            margin: 0 4px 0 0;
+          }
+
+          margin: 0 25px 0 0;
+        }
+
       }
     }
 
@@ -35,8 +61,8 @@
       .btn-edit, .btn-delete {
         background: transparent;
         color: $color-head-text;
-        width: 38px;
         height: 38px;
+        width: 38px;
         margin: 0 0 10px 0;
       }
     }

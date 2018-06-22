@@ -1,7 +1,7 @@
 <div class="card">
   <div class="content">
 
-    <div fxFlex="20%" class="image">
+    <div fxFlex="25%" class="image">
       <img src="{{ course.thumbnail.src }}" alt="{{ course.thumbnail.alt }}" class="src" />
     </div>
 
@@ -11,9 +11,15 @@
           {{ course.description }}
       </div>
       <div class="info">
-        <div class="author">Author: </div>
-        <div class="duration">Duration: {{ course.duration }} min</div>
-        <div class="date">{{ course.dateCreation | date }}</div>
+        <div class="author">
+          <fa name="user"></fa><span>Author:</span> {{ course.author }}
+        </div>
+        <div class="duration">
+          <fa name="clock"></fa><span>Duration:</span> {{ course.duration }} min.
+        </div>
+        <div class="date">
+          <fa name="clock"></fa><span>Date:</span> {{ course.dateCreation | date }}
+        </div>
     </div>
     </div>
 

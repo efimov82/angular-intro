@@ -2,9 +2,10 @@ import { Image } from './image';
 
 export interface Course {
   id: number;
-  title: string;
+  author: string;
   dateCreation: Date;
-  duration: number;
   description: string;
+  duration: number;
+  title: string;
   thumbnail: Image;
 }

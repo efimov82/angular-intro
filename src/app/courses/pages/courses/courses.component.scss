@@ -8,13 +8,17 @@
   .search {
     padding: 25px 0 0 0;
   }
+
+  .pluss {
+    margin: 0 4px 0 0;
+  }
 }
 
 .btn-add-course {
   border: 1px solid $font-color-header;
   border-radius: 4px;
   color: $font-color-header;
-  font-size: $font-size-small;
+  font-size: $font-size-middle;
   height: 34px;
   margin: 0 0 0 10px;
 }
@@ -36,7 +40,9 @@
   text-align: center;
 
   .btn-load-more {
-    width: 240px;
+    border-radius: 5px;
+    border-color: $color-borders;
+    width: 200px;
     height: 35px;
   }
 }

@@ -4,6 +4,7 @@ import { Image } from '../interfaces/image';
 export const coursesList: Course[] = [
   {
     id: 1,
+    author: 'Sten Williams',
     title: 'Angular Starter course',
     dateCreation: new Date('2018-04-10 12:00:00'),
     duration: 124,
@@ -15,6 +16,7 @@ export const coursesList: Course[] = [
   },
   {
     id: 2,
+    author: 'Alex Nishulin',
     title: 'Angular Forms course',
     dateCreation: new Date('2018-04-10 12:00:00'),
     duration: 124,
@@ -26,6 +28,7 @@ export const coursesList: Course[] = [
   },
   {
     id: 3,
+    author: 'Piter Bayer',
     title: 'Angular Ninja course',
     dateCreation: new Date('2018-03-14 14:00:00'),
     duration: 250,
@@ -37,6 +40,7 @@ export const coursesList: Course[] = [
   },
   {
     id: 4,
+    author: 'Jon Papa',
     title: 'Angular Guru NgRJS course',
     dateCreation: new Date('2017-12-09 14:00:00'),
     duration: 350,
@@ -48,6 +52,7 @@ export const coursesList: Course[] = [
   },
   {
     id: 5,
+    author: 'Nina Fisher',
     title: 'Angular 6 course',
     dateCreation: new Date('2018-04-12 14:00:00'),
     duration: 650,
@@ -58,6 +63,7 @@ export const coursesList: Course[] = [
   },
   {
     id: 6,
+    author: 'Semen Slepakov',
     title: 'Angular NgRX Store, Actions, Reducers',
     dateCreation: new Date('2016-10-24 14:00:00'),
     duration: 350,
@@ -71,6 +77,7 @@ export const coursesList: Course[] = [
   },
   {
     id: 7,
+    author: 'Denis Davidov',
     title: 'Last course',
     dateCreation: new Date('2018-06-19 14:00:00'),
     duration: 350,
