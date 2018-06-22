@@ -1,8 +1,11 @@
 @import 'src/styles/variables.scss';
 
-.c-logo {
+.logo {
   margin: 10px 0 0 20px;
-  color: blueviolet;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .user-info {
@@ -11,6 +14,8 @@
 }
 
 .header {
-  height: 40px;
+
   background: linear-gradient(to right, $header-bgr-color-left , $header-bgr-color-right);
+  height: 40px;
+  padding: 0 0 0 10%;
 }

@@ -1,24 +1,44 @@
-.row {
-  margin: 0 0 2px;
-  padding: 10px;
-  .title {
-    font-size: 16px;
-  }
+@import 'src/styles/variables.scss';
 
-  .date-creation {
-    font-size: 16px;
-    font-style: italic;
-  }
+.card {
+  margin: 0 0 20px 0;
+  border: 1px solid #ededed;
+  border-radius: 5px;
 
-  .div-edit {
-    text-align: right;
-  }
+  .content {
+    margin: 0;
 
-  .div-delete {
-    text-align: right;
-  }
+    .image {
+      margin: 0px;
+      display: inline-block;
+      overflow: hidden;
+      border-radius: 5px 0 0 5px;
+    }
 
-  .btn-edit {
-    color: red;
+    .course-block {
+      padding: 10px;
+      font-size: $font-size-common;
+
+      .date-creation {
+        font-size: $font-size-big;
+        font-style: italic;
+      }
+
+      .info {
+        display: inline;
+      }
+    }
+
+    .controls {
+      padding: 20px 10px 0 0;
+
+      .btn-edit, .btn-delete {
+        background: transparent;
+        color: $color-head-text;
+        width: 38px;
+        height: 38px;
+        margin: 0 0 10px 0;
+      }
+    }
   }
 }

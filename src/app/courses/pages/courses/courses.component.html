@@ -9,7 +9,7 @@
 </div>
 
 <div class="container">
-  <p>All courses: 34</p>
+  <div class="total-count-courses">Total courses: {{ countAll }}</div>
   <div *ngFor="let course of courses; let index=index;">
     <app-course [course]=course (delete)=delete(course) class="course-item"></app-course>
   </div>

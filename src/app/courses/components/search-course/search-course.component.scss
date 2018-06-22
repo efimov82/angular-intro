@@ -20,11 +20,13 @@
     width: 400px;
     border: none;
 
-    :focus {
+    :focus, :active {
       border-color: inherit;
       -webkit-box-shadow: none;
       box-shadow: none;
+      border: none;
     }
+
   }
 
   .btn-search {
