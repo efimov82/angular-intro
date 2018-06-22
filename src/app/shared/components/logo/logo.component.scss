@@ -1,10 +1,18 @@
 .logo {
-  // font-family: 'Eater', cursive;
-  font-size: 18px;
-  color: white;
-  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .icon {
+    height: 22px;
+  }
 
   .text{
-    margin: 0 0 5px 0;
+    margin: 4px 0 0 -1px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
   }
 }
