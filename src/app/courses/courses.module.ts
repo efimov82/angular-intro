@@ -6,8 +6,9 @@ import { MaterialsModule } from '../materials/materials.module';
 import { SharedModule } from '../shared/shared.module';
 // Routing
 import { coursesRoutes } from './courses.routes';
-// Components
+// Pages Components
 import { CoursesComponent } from './pages/courses/courses.component';
+// Components
 import {
   AddCourseComponent,
   CourseComponent,

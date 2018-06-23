@@ -11,14 +11,17 @@
 
     .image {
       border-radius: 5px 0 0 5px;
-      display: inline-block;
+      display: none;
       width: 230px;
       overflow: hidden;
       margin: 0px;
+
+      @media (min-width: $screen-small) {
+        display: inline-block;
+      }
     }
 
     .course-block {
-
       padding: 20px 15px;
 
       .title {
@@ -47,9 +50,24 @@
           span {
             color: $font-color-secondary;
             margin: 0 4px 0 0;
+            display: none;
           }
 
           margin: 0 25px 0 0;
+        }
+
+        @media (min-width: $screen-medium) {
+          .author, .duration, .date {
+            span {
+              display: inline;
+            }
+          }
+        }
+
+        @media (max-width: $screen-phone) {
+          .author {
+            display: none;
+          }
         }
 
       }

@@ -12,6 +12,11 @@
 }
 
 .footer {
-  margin: 10px 10% 0 0;
+  margin: 20px 10% 0 0;
+  display: none;
+
+  @media (min-width: $screen-small) {
+    display: block;
+  }
 }
 

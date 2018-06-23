@@ -21,6 +21,16 @@
   font-size: $font-size-middle;
   height: 34px;
   margin: 0 0 0 10px;
+
+  span {
+    display: none;
+  }
+
+  @media (min-width: $screen-small) {
+    span {
+      display: inline;
+    }
+  }
 }
 
 .container {
