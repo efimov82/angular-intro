@@ -1,0 +1,7 @@
+<div class="container">
+  <div mat-dialog-content class="message">{{confirmMessage}}</div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button color="warn" (click)="dialogRef.close(true)">Delete</button>
+    <button mat-button (click)="dialogRef.close(false)">Cancel</button>
+  </div>
+</div>

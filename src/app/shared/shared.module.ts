@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialsModule } from '../materials/materials.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import {
   BreadcrumbsComponent,
+  ConfirmDialogComponent,
   HeaderComponent,
   FooterComponent,
   LogoComponent,
@@ -16,6 +18,7 @@ import {
 
 const COMPONENTS = [
   BreadcrumbsComponent,
+  ConfirmDialogComponent,
   HeaderComponent,
   FooterComponent,
   LogoComponent,
@@ -26,17 +29,22 @@ const COMPONENTS = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MaterialsModule,
     AngularFontAwesomeModule,
     RouterModule,
   ],
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
   ],
   exports: [
     ...COMPONENTS,
     AngularFontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
     MaterialsModule,
   ],
+  entryComponents: [ConfirmDialogComponent]
 })
 export class SharedModule { }

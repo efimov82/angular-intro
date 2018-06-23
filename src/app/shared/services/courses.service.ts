@@ -6,33 +6,48 @@ import {
   Course,
   CoursesResponse,
 } from '../interfaces';
+import { CoursesServiceInterface } from './corses.service.interface';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CoursesService {
+export class CoursesService implements CoursesServiceInterface {
   courses: Course[];
-  all: number;
 
   constructor() {
     this.courses = coursesList;
-    this.all = coursesList.length;
    }
 
-  find(start: number, countItems: number = 20): Observable<CoursesResponse> {
-    const items = this.courses.slice(start, start + countItems);
+  find(searchString: string, start: number, countItems: number = 20): Observable<CoursesResponse> {
+    let items = [];
+    if (searchString) {
+      items = this.courses.filter(course => this.search(course, searchString));
+    } else {
+      items = this.courses;
+    }
+
+    const all = items.length;
+    items = items.slice(start, start + countItems);
+    const count = items.length;
+
     const resp = <CoursesResponse>{
-      items: items,
-      count: items.length,
-      all: this.all
+      items,
+      count,
+      all
     };
 
     return of(resp);
   }
 
-  delete(course) {
+  delete(course: Course) {
     this.courses = this.courses.filter(item => item !== course );
-    this.all = this.courses.length;
+  }
+
+  private search(course: Course, searchString: string) {
+    return (
+      course.title.indexOf(searchString) !== -1 ||
+      course.description.indexOf(searchString) !== -1
+    )
   }
 }

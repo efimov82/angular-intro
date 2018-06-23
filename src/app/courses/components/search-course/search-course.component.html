@@ -2,17 +2,11 @@
   <div class="lable">Find Courses...</div>
   <!-- <fa name="search"></fa> -->
   <div class="search-container">
-    <input type="text" class="input-search" placeholder="Search by name, title, author or date">
-    <button class="btn-search">Search</button>
+    <input type="text" class="input-search"
+      placeholder="Search by name, title, author or date"
+      [(ngModel)]="searchText" (keydown.enter)="search()">
+    <button class="btn-search" (click)="search()">
+      <fa name="search"></fa><span>Search</span>
+    </button>
   </div>
 </div>
-<!-- 
-  <mat-form-field  class="example-full-width">
-    <mat-icon matPrefix>search</mat-icon>
-    <input matInput
-      type="email"
-      tabindex="1"
-      placeholder="Your Email"
-      formControlName="email">
-  </mat-form-field>
- -->
