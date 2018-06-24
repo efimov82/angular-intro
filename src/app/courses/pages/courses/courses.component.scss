@@ -1,29 +1,58 @@
-.div-add-course {
-  text-align: right;
-  color: green;
+@import 'src/styles/variables.scss';
+
+.head {
+  background: linear-gradient(to right, $page-brg-color-header-left , $page-brg-color-header-right);
+  height: 126px;
+  padding: 0 10%;
+
+  .search {
+    padding: 25px 0 0 0;
+  }
+
+  .pluss {
+    margin: 0 4px 0 0;
+  }
 }
 
-.button-add-course {
-  background-color: #ddd;
-}
+.btn-add-course {
+  border: 1px solid $font-color-header;
+  border-radius: 4px;
+  color: $font-color-header;
+  font-size: $font-size-middle;
+  height: 34px;
+  margin: 0 0 0 10px;
 
-.even { 
-  background-color: #f1f9df;
-}
-.odd { 
-  background-color: #f5ffdd;
+  span {
+    display: none;
+  }
+
+  @media (min-width: $screen-small) {
+    span {
+      display: inline;
+    }
+  }
 }
 
 .container {
-  margin: 20px 0 20px;
+  padding: 0 10%;
+
+  .total-count-courses {
+    margin: 30px 0 15px 0;
+    font-weight: bold;
+  }
+
+  .course-item {
+    margin: 50px 0 50px 0;
+  }
 }
 
 .load-more {
   text-align: center;
-  background-color: #eee;
 
   .btn-load-more {
-    width: 240px;
+    border-radius: 5px;
+    border-color: $color-borders;
+    width: 200px;
     height: 35px;
   }
 }

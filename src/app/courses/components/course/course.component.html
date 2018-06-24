@@ -1,16 +1,40 @@
-<div class="row">
-  <div>
-    <div fxFlex="20%" class="title">#{{ course.id }} {{ course.title }}</div>
-    <div fxFlex></div>
-    <div fxFlex="20%" class="date-creation">Duration: {{ course.duration }} min, {{ course.dateCreation | date }}</div>
-    <div fxFlex="20%" class="div-edit">
-      <button mat-button color="primary">Edit</button>
+<div class="card">
+  <div class="content">
+
+    <div fxFlex="25%" class="image">
+      <a [routerLink]="['/courses', course.slug]">
+        <img src="{{ course.thumbnail.src }}" alt="{{ course.thumbnail.alt }}" class="src" />
+      </a>
+    </div>
+
+    <div fxFlex class="course-block">
+      <div class="title">
+          <a [routerLink]="['/courses', course.slug]">{{ course.title }}</a>
+      </div>
+      <div class="description">
+          {{ course.description }}
+      </div>
+      <div class="info">
+        <div class="author">
+          <fa name="user"></fa><span>Author:</span> {{ course.author }}
+        </div>
+        <div class="duration">
+          <fa name="hourglass-2"></fa><span>Duration:</span> {{ course.duration }} min.
+        </div>
+        <div class="date">
+          <fa name="calendar"></fa><span>Date:</span> {{ course.dateCreation | date }}
+        </div>
+    </div>
+    </div>
+
+    <div fxFlex="60px" class="controls">
+      <button mat-mini-fab class="btn-edit">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+      <button mat-mini-fab class="btn-delete" (click)="deleteCourse()">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
     </div>
   </div>
-  <div>
-    <div fxFlex="80%">{{ course.description }}</div>
-    <div fxFlex="20%" class="div-delete">
-      <button mat-button color="warn">Delete</button>
-    </div>
-  </div>
+
 </div>

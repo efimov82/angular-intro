@@ -1,7 +1,13 @@
+import { Image } from './image';
+
 export interface Course {
   id: number;
-  title: string;
+  slug: string;
+  author: string;
   dateCreation: Date;
-  duration: number;
   description: string;
+  duration: number;
+  title: string;
+  thumbnail: Image;
+  youtubeId: string;
 }

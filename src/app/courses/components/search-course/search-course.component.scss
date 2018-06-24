@@ -1,0 +1,61 @@
+@import 'src/styles/variables.scss';
+
+.lable {
+  color: white;
+  font-size: 24px;
+  font-family: 'Quicksand', sans-serif;
+  margin: 0 0 15px 0;
+}
+
+.search-container {
+  background: white;
+  border-radius: 4px;
+  padding: 4px;
+
+  .input-search {
+    font-size: $font-size-middle;
+    margin: 2px 10px;
+    width: 400px;
+    border: none;
+
+    @media (max-width: $screen-small) {
+      width: 250px;
+    }
+
+    @media (max-width: $screen-phone) {
+      width: 120px;
+    }
+
+  }
+
+  input:focus {
+    outline:0;
+  }
+
+  .btn-search {
+    background-color: $color-action-button;
+    border-color: transparent;
+    color: white;
+    font-size: 10px;
+    border-radius: 4px;
+    height: 25px;
+    width: 54px;
+
+    fa {
+      display: none;
+    }
+
+    @media (max-width: $screen-phone) {
+      width: 24px;
+
+      span {
+        display: none;
+      }
+
+      fa {
+        display: inline;
+      }
+    }
+  }
+}
+

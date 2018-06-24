@@ -1,0 +1,22 @@
+@import 'src/styles/variables.scss';
+
+.header {
+  height: 40px;
+}
+
+.content {
+}
+
+.div-header > ::ng-deep figure {
+  justify-content: flex-start !important;
+}
+
+.footer {
+  margin: 20px 10% 0 0;
+  display: none;
+
+  @media (min-width: $screen-small) {
+    display: block;
+  }
+}
+

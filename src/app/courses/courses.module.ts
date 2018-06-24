@@ -6,8 +6,14 @@ import { MaterialsModule } from '../materials/materials.module';
 import { SharedModule } from '../shared/shared.module';
 // Routing
 import { coursesRoutes } from './courses.routes';
+
+// Pages Components
+import {
+  CoursesComponent,
+  CourseDetailsComponent
+} from './pages';
+
 // Components
-import { CoursesComponent } from './pages/courses/courses.component';
 import {
   AddCourseComponent,
   CourseComponent,
@@ -34,6 +40,7 @@ const COMPONENTS = [
   ],
   declarations: [
     ...COMPONENTS,
+    CourseDetailsComponent,
   ],
   exports: [
     ...COMPONENTS

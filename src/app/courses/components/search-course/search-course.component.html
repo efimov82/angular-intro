@@ -1,4 +1,12 @@
 <div>
-  <input matInput type="text" placeholder="Input Id, Title, Date...">
-  <button>Search</button>
+  <div class="lable">Find Courses...</div>
+  <!-- <fa name="search"></fa> -->
+  <div class="search-container">
+    <input type="text" class="input-search"
+      placeholder="Search by name, title, author or date"
+      [(ngModel)]="searchText" (keydown.enter)="search()">
+    <button class="btn-search" (click)="search()">
+      <fa name="search"></fa><span>Search</span>
+    </button>
+  </div>
 </div>

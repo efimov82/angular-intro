@@ -1,0 +1,26 @@
+@import 'src/styles/variables.scss';
+
+.container {
+  padding: 20px 10% 20px;
+
+  .title {
+    margin: 0 0 15px 0;
+    color: $color-head-text;
+    font-size: $font-size-extra;
+    font-weight: 400;
+  }
+
+  .description {
+    margin: 0 0 20px;
+  }
+
+  .video {
+    margin: 0 0 20px;
+  }
+}
+
+.not-found {
+  font-size: $font-size-big;
+  padding: 60px 10% 20px;
+  text-align: center;
+}

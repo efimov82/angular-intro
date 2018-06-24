@@ -1,20 +1,92 @@
-.row {
-  margin: 0 0 2px;
-  padding: 10px;
-  .title {
-    font-size: 16px;
-  }
+@import 'src/styles/variables.scss';
 
-  .date-creation {
-    font-size: 16px;
-    font-style: italic;
-  }
+.card {
+  border: 1px solid $color-borders;
+  border-radius: 5px;
+  margin: 0 0 20px 0;
 
-  .div-edit {
-    text-align: right;
-  }
+  .content {
+    height: 126px;
+    margin: 0;
 
-  .div-delete {
-    text-align: right;  
+    .image {
+      border-radius: 5px 0 0 5px;
+      display: none;
+      width: 230px;
+      overflow: hidden;
+      margin: 0px;
+
+      @media (min-width: $screen-small) {
+        display: inline-block;
+      }
+    }
+
+    .course-block {
+      padding: 20px 15px;
+
+      .title {
+        margin: 0 0 15px 0;
+
+        a {
+          color: $color-head-text;
+          font-size: $font-size-big;
+          font-weight: 400;
+          text-decoration: none;
+        }
+      }
+
+      .description {
+        font-size: $font-size-common;
+        height: 45px;
+      }
+
+      .info {
+        display: flex;
+
+        .author, .duration, .date {
+          font-size: $font-size-middle;
+          fa {
+            color: $color-head-text;
+            font-size: $font-size-common;
+            margin: 0 8px 0 0;
+          }
+
+          span {
+            color: $font-color-secondary;
+            margin: 0 4px 0 0;
+            display: none;
+          }
+
+          margin: 0 25px 0 0;
+        }
+
+        @media (min-width: $screen-medium) {
+          .author, .duration, .date {
+            span {
+              display: inline;
+            }
+          }
+        }
+
+        @media (max-width: $screen-phone) {
+          .author {
+            display: none;
+          }
+        }
+
+      }
+    }
+
+    .controls {
+      padding: 20px 10px 0 0;
+
+      .btn-edit, .btn-delete {
+        background: transparent;
+        color: $color-head-text;
+        height: 38px;
+        width: 38px;
+        margin: 0 0 10px 0;
+      }
+    }
   }
 }

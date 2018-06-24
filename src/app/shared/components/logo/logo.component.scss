@@ -1,0 +1,18 @@
+.logo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .icon {
+    height: 22px;
+  }
+
+  .text{
+    margin: 4px 0 0 -1px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}

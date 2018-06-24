@@ -1,20 +1,17 @@
-<h1>
-  Courses list
-</h1>
-<div class="panel">
-  <div fxFlex="35%">
-    <app-search-course></app-search-course>
-  </div>
-  <div fxFlex></div>
-  <div fxFlex="20%" class="div-add-course">
-    <a mat-button color="primary" class="button-add-course" routerLink="add">Add Course</a>
+<div class="head">
+  <div class="search" fxLayout="row" fxLayoutAlign="start end">
+    <app-search-course (onSearch)="searchCourses($event)"></app-search-course>
+
+    <button mat-button class="btn-add-course" (click)="add()">
+      <fa name="plus" class="pluss"></fa> <span>Add Course</span>
+    </button>
   </div>
 </div>
 
 <div class="container">
-  <div *ngFor="let course of courses; let index=index; let odd=odd; let even=even;"
-    [ngClass]="{ odd: odd, even: even }">
-    <app-course [course]=course></app-course>
+  <div class="total-count-courses">Total courses: {{ countAll }}</div>
+  <div *ngFor="let course of courses; let index=index;">
+    <app-course [course]=course (delete)=delete(course) class="course-item"></app-course>
   </div>
 </div>
 

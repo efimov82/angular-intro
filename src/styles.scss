@@ -1,11 +1,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '_variables.scss';
-
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'src/styles/variables.scss';
 
 body {
   font-family: 'Raleway', sans-serif;
   font-size: $font-size-common;
-  color: $font-color;
+  color: $font-color-main;
   margin: 0;
 }
 

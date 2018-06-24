@@ -1,0 +1,21 @@
+@import 'src/styles/variables.scss';
+
+.logo {
+  margin: 10px 0 0 0;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.user-info {
+  text-align: right;
+  margin: 10px 20px 0 0;
+}
+
+.header {
+
+  background: linear-gradient(to right, $header-bgr-color-left , $header-bgr-color-right);
+  height: 40px;
+  padding: 0 0 0 10%;
+}
