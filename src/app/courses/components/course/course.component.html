@@ -2,11 +2,15 @@
   <div class="content">
 
     <div fxFlex="25%" class="image">
-      <img src="{{ course.thumbnail.src }}" alt="{{ course.thumbnail.alt }}" class="src" />
+      <a [routerLink]="['/courses', course.slug]">
+        <img src="{{ course.thumbnail.src }}" alt="{{ course.thumbnail.alt }}" class="src" />
+      </a>
     </div>
 
     <div fxFlex class="course-block">
-      <div class="title">#{{ course.id }} {{ course.title }}</div>
+      <div class="title">
+          <a [routerLink]="['/courses', course.slug]">{{ course.title }}</a>
+      </div>
       <div class="description">
           {{ course.description }}
       </div>

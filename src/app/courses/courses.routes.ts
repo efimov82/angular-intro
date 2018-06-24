@@ -1,12 +1,18 @@
 import { Routes } from '@angular/router';
-import { CoursesComponent } from './pages/courses/courses.component';
+
+import {
+  CoursesComponent,
+  CourseDetailsComponent
+} from './pages';
+
 import { AddCourseComponent } from './components/add-course/add-course.component';
 
 export const coursesRoutes: Routes = [
   {
     path: 'courses',
     children: [
-      { path: '', component: CoursesComponent, },
+      { path: '', component: CoursesComponent },
+      { path: ':slug', component: CourseDetailsComponent },
       { path: 'add', component: AddCourseComponent }
     ]
   },

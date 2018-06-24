@@ -40,6 +40,16 @@ export class CoursesService implements CoursesServiceInterface {
     return of(resp);
   }
 
+  findBySlug(slug: string): Observable<Course> {
+    const index = this.courses.findIndex(course => {
+      if (course.slug === slug) {
+        return true;
+      }
+    });
+
+    return of(this.courses[index]);
+  }
+
   delete(course: Course) {
     this.courses = this.courses.filter(item => item !== course );
   }

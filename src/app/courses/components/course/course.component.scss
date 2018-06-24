@@ -25,10 +25,14 @@
       padding: 20px 15px;
 
       .title {
-        color: $color-head-text;
-        font-size: $font-size-big;
-        font-weight: 400;
         margin: 0 0 15px 0;
+
+        a {
+          color: $color-head-text;
+          font-size: $font-size-big;
+          font-weight: 400;
+          text-decoration: none;
+        }
       }
 
       .description {
