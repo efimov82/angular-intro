@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from '../../../shared/services/courses.service';
 import { Course } from '../../../shared/interfaces';
@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './course-details.component.html',
   styleUrls: ['./course-details.component.scss']
 })
-export class CourseDetailsComponent implements OnInit {
+export class CourseDetailsComponent implements OnInit, OnDestroy {
 
   private course: Course;
   private slug: string;

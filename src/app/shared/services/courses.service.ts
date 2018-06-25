@@ -58,6 +58,6 @@ export class CoursesService implements CoursesServiceInterface {
     return (
       course.title.indexOf(searchString) !== -1 ||
       course.description.indexOf(searchString) !== -1
-    )
+    );
   }
 }

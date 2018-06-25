@@ -12,14 +12,14 @@ import {
 })
 export class SearchCourseComponent implements OnInit {
   searchText: string;
-  @Output() onSearch: EventEmitter<string> = new EventEmitter();
+  @Output() search: EventEmitter<string> = new EventEmitter();
 
   ngOnInit() {
     this.searchText = '';
   }
 
-  search() {
-    this.onSearch.emit(this.searchText);
+  clickSearch() {
+    this.search.emit(this.searchText);
   }
 
 }

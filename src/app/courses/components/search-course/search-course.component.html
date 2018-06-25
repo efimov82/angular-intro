@@ -4,8 +4,8 @@
   <div class="search-container">
     <input type="text" class="input-search"
       placeholder="Search by name, title, author or date"
-      [(ngModel)]="searchText" (keydown.enter)="search()">
-    <button class="btn-search" (click)="search()">
+      [(ngModel)]="searchText" (keydown.enter)="clickSearch()">
+    <button class="btn-search" (click)="clickSearch()">
       <fa name="search"></fa><span>Search</span>
     </button>
   </div>

@@ -51,18 +51,17 @@ export class CoursesComponent implements OnInit {
     this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
       disableClose: false
     });
-    this.dialogRef.componentInstance.confirmMessage = "Are you sure you want to delete course?"
+    this.dialogRef.componentInstance.confirmMessage = 'Are you sure you want to delete course?';
 
     this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.coursesService.delete(course);
         this.countAll--;
         this.courses = this.courses.filter(item => item !== course);
 
-        this.snackBar.open("Course deleted.", "", {duration: 4000});
+        this.snackBar.open('Course deleted.', '', {duration: 4000});
       }
       this.dialogRef = null;
     });
   }
-
 }

@@ -1,4 +1,4 @@
-import { Course as CourseInterface }  from '../interfaces';
+import { Course as CourseInterface } from '../interfaces';
 import { Image } from '../interfaces/image';
 
 export class Course implements CourseInterface {
