@@ -23,8 +23,12 @@ import {
 const COMPONENTS = [
   AddCourseComponent,
   CourseComponent,
-  CoursesComponent,
   SearchCourseComponent,
+];
+
+const PAGES = [
+  CoursesComponent,
+  CourseDetailsComponent,
 ];
 
 @NgModule({
@@ -40,10 +44,11 @@ const COMPONENTS = [
   ],
   declarations: [
     ...COMPONENTS,
-    CourseDetailsComponent,
+    ...PAGES,
   ],
   exports: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    ...PAGES,
   ]
 })
 export class CoursesModule { }
