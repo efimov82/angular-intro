@@ -6,15 +6,11 @@ import { Course } from '../../../shared/interfaces/course';
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss']
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent {
   @Input() course:  Course;
   @Output() delete: EventEmitter<Course> = new EventEmitter();
-
-  ngOnInit() {
-  }
 
   deleteCourse() {
     this.delete.emit(this.course);
   }
-
 }
