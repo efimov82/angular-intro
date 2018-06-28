@@ -11,9 +11,9 @@ export const coursesRoutes: Routes = [
   {
     path: 'courses',
     children: [
-      { path: ':slug', component: CourseDetailsComponent },
-      { path: 'add', component: AddCourseComponent },
       { path: '', component: CoursesComponent, pathMatch: 'full' },
+      { path: 'add', component: AddCourseComponent },
+      { path: ':slug', component: CourseDetailsComponent },
     ]
   },
 ];
