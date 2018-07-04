@@ -1,27 +1,32 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
+import { coursesRoutes } from './courses/courses.routes';
+import { SharedModule } from './shared/shared.module';
+import { APP_BASE_HREF } from '@angular/common';
+import { CoursesComponent, CourseDetailsComponent } from './courses/pages';
+import { AddCourseComponent, CourseComponent, SearchCourseComponent } from './courses/components';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        AddCourseComponent,
+        CoursesComponent,
+        CourseComponent,
+        SearchCourseComponent,
+        CourseDetailsComponent,
       ],
+      imports: [
+        RouterModule.forRoot(coursesRoutes),
+        SharedModule,
+      ],
+      providers: [{provide: APP_BASE_HREF, useValue : '/' }]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to angular-intro!');
   }));
 });
