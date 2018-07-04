@@ -34,10 +34,6 @@ describe('CourseComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
     const course = new Course({
       id: 1,
       slug: 'test',
@@ -52,6 +48,12 @@ describe('CourseComponent', () => {
       );
 
     component.course = course;
+
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+
     expect(component).toBeTruthy();
   });
 });
