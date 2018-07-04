@@ -12,4 +12,12 @@ describe('CoursesService', () => {
   it('should be created', inject([CoursesService], (service: CoursesService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('find with empty string', inject([CoursesService], (service: CoursesService) => {
+    const count = 2;
+    let courses = service.find('', 0, count).subscribe(res => {
+      expect(res.count == count).toBeTruthy();
+    });
+
+  }));
 });
