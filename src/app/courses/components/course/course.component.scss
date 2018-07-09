@@ -5,6 +5,10 @@
   border-radius: 5px;
   margin: 0 0 20px 0;
 
+  .topRated {
+    background-color: #ecffdf;
+  }
+
   .content {
     height: 126px;
     margin: 0;
@@ -32,6 +36,11 @@
           font-size: $font-size-big;
           font-weight: 400;
           text-decoration: none;
+        }
+
+        fa {
+          margin: 0 0 0 6px;
+          color:grey;
         }
       }
 

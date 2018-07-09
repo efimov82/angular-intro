@@ -8,13 +8,21 @@
   </div>
 </div>
 
-<div class="container">
+<div *ngIf="countAll; else notFoundCourses" class="container">
   <div class="total-count-courses">Total courses: {{ countAll }}</div>
   <div *ngFor="let course of courses; let index=index;">
     <app-course [course]=course (delete)=delete(course) class="course-item"></app-course>
   </div>
+
+
+  <div class="load-more">
+    <button mat-button (click)="loadMore()" class="btn-load-more">Load More</button>
+  </div>
+
 </div>
 
-<div class="load-more">
-  <button mat-button (click)="loadMore()" class="btn-load-more">Load More</button>
-</div>
+<ng-template #notFoundCourses>
+  <div class="container">
+    <p>Courses not found.</p>
+  </div>
+</ng-template>

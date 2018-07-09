@@ -11,6 +11,7 @@ export class Course implements CourseInterface {
   title: string;
   thumbnail: Image;
   youtubeId: string;
+  topRated: boolean;
 
   constructor(data: CourseInterface) {
     Object.assign(this, data);

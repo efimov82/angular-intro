@@ -10,4 +10,5 @@ export interface Course {
   title: string;
   thumbnail: Image;
   youtubeId: string;
+  topRated: boolean;
 }

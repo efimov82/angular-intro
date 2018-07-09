@@ -8,13 +8,14 @@ export const coursesList: Course[] = [
     author: 'Ninja Squad',
     title: 'Angular 6 - What\'s new?',
     dateCreation: new Date('2018-05-04 12:00:00'),
-    duration: 124,
+    duration: 12,
     description: 'What\'s new in Angular 6.0, by Ninja Squad.',
     thumbnail: <Image>{
       src: 'assets/images/courses/course-thumb-1.png',
       alt: 'Angular course'
     },
     youtubeId: 'NpnsqOCkhIs',
+    topRated: true,
   }),
   new Course({
     id: 2,
@@ -28,7 +29,8 @@ export const coursesList: Course[] = [
       src: 'assets/images/courses/course-thumb-2.png',
       alt: 'Angular course'
     },
-    youtubeId: 'oa9cnWTpqP8'
+    youtubeId: 'oa9cnWTpqP8',
+    topRated: false,
   }),
   new Course({
     id: 3,
@@ -36,13 +38,14 @@ export const coursesList: Course[] = [
     author: 'Piter Bayer',
     title: 'Angular Material And Angular 6 ',
     dateCreation: new Date('2018-03-14 14:00:00'),
-    duration: 250,
+    duration: 3850,
     description: 'Material Design For Angular.',
     thumbnail: <Image>{
       src: 'assets/images/courses/course-thumb-3.png',
       alt: 'Angular course'
     },
-    youtubeId: 'bGReOt6r4ww'
+    youtubeId: 'bGReOt6r4ww',
+    topRated: false,
   }),
   new Course({
     id: 4,
@@ -50,13 +53,14 @@ export const coursesList: Course[] = [
     slug: 'guru-ngrx-course',
     title: 'Angular Guru NgRJS course',
     dateCreation: new Date('2017-12-09 14:00:00'),
-    duration: 350,
+    duration: 72350,
     description: 'Description of Last course.',
     thumbnail: <Image>{
       src: 'assets/images/courses/course-thumb-4.png',
       alt: 'Angular course'
     },
-    youtubeId: 'oa9cnWTpqP8'
+    youtubeId: 'oa9cnWTpqP8',
+    topRated: false,
   }),
   new Course({
     id: 5,
@@ -69,7 +73,8 @@ export const coursesList: Course[] = [
     thumbnail: <Image>{
       src: 'assets/images/courses/course-thumb-1.png',
     },
-    youtubeId: '9P5DTlg9oLc'
+    youtubeId: '9P5DTlg9oLc',
+    topRated: false,
   }),
   new Course({
     id: 6,
@@ -85,7 +90,8 @@ export const coursesList: Course[] = [
       src: 'assets/images/courses/course-thumb-2.png',
       alt: 'Angular course'
     },
-    youtubeId: 'Tux1nhBPl_w'
+    youtubeId: 'Tux1nhBPl_w',
+    topRated: false,
   }),
   new Course({
     id: 7,
@@ -98,6 +104,7 @@ export const coursesList: Course[] = [
     thumbnail: <Image>{
       src: 'assets/images/courses/course-thumb-3.png',
     },
-    youtubeId: 'oa9cnWTpqP8'
+    youtubeId: 'oa9cnWTpqP8',
+    topRated: true,
   })
 ];
