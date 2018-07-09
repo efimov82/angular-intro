@@ -1,4 +1,4 @@
-import { Course as CourseInterface } from '../interfaces';
+import { Course as CourseInterface }  from '../interfaces';
 import { Image } from '../interfaces/image';
 
 export class Course implements CourseInterface {
@@ -16,7 +16,7 @@ export class Course implements CourseInterface {
     Object.assign(this, data);
   }
 
-  getVideoUrl() {
+  getVideoUrl(): string {
     return 'https://www.youtube.com/embed/' + this.youtubeId;
   }
 }
