@@ -60,11 +60,22 @@ export class CoursesComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.coursesService.delete(course);
-        this.countAll--;
-        this.courses = this.courses.filter(item => item !== course);
+        this.coursesService.delete(course).subscribe(
+          res => {
+            if (res) {
+              this.countAll--;
+              this.courses = this.courses.filter(item => item !== course);
 
-        this.snackBar.open('Course deleted.', '', {duration: 4000});
+              this.snackBar.open('Course deleted.', '', {duration: 4000});
+            } else {
+              this.snackBar.open('Error course delete.', '', {duration: 4000});
+            }
+          },
+          error => {
+            this.snackBar.open('Error course delete: ' + error.statusText, '', {duration: 4000});
+          }
+        );
+
       }
       this.dialogRef = null;
     });
