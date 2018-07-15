@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Course } from '../../../shared/interfaces';
-import { CoursesService } from '../../../shared/services/courses.service';
+import { CoursesService } from '@shared/services/courses.service';
 
 import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
-import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
+import { Course } from '@shared/models/course.model';
+import { Course as CourseInterface } from '@shared/interfaces'
 
 @Component({
   selector: 'app-courses',
@@ -34,9 +35,13 @@ export class CoursesComponent implements OnInit {
     this.coursesService.find(this.searchStr, this.numStartItem, this.countItems).subscribe(
       resp => {
         this.countAll = resp.all;
-        resp.items.map(course => this.courses.push(course));
+        resp.items.map(courseData => {
+          let course = new Course(<CourseInterface>courseData);
+          this.courses.push(course);
+        });
       }
     );
+
     this.numStartItem += this.countItems;
   }
 
