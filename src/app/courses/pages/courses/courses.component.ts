@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CoursesService } from '@shared/services/courses.service';
+import { CoursesService } from '@shared/services';
 
 import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';

@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map }  from 'rxjs/operators';
 
 import {
   CoursesResponse,
   Course as CourseInterface
-} from '../interfaces';
+} from '@shared/interfaces';
 import { CoursesServiceInterface } from './corses.service.interface';
 import { HttpClient } from '@angular/common/http';
-import { Course } from '../models/course.model';
+import { Course } from '@shared/models/course.model';
 
+// import { environment } from '@environment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class CoursesService implements CoursesServiceInterface {
     return this.http.get(url).pipe(
       map(data => {
         return {
-            items: data['items'].map(item => <Course>item),
+            items: data['items'].map(item => <CourseInterface>item),
             count: data['count'],
             all: data['all']
           };

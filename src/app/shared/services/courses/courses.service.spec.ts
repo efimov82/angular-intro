@@ -1,6 +1,6 @@
 
 import { CoursesService } from './courses.service';
-import { Course } from '../models/course.model';
+import { Course } from '../../models/course.model';
 
 describe('CoursesService', () => {
   let service;
