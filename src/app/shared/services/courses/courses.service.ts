@@ -63,11 +63,4 @@ export class CoursesService implements CoursesServiceInterface {
       })
     );
   }
-
-  private search(course: Course, searchString: string) {
-    return (
-      course.title.indexOf(searchString) !== -1 ||
-      course.description.indexOf(searchString) !== -1
-    );
-  }
 }
