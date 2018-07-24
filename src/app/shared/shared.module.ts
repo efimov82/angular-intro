@@ -16,6 +16,9 @@ import {
   UserInfoComponent,
  } from './components';
 
+import { DurationPipe } from './pipes';
+import { FreshCourseDirective } from './directives';
+
 const COMPONENTS = [
   BreadcrumbsComponent,
   ConfirmDialogComponent,
@@ -25,6 +28,14 @@ const COMPONENTS = [
   NotFoundComponent,
   UserInfoComponent,
 ];
+
+const DIRECTIVES = [
+  FreshCourseDirective,
+];
+
+const PIPES = [
+  DurationPipe,
+]
 
 @NgModule({
   imports: [
@@ -37,9 +48,13 @@ const COMPONENTS = [
   ],
   declarations: [
     ...COMPONENTS,
+    ...DIRECTIVES,
+    ...PIPES,
   ],
   exports: [
     ...COMPONENTS,
+    ...DIRECTIVES,
+    ...PIPES,
     AngularFontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,

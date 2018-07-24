@@ -15,7 +15,7 @@ import { CoursesServiceInterface } from './corses.service.interface';
 export class CoursesService implements CoursesServiceInterface {
   courses: Course[];
 
-  constructor() {
+  constructor() { // coursesList: Course[]
     this.courses = coursesList;
    }
 

@@ -11,9 +11,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class CourseDetailsComponent implements OnInit, OnDestroy {
 
-  private course: Course;
-  private slug: string;
-  private sub: any;
+  public course: Course;
+  public slug: string;
+  private routerSubsription$: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +22,7 @@ export class CourseDetailsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
+    this.routerSubsription$ = this.route.params.subscribe(params => {
       this.slug = params['slug'];
       this.coursesService.findBySlug(this.slug).subscribe(
         course => this.course = course
@@ -31,7 +31,7 @@ export class CourseDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.routerSubsription$.unsubscribe();
   }
 
 }

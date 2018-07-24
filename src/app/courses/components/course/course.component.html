@@ -1,5 +1,5 @@
-<div class="card">
-  <div class="content">
+<div class="card" [appFreshCourse]="course">
+  <div class="content" [ngClass]="{ 'topRated': course.topRated }">
 
     <div fxFlex="25%" class="image">
       <a [routerLink]="['/courses', course.slug]">
@@ -9,7 +9,8 @@
 
     <div fxFlex class="course-block">
       <div class="title">
-          <a [routerLink]="['/courses', course.slug]">{{ course.title }}</a>
+          <a [routerLink]="['/courses', course.slug]">{{ course.title | uppercase }}</a>
+          <fa *ngIf="course.topRated" name="star"></fa>
       </div>
       <div class="description">
           {{ course.description }}
@@ -19,7 +20,7 @@
           <fa name="user"></fa><span>Author:</span> {{ course.author }}
         </div>
         <div class="duration">
-          <fa name="hourglass-2"></fa><span>Duration:</span> {{ course.duration }} min.
+          <fa name="hourglass-2"></fa><span>Duration:</span> {{ course.duration | duration }}
         </div>
         <div class="date">
           <fa name="calendar"></fa><span>Date:</span> {{ course.dateCreation | date }}
