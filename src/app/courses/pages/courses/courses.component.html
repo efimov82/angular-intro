@@ -2,8 +2,8 @@
   <div class="search" fxLayout="row" fxLayoutAlign="start end">
     <app-search-course (search)="searchCourses($event)"></app-search-course>
 
-    <button mat-button class="btn-add-course">
-      <fa name="plus" class="pluss"></fa> <span>Add Course</span>
+    <button mat-button (click)="addCourse()" class="btn-add-course">
+      <fa name="plus" class="pluss"></fa><span>Add Course</span>
     </button>
   </div>
 </div>

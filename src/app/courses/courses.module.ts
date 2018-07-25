@@ -49,6 +49,7 @@ const PAGES = [
   exports: [
     ...COMPONENTS,
     ...PAGES,
-  ]
+  ],
+  entryComponents: [ AddCourseComponent ],
 })
 export class CoursesModule { }

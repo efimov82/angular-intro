@@ -1,6 +1,20 @@
-<p>
-  Add course
-</p>
-
-
-<a routerLink="/courses">Back</a>
+<h3>Add Course</h3>
+<mat-divider></mat-divider>
+<div class="container">
+  <div class="row">
+    <p>Title</p>
+    <input type="text" class="text">
+  </div>
+  <div class="row">
+    <p>Description</p>
+    <input type="text" class="text">
+  </div>
+  <div class="row">
+    <p>Date</p>
+    <input type="text" class="text">
+  </div>
+</div>
+<div class="panel">
+  <button (click)="save()">Save</button>
+  <button (click)="cancel()">Cancel</button>
+</div>
