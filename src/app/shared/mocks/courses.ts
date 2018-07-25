@@ -7,7 +7,7 @@ export const coursesList: Course[] = [
     slug: 'starter-course',
     author: 'Ninja Squad',
     title: 'Angular 6 - What\'s new?',
-    dateCreation: new Date('2018-05-04 12:00:00'),
+    dateCreation: new Date('2018-07-04 12:00:00'),
     duration: 12,
     description: 'What\'s new in Angular 6.0, by Ninja Squad.',
     thumbnail: <Image>{

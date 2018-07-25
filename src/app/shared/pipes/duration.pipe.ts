@@ -21,7 +21,7 @@ export class DurationPipe implements PipeTransform {
       minutes = minutes - Math.floor(minutes / 60) * 60;
     }
 
-    return hours.concat( minutes.toString().padStart(2, '0') + ':',
-          seconds.toString().padStart(2, '0'));
+    return `${hours}${minutes.toString().padStart(2, '0')}:
+          ${seconds.toString().padStart(2, '0')}`;
   }
 }

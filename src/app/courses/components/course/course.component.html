@@ -1,5 +1,5 @@
 <div class="card" [appFreshCourse]="course">
-  <div class="content" [ngClass]="course.topRated ? 'topRated': ''">
+  <div class="content" [ngClass]="{ 'topRated': course.topRated }">
 
     <div fxFlex="25%" class="image">
       <a [routerLink]="['/courses', course.slug]">
