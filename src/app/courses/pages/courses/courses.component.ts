@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Course } from '../../../shared/interfaces';
-import { CoursesService } from '../../../shared/services/courses.service';
-
 import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
-import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { AddCourseComponent } from '../../../courses/components';
+
+import { CoursesService } from '@shared/services';
+import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
+import { Course } from '@shared/models/course.model';
+import { Course as CourseInterface } from '@shared/interfaces'
+import { AddCourseComponent } from '@app/courses/components';
+
 
 @Component({
   selector: 'app-courses',
@@ -36,9 +37,13 @@ export class CoursesComponent implements OnInit {
     this.coursesService.find(this.searchStr, this.numStartItem, this.countItems).subscribe(
       resp => {
         this.countAll = resp.all;
-        resp.items.map(course => this.courses.push(course));
+        resp.items.map(courseData => {
+          let course = new Course(<CourseInterface>courseData);
+          this.courses.push(course);
+        });
       }
     );
+
     this.numStartItem += this.countItems;
   }
 
@@ -63,11 +68,22 @@ export class CoursesComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.coursesService.delete(course);
-        this.countAll--;
-        this.courses = this.courses.filter(item => item !== course);
+        this.coursesService.delete(course).subscribe(
+          res => {
+            if (res) {
+              this.countAll--;
+              this.courses = this.courses.filter(item => item !== course);
 
-        this.snackBar.open('Course deleted.', '', {duration: 4000});
+              this.snackBar.open('Course deleted.', '', {duration: 4000});
+            } else {
+              this.snackBar.open('Error course delete.', '', {duration: 4000});
+            }
+          },
+          error => {
+            this.snackBar.open('Error course delete: ' + error.statusText, '', {duration: 4000});
+          }
+        );
+
       }
       this.dialogRef = null;
     });

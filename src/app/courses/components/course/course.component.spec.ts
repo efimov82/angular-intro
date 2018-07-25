@@ -44,6 +44,7 @@ describe('CourseComponent', () => {
       title: 'title',
       thumbnail: new Image(),
       youtubeId: 'id',
+      topRated: true,
         }
       );
 

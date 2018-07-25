@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CoursesService } from '../../../shared/services/courses.service';
-import { Course } from '../../../shared/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
+
+import { CoursesService } from '@shared/services/courses/courses.service';
+import { Course } from '@shared/interfaces';
 
 @Component({
   selector: 'app-course-details',
@@ -33,5 +34,4 @@ export class CourseDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.routerSubsription$.unsubscribe();
   }
-
 }

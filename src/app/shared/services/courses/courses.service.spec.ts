@@ -1,13 +1,13 @@
-import { TestBed, inject } from '@angular/core/testing';
 
 import { CoursesService } from './courses.service';
-import { Course } from '../models/course.model';
+import { Course } from '../../models/course.model';
 
 describe('CoursesService', () => {
   let service;
+  let http;
 
   beforeEach(() => {
-    service = new CoursesService(); // <- set MOCK Course[] here for tests?
+    service = new CoursesService(http); // <- set MOCK Course[] here for tests?
   });
 
   it('should be created', () => {

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 import { MaterialsModule } from '../materials/materials.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -18,12 +19,14 @@ import {
 
 import { DurationPipe } from './pipes';
 import { FreshCourseDirective } from './directives';
+import { LoginComponent } from './pages/login/login.component';
 
 const COMPONENTS = [
   BreadcrumbsComponent,
   ConfirmDialogComponent,
   HeaderComponent,
   FooterComponent,
+  LoginComponent, // TODO structure for this page-component
   LogoComponent,
   NotFoundComponent,
   UserInfoComponent,
@@ -39,12 +42,13 @@ const PIPES = [
 
 @NgModule({
   imports: [
+    AngularFontAwesomeModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialsModule,
-    AngularFontAwesomeModule,
     RouterModule,
+    StorageServiceModule,
   ],
   declarations: [
     ...COMPONENTS,
@@ -59,6 +63,7 @@ const PIPES = [
     FormsModule,
     ReactiveFormsModule,
     MaterialsModule,
+    StorageServiceModule,
   ],
   entryComponents: [ConfirmDialogComponent]
 })

@@ -2,13 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 // Modules
 import { CoursesModule } from './courses/courses.module';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { NotFoundComponent } from './shared/components';
+import { NotFoundComponent } from '@shared/components';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/courses', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
     // Routing
     RouterModule.forRoot(
       appRoutes,
