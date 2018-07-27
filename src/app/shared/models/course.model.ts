@@ -13,7 +13,7 @@ export class Course implements CourseInterface {
   youtubeId: string;
   topRated: boolean;
 
-  constructor(data: CourseInterface) {
+  constructor(data?: CourseInterface) {
     Object.assign(this, data);
   }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Course } from '@app/shared/models/course.model';
 
 @Component({
   selector: 'app-add-course',
@@ -7,15 +8,18 @@ import { MatDialogRef } from '@angular/material';
   styleUrls: ['./add-course.component.scss']
 })
 export class AddCourseComponent {
+  course: Course = null;
 
-  constructor(public dialogRef: MatDialogRef<AddCourseComponent>) { }
+  constructor(public dialogRef: MatDialogRef<AddCourseComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.course = data.course;
+   }
 
   save() {
 
   }
 
   cancel() {
-
     this.dialogRef.close();
   }
 }

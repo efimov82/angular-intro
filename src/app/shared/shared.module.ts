@@ -18,7 +18,10 @@ import {
  } from './components';
 
 import { DurationPipe } from './pipes';
-import { FreshCourseDirective } from './directives';
+import {
+  FreshCourseDirective,
+  OnlyNumbersDirective,
+} from './directives';
 import { LoginComponent } from './pages/login/login.component';
 
 const COMPONENTS = [
@@ -34,6 +37,7 @@ const COMPONENTS = [
 
 const DIRECTIVES = [
   FreshCourseDirective,
+  OnlyNumbersDirective,
 ];
 
 const PIPES = [

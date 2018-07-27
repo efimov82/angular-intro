@@ -55,7 +55,16 @@ export class CoursesComponent implements OnInit {
   }
 
   addCourse() {
+    let course = new Course();
     this.dialogAddCourse = this.dialog.open(AddCourseComponent, {
+      data: { course },
+      disableClose: false,
+    });
+  }
+
+  edit(course: Course) {
+    this.dialogAddCourse = this.dialog.open(AddCourseComponent, {
+      data: {course},
       disableClose: false
     });
   }

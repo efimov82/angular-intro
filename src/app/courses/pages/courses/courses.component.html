@@ -11,7 +11,7 @@
 <div *ngIf="countAll; else notFoundCourses" class="container">
   <div class="total-count-courses">Total courses: {{ countAll }}</div>
   <div *ngFor="let course of courses; let index=index;">
-    <app-course [course]=course (delete)=delete(course) class="course-item"></app-course>
+    <app-course [course]=course (delete)=delete(course) (edit)=edit(course) class="course-item"></app-course>
   </div>
 
 

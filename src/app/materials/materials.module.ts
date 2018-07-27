@@ -6,6 +6,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatGridListModule,
   MatToolbarModule,
@@ -14,6 +15,8 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatNativeDateModule,
+
 } from '@angular/material';
 
 import { LayoutModule } from '@angular/cdk/layout';
@@ -23,6 +26,7 @@ const COMPONENTS = [
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatGridListModule,
   MatIconModule,
@@ -30,6 +34,7 @@ const COMPONENTS = [
   MatSidenavModule,
   MatSnackBarModule,
   MatListModule,
+  MatNativeDateModule,
   MatToolbarModule,
 
   LayoutModule,
