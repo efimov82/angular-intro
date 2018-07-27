@@ -1,6 +1,38 @@
-<p>
-  Add course
-</p>
+<form class="example-form">
+<div class="container">
+  <div class="header">
+    <span class="title">Add Course</span>
+    <span class="btn-close" (click)="cancel()">X</span>
+  </div>
+  <mat-divider></mat-divider>
 
+  <div class="fields">
+    <mat-form-field class="row title">
+      <input matInput [(ngModel)]="course.title" name="title" placeholder="Title *" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field class="row details">
+      <textarea matInput [(ngModel)]="course.description" name="description" placeholder="Details *" rows="4" autocomplete="off"></textarea>
+    </mat-form-field>
+    <mat-form-field class="date">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="course.dateCreation" name="dateCreation" placeholder="Date *">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="duration">
+        <input matInput [(ngModel)]="course.duration" name="duration" placeholder="Duration *" autocomplete="off" onlyNumbers value="">
+    </mat-form-field>
+    <span [hidden]="!course.duration">{{course.duration | duration}}</span>
+    <mat-form-field class="row authors">
+        <input matInput placeholder="Authors *" value="" autocomplete="off">
+      </mat-form-field>
+  </div>
 
-<a routerLink="/courses">Back</a>
+  <div class="panel">
+
+    <span class="mandatory-lable"><strong>*</strong> Mandatory fields </span>
+    <button mat-button (click)="save()" class="btn-save" [color]="'save'">Save</button>
+    <button mat-button (click)="cancel()" [color]="'cancel'">Cancel</button>
+  </div>
+
+</div>
+</form>

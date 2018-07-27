@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
 
 import { CoursesService } from '@shared/services';
-
-import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { Course } from '@shared/models/course.model';
 import { Course as CourseInterface } from '@shared/interfaces'
+import { AddCourseComponent } from '@app/courses/components';
+
 
 @Component({
   selector: 'app-courses',
@@ -19,6 +20,7 @@ export class CoursesComponent implements OnInit {
   countItems = 2;
   searchStr = '';
   dialogRef: MatDialogRef<ConfirmDialogComponent>;
+  dialogAddCourse: MatDialogRef<AddCourseComponent>;
 
   constructor(
     private coursesService: CoursesService,
@@ -50,6 +52,21 @@ export class CoursesComponent implements OnInit {
     this.numStartItem = 0;
     this.courses = [];
     this.loadMore();
+  }
+
+  addCourse() {
+    let course = new Course();
+    this.dialogAddCourse = this.dialog.open(AddCourseComponent, {
+      data: { course },
+      disableClose: false,
+    });
+  }
+
+  edit(course: Course) {
+    this.dialogAddCourse = this.dialog.open(AddCourseComponent, {
+      data: {course},
+      disableClose: false
+    });
   }
 
   delete(course: Course) {

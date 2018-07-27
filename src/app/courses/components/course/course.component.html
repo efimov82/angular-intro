@@ -1,4 +1,4 @@
-<div class="card" [appFreshCourse]="course">
+<div class="card" [appFreshCourse]="course" colorCommingSoon="lime">
   <div class="content" [ngClass]="{ 'topRated': course.topRated }">
 
     <div fxFlex="25%" class="image">
@@ -29,7 +29,7 @@
     </div>
 
     <div fxFlex="60px" class="controls">
-      <button mat-mini-fab class="btn-edit">
+      <button mat-mini-fab class="btn-edit" (click)="editCourse()">
           <mat-icon aria-label="Edit">edit</mat-icon>
       </button>
       <button mat-mini-fab class="btn-delete" (click)="deleteCourse()">

@@ -6,20 +6,22 @@ import { Course } from '../models/course.model';
 })
 export class FreshCourseDirective implements OnInit {
   @Input('appFreshCourse') course: Course;
+  @Input('colorFresh') colorFreshCourse: String = '#b9ffb3';
+  @Input('colorCommingSoon') colorCommingSoon: String = 'lime';
 
-  constructor(private el: ElementRef) {
-   }
+  constructor(private el: ElementRef) {}
 
    ngOnInit() {
-    let dateCreation = this.course.dateCreation.toDateString();
+    const dateCreation = new Date(this.course.dateCreation).getTime();
     let now = new Date();
+    const nowTime = now.getTime();
     now.setDate(now.getDate() - 14);
+    const freshTime = now.getTime();
 
-    // If creationDate < currentDate && creationDate >= currentDate - 14days
-    if (dateCreation < Date() && dateCreation >= now.toString()) {
-      this.el.nativeElement.style.borderColor = '#b9ffb3';
-    } else if (dateCreation > Date()) {
-      this.el.nativeElement.style.borderColor = 'lime';
+    if (dateCreation > nowTime) {
+      this.el.nativeElement.style.borderColor = this.colorCommingSoon;
+    } else if (dateCreation >= freshTime) {
+      this.el.nativeElement.style.borderColor = this.colorFreshCourse;
     }
-   }
+  }
 }
