@@ -21,7 +21,7 @@
     <mat-form-field class="duration">
         <input matInput [(ngModel)]="course.duration" name="duration" placeholder="Duration *" autocomplete="off" onlyNumbers value="">
     </mat-form-field>
-    <span>{{course.duration | duration}}</span>
+    <span [hidden]="!course.duration">{{course.duration | duration}}</span>
     <mat-form-field class="row authors">
         <input matInput placeholder="Authors *" value="" autocomplete="off">
       </mat-form-field>

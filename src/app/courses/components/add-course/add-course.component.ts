@@ -16,7 +16,8 @@ export class AddCourseComponent {
    }
 
   save() {
-
+    console.log('save course');
+    this.dialogRef.close();
   }
 
   cancel() {

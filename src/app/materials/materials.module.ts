@@ -16,12 +16,11 @@ import {
   MatInputModule,
   MatListModule,
   MatNativeDateModule,
-
 } from '@angular/material';
 
 import { LayoutModule } from '@angular/cdk/layout';
 
-const COMPONENTS = [
+const MODULES = [
   // Materials
   MatButtonModule,
   MatCardModule,
@@ -36,7 +35,6 @@ const COMPONENTS = [
   MatListModule,
   MatNativeDateModule,
   MatToolbarModule,
-
   LayoutModule,
   // Flex
   FlexLayoutModule,
@@ -45,10 +43,10 @@ const COMPONENTS = [
 @NgModule({
   imports: [
     CommonModule,
-    ...COMPONENTS
+    ...MODULES
   ],
   exports: [
-    ...COMPONENTS
+    ...MODULES
   ],
   declarations: []
 })
