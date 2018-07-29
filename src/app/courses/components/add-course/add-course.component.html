@@ -22,9 +22,16 @@
         <input matInput [(ngModel)]="course.duration" name="duration" placeholder="Duration *" autocomplete="off" onlyNumbers value="">
     </mat-form-field>
     <span [hidden]="!course.duration">{{course.duration | duration}}</span>
+
+    
+    <mat-form-field class="row youtube-id">
+      <input matInput [(ngModel)]="course.youtubeId" name="youtubeId" placeholder="Youtube Id *" value="" autocomplete="off">
+    </mat-form-field>
+    
+
     <mat-form-field class="row authors">
-        <input matInput placeholder="Authors *" value="" autocomplete="off">
-      </mat-form-field>
+      <input matInput placeholder="Authors *" value="" autocomplete="off">
+    </mat-form-field>
   </div>
 
   errors: {{errors}}

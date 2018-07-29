@@ -17,7 +17,7 @@ export class CoursesComponent implements OnInit {
   courses: Course[];
   countAll: number;
   numStartItem = 0;
-  countItems = 2;
+  countItems = 6;
   searchStr = '';
 
   constructor(
