@@ -39,6 +39,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "baseHref": "/courses/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

@@ -1,9 +1,9 @@
 <div *ngIf="user">
   <span class="info">Welcome {{user.email}}!
-  <a routerLink="/logout">Logout</a></span>
+  <a routerLink="/auth/logout">Logout</a></span>
 </div>
 
 <div *ngIf="!user">
-    <a routerLink="/login">Login</a>
+    <a routerLink="/auth/login">Login</a>
 </div>
 

@@ -29,10 +29,16 @@
     </div>
 
     <div fxFlex="60px" class="controls">
-      <button mat-mini-fab class="btn-edit" (click)="editCourse()">
+      <button mat-mini-fab class="btn-edit"
+        [disabled]="!canDelete"
+        [ngClass]="{ 'disabled': !canDelete }"
+        (click)="editCourse()">
           <mat-icon aria-label="Edit">edit</mat-icon>
       </button>
-      <button mat-mini-fab class="btn-delete" (click)="deleteCourse()">
+      <button mat-mini-fab class="btn-delete"
+        [disabled]="!canDelete"
+        [ngClass]="{ 'disabled': !canDelete }"
+        (click)="deleteCourse()">
           <mat-icon aria-label="Delete">delete</mat-icon>
       </button>
     </div>

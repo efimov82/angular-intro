@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map }  from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError }  from 'rxjs/operators';
 
 import {
   CoursesResponse,
   Course as CourseInterface
 } from '@shared/interfaces';
 import { CoursesServiceInterface } from './corses.service.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Course } from '@shared/models/course.model';
 
-// import { environment } from '@environment';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService implements CoursesServiceInterface {
-  endPoint = 'http://localhost:3000/courses';
+  endPoint = `${environment.restEndPoint}/courses`;
   courses: Course[];
 
   constructor(private http: HttpClient) {}
@@ -50,7 +50,41 @@ export class CoursesService implements CoursesServiceInterface {
     );
   }
 
-  delete(course: Course) {
+  add(course: Course): any {
+    return this.http.post(this.endPoint, course).pipe(
+      map(response => {
+        let courseNew = new Course(<CourseInterface>response);
+        if (courseNew instanceof Course) {
+          return courseNew;
+        } else {
+          return { res: false, errors: response['message'] };
+        }
+      }),
+      catchError(e => {
+        // console.log(e.error);
+        return throwError(e.error);
+      })
+    );
+
+  }
+
+  edit(course: Course) {
+    let url = `${this.endPoint}/${course.slug}`;
+
+    return this.http.put(url, course).pipe(
+      map(response => {
+        // check maybe need Try-Catch here
+        let courseNew = new Course(<CourseInterface>response);
+        if (courseNew instanceof Course) {
+          return courseNew;
+        } else {
+          return { res: false, errors: response['message'] };
+        }
+      })
+    );
+  }
+
+  delete(course: Course): Observable<boolean> {
     let url = `${this.endPoint}/${course.slug}`;
 
     return this.http.delete(url).pipe(

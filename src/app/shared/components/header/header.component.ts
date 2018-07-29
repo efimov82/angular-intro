@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '@shared/services';
+import { AuthService } from '@app/auth/services';
 import { User } from '@app/shared/interfaces';
 import { Subscription } from 'rxjs';
 
@@ -8,13 +8,21 @@ import { Subscription } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
   currentUser: User;
   subscription: Subscription;
 
   constructor(private authService: AuthService) {
-    this.subscription = authService.getAuthUser()
-      .subscribe( user => this.currentUser = user );
+    
+    this.subscription = authService.getAuthUserObservable()
+      .subscribe( user => {
+        console.log('constuctor: user=', user);
+        this.currentUser = user;
+      });
+  }
+
+  ngOnInit() {
+    this.currentUser = this.authService.getAuthUser();
   }
 
   public isUserAuth(): boolean {

@@ -6,6 +6,9 @@
   </div>
   <div fxFlex></div>
   <div fxFlex="20%" class="user-info">
-    <app-user-info [user]="currentUser"></app-user-info>
+    <span>isUserAut={{ isUserAuth() }} </span>
+    <span>{{ currentUser }} </span>}
+    
+    <app-user-info [user]="currentUser" ></app-user-info>
   </div>
 </div>

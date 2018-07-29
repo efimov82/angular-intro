@@ -4,6 +4,9 @@ import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
 import { User } from '@app/shared/interfaces';
 import { Observable, of } from 'rxjs';
+import { map }  from 'rxjs/operators';
+
+import { environment } from '@environments/environment';
 
 // key that is used to access the data in local storage
 const STORAGE_KEY = 'local_auth_user';
@@ -12,7 +15,7 @@ const STORAGE_KEY = 'local_auth_user';
   providedIn: 'root'
 })
 export class AuthService {
-  endPoint = 'http://localhost:3000/auth';
+  endPoint = `${environment.restEndPoint}/auth`;
   currentUser: User = null;
 
   constructor(
@@ -28,34 +31,40 @@ export class AuthService {
     // }
   }
 
-  public login(email: string, password: string):boolean {
-    // TODO implement REST API logic
-    if (email !== 'test@gmail.com' && password !== '123456') {
-      return false;
-    }
+  public login(email: string, password: string): Observable<boolean> {
+    let url = this.endPoint + '/login';
+    return this.http.post(url, { email, password } )
+      .pipe(
+        map(response => {
+          if (response['success']) {
+            this.currentUser = { email: email, authToken: response['token'] };
+            this.storage.set(STORAGE_KEY, this.currentUser);
 
-    let user = <User>{
-      id:0,
-      email:email,
-      authToken: 'authToken123'
-    };
-    this.storage.set(STORAGE_KEY, user);
-
-    return true;
+            return true;
+          } else {
+            return false;
+          }
+        })
+    );
   }
 
-  public logout():void {
+  public logout(): void {
     // TODO implement REST API logic
     this.storage.set(STORAGE_KEY, null);
 
     this.currentUser = null;
   }
 
-  public isAuthenticated():boolean {
+  public isAuthenticated(): boolean {
     return this.currentUser && this.currentUser.authToken != '';
   }
 
-  public getAuthUser(): Observable<User|null> {
-    return of(this.currentUser);
+  public getAuthUser(): User|null {
+    return this.currentUser;
+  }
+
+  public getAuthUserObservable(): Observable<User|null> {
+    let user = this.currentUser;
+    return of(user);
   }
 }

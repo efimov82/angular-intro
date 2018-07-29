@@ -27,10 +27,11 @@
       </mat-form-field>
   </div>
 
+  errors: {{errors}}
   <div class="panel">
 
     <span class="mandatory-lable"><strong>*</strong> Mandatory fields </span>
-    <button mat-button (click)="save()" class="btn-save" [color]="'save'">Save</button>
+    <button mat-button (click)="saveClick()" class="btn-save" [color]="'save'">Save</button>
     <button mat-button (click)="cancel()" [color]="'cancel'">Cancel</button>
   </div>
 

@@ -22,14 +22,12 @@ import {
   FreshCourseDirective,
   OnlyNumbersDirective,
 } from './directives';
-import { LoginComponent } from './pages/login/login.component';
 
 const COMPONENTS = [
   BreadcrumbsComponent,
   ConfirmDialogComponent,
   HeaderComponent,
   FooterComponent,
-  LoginComponent, // TODO structure for this page-component
   LogoComponent,
   NotFoundComponent,
   UserInfoComponent,
