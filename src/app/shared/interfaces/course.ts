@@ -8,7 +8,7 @@ export interface Course {
   description: string;
   duration: number;
   title: string;
-  thumbnail: Image;
+  thumbnail: string;
   youtubeId: string;
   topRated: boolean;
 }

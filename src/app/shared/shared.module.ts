@@ -14,7 +14,6 @@ import {
   FooterComponent,
   LogoComponent,
   NotFoundComponent,
-  UserInfoComponent,
  } from './components';
 
 import { DurationPipe } from './pipes';
@@ -30,7 +29,6 @@ const COMPONENTS = [
   FooterComponent,
   LogoComponent,
   NotFoundComponent,
-  UserInfoComponent,
 ];
 
 const DIRECTIVES = [

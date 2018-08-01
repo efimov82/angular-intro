@@ -76,30 +76,29 @@ export class CoursesComponent implements OnInit {
       disableClose: false,
     });
 
-      dialogRef.componentInstance.onSave.subscribe(course => {
-        // console.log(course);
-        try {
-          this.coursesService.add(course).subscribe(result => {
-            let courseNew = <CourseInterface>result;
-            console.log(courseNew);
-            if (courseNew instanceof Course) {
-              course = result;
-              dialogRef.close();
-            } else {
-              dialogRef.componentInstance.errors = result['errors'];
-            }
-          });
-        } catch (error) {
-          dialogRef.componentInstance.errors = error['massage'];
-        }
-      });
-
-
+    dialogRef.componentInstance.onSave.subscribe(course => {
+      // console.log(course);
+      try {
+        this.coursesService.add(course).subscribe(result => {
+          let courseNew = <CourseInterface>result;
+          console.log(courseNew);
+          if (courseNew instanceof Course) {
+            course = result;
+            dialogRef.close();
+            this.snackBar.open('Course successfully added.', '', { duration: 4000 });
+          } else {
+            dialogRef.componentInstance.errors = result['errors'];
+          }
+        });
+      } catch (error) {
+        dialogRef.componentInstance.errors = error['massage'];
+      }
+    });
   }
 
   edit(course: Course) {
     let dialogRef = this.dialog.open(AddCourseComponent, {
-      data: {course},
+      data: { course },
       disableClose: false
     });
 
@@ -110,6 +109,7 @@ export class CoursesComponent implements OnInit {
         if (courseNew instanceof Course) {
           course = result;
           dialogRef.close();
+          this.snackBar.open('Course successfully updated.', '', { duration: 4000 });
         } else {
           dialogRef.componentInstance.errors = result['errors'];
         }
@@ -122,7 +122,7 @@ export class CoursesComponent implements OnInit {
       disableClose: false
     });
 
-    dialogRef.componentInstance.confirmMessage = 'Are you sure you want to delete course?';
+    dialogRef.componentInstance.confirmMessage = 'Are you sure you want delete this course?';
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -132,18 +132,17 @@ export class CoursesComponent implements OnInit {
               this.countAll--;
               this.courses = this.courses.filter(item => item !== course);
 
-              this.snackBar.open('Course deleted.', '', {duration: 4000});
+              this.snackBar.open('Course deleted.', '', { duration: 4000 });
             } else {
-              this.snackBar.open('Error course delete.', '', {duration: 4000});
+              this.snackBar.open('Error course delete.', '', { duration: 4000 });
             }
           },
           error => {
-            this.snackBar.open('Error course delete: ' + error.statusText, '', {duration: 4000});
+            this.snackBar.open('Error course delete: ' + error.statusText, '', { duration: 4000 });
           }
         );
 
       }
-      // this.dialogRef = null;
     });
   }
 }

@@ -7,7 +7,7 @@ import {
   Course as CourseInterface
 } from '@shared/interfaces';
 import { CoursesServiceInterface } from './corses.service.interface';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Course } from '@shared/models/course.model';
 
 import { environment } from '@environments/environment';
@@ -51,7 +51,19 @@ export class CoursesService implements CoursesServiceInterface {
   }
 
   add(course: Course): any {
-    return this.http.post(this.endPoint, course).pipe(
+    let payload = new FormData();
+    payload.append('author', course.author);
+    payload.append('duration', course.duration.toString());
+    payload.append('title', course.title);
+    payload.append('description', course.description);
+    payload.append('youtubeId', course.youtubeId);
+
+    console.log(course);
+    if (course.thumbnailFile) {
+      payload.append('thumbnail', course.thumbnailFile.files[0], course.thumbnailFile.files[0].name);
+    }
+
+    return this.http.post(this.endPoint, payload).pipe(
       map(response => {
         let courseNew = new Course(<CourseInterface>response);
         if (courseNew instanceof Course) {
@@ -70,8 +82,18 @@ export class CoursesService implements CoursesServiceInterface {
 
   edit(course: Course) {
     let url = `${this.endPoint}/${course.slug}`;
+    let payload = new FormData();
+    payload.append('author', course.author);
+    payload.append('duration', course.duration.toString());
+    payload.append('title', course.title);
+    payload.append('description', course.description);
+    payload.append('youtubeId', course.youtubeId);
 
-    return this.http.put(url, course).pipe(
+    if (course.thumbnailFile) {
+      payload.append('thumbnail', course.thumbnailFile.files[0], course.thumbnailFile.files[0].name);
+    }
+
+    return this.http.put(url, payload).pipe(
       map(response => {
         // check maybe need Try-Catch here
         let courseNew = new Course(<CourseInterface>response);

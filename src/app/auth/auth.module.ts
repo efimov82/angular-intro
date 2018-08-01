@@ -6,7 +6,6 @@ import { SharedModule } from '@app/shared/shared.module';
 
 import {
   LoginComponent,
-  LogoutComponent
 } from '@app/auth/pages';
 
 import { authRoutes } from './auth.routes';
@@ -16,14 +15,12 @@ import { authRoutes } from './auth.routes';
     CommonModule,
     SharedModule,
     // Routing
-    RouterModule.forRoot(
-      authRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+    RouterModule.forChild(
+      authRoutes
     ),
   ],
   declarations: [
     LoginComponent,
-    LogoutComponent
   ]
 })
 export class AuthModule { }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
 import { User } from '@app/shared/interfaces';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map }  from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
@@ -26,9 +26,6 @@ export class AuthService {
     if (data) {
       this.currentUser = <User>data;
     }
-    // else {
-    //   this.currentUser = {id:0, email:'default', authToken: 'authToken123'};
-    // }
   }
 
   public login(email: string, password: string): Observable<boolean> {
@@ -61,10 +58,5 @@ export class AuthService {
 
   public getAuthUser(): User|null {
     return this.currentUser;
-  }
-
-  public getAuthUserObservable(): Observable<User|null> {
-    let user = this.currentUser;
-    return of(user);
   }
 }
