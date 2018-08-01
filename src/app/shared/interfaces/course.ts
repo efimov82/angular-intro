@@ -1,9 +1,7 @@
-import { Image } from './image';
-
 export interface Course {
   id: number;
   slug: string;
-  author: string;
+  authors: string;
   dateCreation: Date;
   description: string;
   duration: number;

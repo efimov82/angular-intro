@@ -40,6 +40,7 @@ export class CoursesService implements CoursesServiceInterface {
 
     return this.http.get(url).pipe(
       map(response => {
+        console.log(response);
         let data = <CourseInterface>response;
         if (data) {
           return new Course(data);
@@ -52,7 +53,7 @@ export class CoursesService implements CoursesServiceInterface {
 
   add(course: Course): any {
     let payload = new FormData();
-    payload.append('author', course.author);
+    payload.append('authors', course.authors);
     payload.append('duration', course.duration.toString());
     payload.append('title', course.title);
     payload.append('description', course.description);
@@ -83,7 +84,7 @@ export class CoursesService implements CoursesServiceInterface {
   edit(course: Course) {
     let url = `${this.endPoint}/${course.slug}`;
     let payload = new FormData();
-    payload.append('author', course.author);
+    payload.append('authors', course.authors);
     payload.append('duration', course.duration.toString());
     payload.append('title', course.title);
     payload.append('description', course.description);

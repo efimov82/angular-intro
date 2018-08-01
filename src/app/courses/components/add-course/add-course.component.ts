@@ -32,40 +32,12 @@ export class AddCourseComponent {
     private fb: FormBuilder,
   ){
     this.course = data.course;
-
     this.course.thumbnailFile = null;
     this.formCourse.patchValue(this.course);
    }
 
-  //  onFileChange(event) {
-  //   const reader = new FileReader();
-
-  //   if(event.target.files && event.target.files.length) {
-  //     const [file] = event.target.files;
-  //     reader.readAsDataURL(file);
-
-  //     reader.onload = () => {
-  //       this.formCourse.patchValue({
-  //         file: reader.result
-  //      });
-
-  //       // need to run CD since file load runs outside of zone
-  //       //this.cd.markForCheck();
-  //     };
-  //   }
-  // }
-
-  // handleFileInput(files: FileList){
-  //   this.fileToUpload=files.item(0);
-  // }
-
-  // previewImage($event) {
-  //   console.log($event);
-  // }
-
   onSubmit() {
     let data = this.formCourse.value;
-    console.log(data);
     if (this.formCourse.valid)
     {
       this.course.import(data);

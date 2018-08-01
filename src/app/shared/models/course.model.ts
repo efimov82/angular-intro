@@ -1,11 +1,10 @@
 import { Course as CourseInterface }  from '../interfaces';
-import { Image } from '../interfaces/image';
 import { FileInput } from 'ngx-material-file-input';
 
 export class Course implements CourseInterface {
   id: number;
   slug: string;
-  author: string;
+  authors: string;
   dateCreation: Date;
   description: string;
   duration: number;
@@ -27,7 +26,7 @@ export class Course implements CourseInterface {
    * @param data [title, description, dateCreation, duration, title, thumbnailFile, topRated]
    */
   import(data: any) {
-    this.author = data.author;
+    this.authors = data.authors;
     this.dateCreation = data.dateCreation;
     this.description = data.description;
     this.duration = data.duration;

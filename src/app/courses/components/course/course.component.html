@@ -9,15 +9,15 @@
 
     <div fxFlex class="course-block">
       <div class="title">
-          <a [routerLink]="['/courses', course.slug]">{{ course.title | uppercase }}</a>
-          <fa *ngIf="course.topRated" name="star"></fa>
+        <a [routerLink]="['/courses', course.slug]">{{ course.title | uppercase }}</a>
+        <fa *ngIf="course.topRated" name="star"></fa>
       </div>
       <div class="description">
-          {{ course.description }}
+        {{ course.description }}
       </div>
       <div class="info">
         <div class="author">
-          <fa name="user"></fa><span>Author:</span> {{ course.author }}
+          <fa name="user"></fa><span>Authors:</span> {{ course.authors }}
         </div>
         <div class="duration">
           <fa name="hourglass-2"></fa><span>Duration:</span> {{ course.duration | duration }}
@@ -25,20 +25,14 @@
         <div class="date">
           <fa name="calendar"></fa><span>Date:</span> {{ course.dateCreation | date }}
         </div>
-    </div>
+      </div>
     </div>
 
     <div fxFlex="60px" class="controls">
-      <button mat-mini-fab class="btn-edit"
-        [disabled]="!canDelete"
-        [ngClass]="{ 'disabled': !canDelete }"
-        (click)="editCourse()">
+      <button mat-mini-fab class="btn-edit" [disabled]="!canDelete" [ngClass]="{ 'disabled': !canDelete }" (click)="editCourse()">
           <mat-icon aria-label="Edit">edit</mat-icon>
       </button>
-      <button mat-mini-fab class="btn-delete"
-        [disabled]="!canDelete"
-        [ngClass]="{ 'disabled': !canDelete }"
-        (click)="deleteCourse()">
+      <button mat-mini-fab class="btn-delete" [disabled]="!canDelete" [ngClass]="{ 'disabled': !canDelete }" (click)="deleteCourse()">
           <mat-icon aria-label="Delete">delete</mat-icon>
       </button>
     </div>
