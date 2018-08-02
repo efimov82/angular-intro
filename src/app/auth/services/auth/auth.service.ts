@@ -4,30 +4,34 @@ import { HttpClient } from '@angular/common/http';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
 import { User } from '@app/shared/interfaces';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map }  from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-
-// key that is used to access the data in local storage
-const STORAGE_KEY = 'local_auth_user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  endPoint = `${environment.restEndPoint}/auth`;
-  currentUser: User = null;
-  redirectUrl = '/';
-  
+  public redirectUrl = '/';
+  private endPoint = `${environment.restEndPoint}/auth`;
+  private currentUser = new BehaviorSubject<User>(null);
+  private _user = null;
+
   constructor(
     public jwtHelper: JwtHelperService,
     private http: HttpClient,
     @Inject(SESSION_STORAGE) private storage: StorageService
   ){
-    let data = this.storage.get(STORAGE_KEY);
-    if (data) {
-      this.currentUser = <User>data;
+    let data = this.storage.get(environment.storageKeyForUser);
+    if (data && data.authToken) {
+      let isTokenExpired = this.jwtHelper.isTokenExpired(data.authToken);
+      if (isTokenExpired) {
+        this.logout();
+      } else {
+        this._user = <User>data;
+        this.currentUser.next(this._user);
+      }
     }
   }
 
@@ -37,8 +41,10 @@ export class AuthService {
       .pipe(
         map(response => {
           if (response['success']) {
-            this.currentUser = { email: email, authToken: response['token'] };
-            this.storage.set(STORAGE_KEY, this.currentUser);
+            this._user = { email: email, authToken: response['token'] };
+            this.currentUser.next(<User>this._user);
+
+            this.storage.set(environment.storageKeyForUser, this._user);
 
             return true;
           } else {
@@ -49,26 +55,27 @@ export class AuthService {
   }
 
   public logout(): void {
-    // TODO implement REST API logic
-    this.storage.set(STORAGE_KEY, null);
+    this.storage.set(environment.storageKeyForUser, null);
 
-    this.currentUser = null;
+    this._user = null;
+    this.currentUser.next(null);
   }
 
   public isAuthenticated(): boolean {
-    if (!this.currentUser || !this.currentUser.authToken) {
+    if (!this._user || !this._user.authToken) {
       return false;
     }
 
-    let token = this.currentUser.authToken;
+    let token = this._user.authToken;
     let isTokenExpired = this.jwtHelper.isTokenExpired(token);
     if (isTokenExpired) {
       this.logout();
     }
+
     return !isTokenExpired;
   }
 
-  public getAuthUser(): User|null {
+  public getAuthUser(): Observable<User> {
     return this.currentUser;
   }
 }

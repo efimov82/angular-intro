@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { SharedModule } from '@app/shared/shared.module';
-
 import {
   LoginComponent,
 } from '@app/auth/pages';
 
 import { authRoutes } from './auth.routes';
-import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from '@app/auth/guards/auth-guard.service';
 
-export function tokenGetter() {
-  return localStorage.getItem('local_auth_user');
+import { environment as env } from '@environments/environment';
+
+export function authTokenGetter() {
+  return localStorage.getItem(env.storageKeyForUser);
 }
 
 @NgModule({
@@ -26,9 +27,10 @@ export function tokenGetter() {
     ),
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:3000'],
-        blacklistedRoutes: ['localhost:3000/auth/']
+        tokenGetter: authTokenGetter,
+        // TODO check set this values
+        //whitelistedDomains: env.JwtWhitelistedDomains,
+        //blacklistedRoutes: env.JwtBlacklistedRoutes
       }
     })
   ],

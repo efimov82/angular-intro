@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  hidePassword = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,10 +27,6 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
-    // get return url from route parameters or default to '/'
-    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    // console.log(this.returnUrl);
   }
 
   onSubmit() {
