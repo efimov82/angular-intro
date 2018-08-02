@@ -8,7 +8,7 @@
   <div fxFlex="20%" class="user-info">
 
     <div *ngIf="currentUser">
-      <span class="info">{{currentUser.email}} 
+      <span class="info"><a routerLink="/profile">{{currentUser.email}}</a>
         <a (click)="logout()" title="Sign Out" class="bnt-sign-out"><fa name="sign-out"></fa></a></span>
     </div>
 

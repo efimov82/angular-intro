@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
@@ -17,8 +18,10 @@ const STORAGE_KEY = 'local_auth_user';
 export class AuthService {
   endPoint = `${environment.restEndPoint}/auth`;
   currentUser: User = null;
-
+  redirectUrl = '/';
+  
   constructor(
+    public jwtHelper: JwtHelperService,
     private http: HttpClient,
     @Inject(SESSION_STORAGE) private storage: StorageService
   ){
@@ -53,7 +56,16 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    return this.currentUser && this.currentUser.authToken != '';
+    if (!this.currentUser || !this.currentUser.authToken) {
+      return false;
+    }
+
+    let token = this.currentUser.authToken;
+    let isTokenExpired = this.jwtHelper.isTokenExpired(token);
+    if (isTokenExpired) {
+      this.logout();
+    }
+    return !isTokenExpired;
   }
 
   public getAuthUser(): User|null {

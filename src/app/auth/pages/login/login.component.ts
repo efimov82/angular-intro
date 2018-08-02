@@ -27,9 +27,9 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    // console.log(this.returnUrl);
   }
 
   onSubmit() {
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     ).subscribe(
         res => {
           if (res) {
-            this.router.navigate([this.returnUrl]);
+            this.router.navigate([this.authenticationService.redirectUrl]);
           } else {
             this.error = 'Incorrect username or password.';
             this.loading = false;
