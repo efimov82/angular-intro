@@ -37,9 +37,9 @@ const PAGES = [
     MaterialsModule,
     SharedModule,
     // Routing
-    RouterModule.forRoot(
+    RouterModule.forChild(
       coursesRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      // { enableTracing: true } // <-- debugging purposes only
     ),
   ],
   declarations: [

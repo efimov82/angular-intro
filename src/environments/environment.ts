@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  restEndPoint: 'http://localhost:3000/courses',
+  restEndPoint: 'http://localhost:3000',
+  storageKeyForUser: 'local_auth_user',
+  JwtWhitelistedDomains: ['localhost:3000'],
+  JwtBlacklistedRoutes: ['localhost:3000/auth/'],
 };
 
 /*

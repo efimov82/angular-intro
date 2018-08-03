@@ -18,6 +18,8 @@ import {
   MatNativeDateModule,
 } from '@angular/material';
 
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+
 import { LayoutModule } from '@angular/cdk/layout';
 
 const MODULES = [
@@ -38,6 +40,8 @@ const MODULES = [
   LayoutModule,
   // Flex
   FlexLayoutModule,
+  // Upload
+  MaterialFileInputModule,
 ];
 
 @NgModule({

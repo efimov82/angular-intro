@@ -6,6 +6,16 @@
   </div>
   <div fxFlex></div>
   <div fxFlex="20%" class="user-info">
-    <app-user-info [user]="currentUser"></app-user-info>
+
+    <div *ngIf="currentUser">
+      <span class="info"><a routerLink="/profile">{{currentUser.email}}</a>
+        <a (click)="logout()" title="Sign Out" class="bnt-sign-out"><fa name="sign-out"></fa></a></span>
+    </div>
+
+    <div *ngIf="(router.url !== '/auth/login') && !currentUser">
+      <a routerLink="/auth/login" title="Sign In" class="bnt-sign-in">
+        <fa name="sign-in"></fa>
+      </a>
+    </div>
   </div>
 </div>

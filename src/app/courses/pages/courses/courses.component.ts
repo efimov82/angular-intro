@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 
 import { CoursesService } from '@shared/services';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { Course } from '@shared/models/course.model';
 import { Course as CourseInterface } from '@shared/interfaces'
 import { AddCourseComponent } from '@app/courses/components';
-
+import { AuthService } from '@app/auth/services';
 
 @Component({
   selector: 'app-courses',
@@ -17,12 +17,11 @@ export class CoursesComponent implements OnInit {
   courses: Course[];
   countAll: number;
   numStartItem = 0;
-  countItems = 2;
+  countItems = 6;
   searchStr = '';
-  dialogRef: MatDialogRef<ConfirmDialogComponent>;
-  dialogAddCourse: MatDialogRef<AddCourseComponent>;
 
   constructor(
+    private authService: AuthService,
     private coursesService: CoursesService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -54,28 +53,78 @@ export class CoursesComponent implements OnInit {
     this.loadMore();
   }
 
+  canAddCourse(): Boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  canEditCourse(course: Course): Boolean {
+    // TODO add check right to owner Course here
+
+    return this.authService.isAuthenticated();
+  }
+
+  canDeleteCourse(course: Course): Boolean {
+    // TODO add check right to owner Course here
+
+    return this.authService.isAuthenticated();
+  }
+
   addCourse() {
     let course = new Course();
-    this.dialogAddCourse = this.dialog.open(AddCourseComponent, {
+    let dialogRef = this.dialog.open(AddCourseComponent, {
       data: { course },
       disableClose: false,
+    });
+
+    dialogRef.componentInstance.onSave.subscribe(course => {
+      // console.log(course);
+      try {
+        this.coursesService.add(course).subscribe(result => {
+          let courseNew = <CourseInterface>result;
+          console.log(courseNew);
+          if (courseNew instanceof Course) {
+            course = result;
+            dialogRef.close();
+            this.snackBar.open('Course successfully added.', '', { duration: 4000 });
+          } else {
+            dialogRef.componentInstance.errors = result['errors'];
+          }
+        });
+      } catch (error) {
+        dialogRef.componentInstance.errors = error['massage'];
+      }
     });
   }
 
   edit(course: Course) {
-    this.dialogAddCourse = this.dialog.open(AddCourseComponent, {
-      data: {course},
+    let dialogRef = this.dialog.open(AddCourseComponent, {
+      data: { course },
       disableClose: false
+    });
+
+    dialogRef.componentInstance.onSave.subscribe(course => {
+      this.coursesService.edit(course).subscribe(result => {
+        let courseNew = <CourseInterface>result;
+        console.log(courseNew);
+        if (courseNew instanceof Course) {
+          course = result;
+          dialogRef.close();
+          this.snackBar.open('Course successfully updated.', '', { duration: 4000 });
+        } else {
+          dialogRef.componentInstance.errors = result['errors'];
+        }
+      });
     });
   }
 
   delete(course: Course) {
-    this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
       disableClose: false
     });
-    this.dialogRef.componentInstance.confirmMessage = 'Are you sure you want to delete course?';
 
-    this.dialogRef.afterClosed().subscribe(result => {
+    dialogRef.componentInstance.confirmMessage = 'Are you sure you want delete this course?';
+
+    dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.coursesService.delete(course).subscribe(
           res => {
@@ -83,18 +132,17 @@ export class CoursesComponent implements OnInit {
               this.countAll--;
               this.courses = this.courses.filter(item => item !== course);
 
-              this.snackBar.open('Course deleted.', '', {duration: 4000});
+              this.snackBar.open('Course deleted.', '', { duration: 4000 });
             } else {
-              this.snackBar.open('Error course delete.', '', {duration: 4000});
+              this.snackBar.open('Error course delete.', '', { duration: 4000 });
             }
           },
           error => {
-            this.snackBar.open('Error course delete: ' + error.statusText, '', {duration: 4000});
+            this.snackBar.open('Error course delete: ' + error.statusText, '', { duration: 4000 });
           }
         );
 
       }
-      this.dialogRef = null;
     });
   }
 }
