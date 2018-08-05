@@ -31,8 +31,13 @@ export class Course implements CourseInterface {
     this.description = data.description;
     this.duration = data.duration;
     this.title = data.title;
+    this.thumbnail = data.thumbnail;
     this.thumbnailFile = data.thumbnailFile;
     this.youtubeId = data.youtubeId;
     this.topRated = data.topRated;
+  }
+
+  setThunmnail(thumbnail: string) {
+    this.thumbnail = thumbnail;
   }
 }
