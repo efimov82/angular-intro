@@ -26,8 +26,12 @@ export class CoursesService implements CoursesServiceInterface {
 
     return this.http.get(url).pipe(
       map(data => {
+        data['items'].map(item => {
+          item.thumbnail = environment.restEndPoint + item.thumbnail;
+        });
+
         return {
-            items: data['items'].map(item => <CourseInterface>item),
+            items: data['items'],
             count: data['count'],
             all: data['all']
           };
@@ -59,7 +63,6 @@ export class CoursesService implements CoursesServiceInterface {
     payload.append('description', course.description);
     payload.append('youtubeId', course.youtubeId);
 
-    console.log(course);
     if (course.thumbnailFile) {
       payload.append('thumbnail', course.thumbnailFile.files[0], course.thumbnailFile.files[0].name);
     }
@@ -68,6 +71,9 @@ export class CoursesService implements CoursesServiceInterface {
       map(response => {
         let courseNew = new Course(<CourseInterface>response);
         if (courseNew instanceof Course) {
+          courseNew.setThunmnail(environment.restEndPoint + courseNew.thumbnail);
+          // console.log(courseNew);
+
           return courseNew;
         } else {
           return { res: false, errors: response['message'] };

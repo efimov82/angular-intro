@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   public login(email: string, password: string): Observable<boolean> {
-    let url = this.endPoint + '/login';
+    let url = this.endPoint + '/signin';
     return this.http.post(url, { email, password } )
       .pipe(
         map(response => {

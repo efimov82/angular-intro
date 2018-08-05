@@ -77,13 +77,11 @@ export class CoursesComponent implements OnInit {
     });
 
     dialogRef.componentInstance.onSave.subscribe(course => {
-      // console.log(course);
       try {
         this.coursesService.add(course).subscribe(result => {
-          let courseNew = <CourseInterface>result;
-          console.log(courseNew);
-          if (courseNew instanceof Course) {
-            course = result;
+          if (result instanceof Course) {
+            this.courses.push(result);
+
             dialogRef.close();
             this.snackBar.open('Course successfully added.', '', { duration: 4000 });
           } else {
