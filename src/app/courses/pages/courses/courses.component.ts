@@ -15,10 +15,10 @@ import { AuthService } from '@app/auth/services';
 })
 export class CoursesComponent implements OnInit {
   courses: Course[];
-  countAll: number;
-  numStartItem = 0;
-  countItems = 6;
-  searchStr = '';
+  countAll: number = 0;
+  numStartItem: number = 0;
+  countItems: number = 2;
+  searchStr: string = '';
 
   constructor(
     private authService: AuthService,
@@ -35,15 +35,19 @@ export class CoursesComponent implements OnInit {
   loadMore() {
     this.coursesService.find(this.searchStr, this.numStartItem, this.countItems).subscribe(
       resp => {
+        if (resp.items.length == 0) {
+          return;
+        }
+
+        this.numStartItem += resp.items.length;
         this.countAll = resp.all;
+
         resp.items.map(courseData => {
-          let course = new Course(<CourseInterface>courseData);
+          const course = new Course(<CourseInterface>courseData);
           this.courses.push(course);
         });
       }
     );
-
-    this.numStartItem += this.countItems;
   }
 
   searchCourses(searchStr: string) {
