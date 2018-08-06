@@ -100,12 +100,10 @@ export class CoursesComponent implements OnInit {
       disableClose: false
     });
 
-    dialogRef.componentInstance.onSave.subscribe(course => {
-      this.coursesService.edit(course).subscribe(result => {
-        let courseNew = <CourseInterface>result;
-        console.log(courseNew);
-        if (courseNew instanceof Course) {
-          course = result;
+    dialogRef.componentInstance.onSave.subscribe(data => {
+      this.coursesService.edit(data).subscribe(result => {
+        if (result instanceof Course) {
+          course.import(result);
           dialogRef.close();
           this.snackBar.open('Course successfully updated.', '', { duration: 4000 });
         } else {

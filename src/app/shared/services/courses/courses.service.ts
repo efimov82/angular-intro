@@ -105,6 +105,7 @@ export class CoursesService implements CoursesServiceInterface {
         // check maybe need Try-Catch here
         let courseNew = new Course(<CourseInterface>response);
         if (courseNew instanceof Course) {
+          courseNew.setThunmnail(environment.restEndPoint + courseNew.thumbnail + '?v=' + Math.random());
           return courseNew;
         } else {
           return { res: false, errors: response['message'] };
