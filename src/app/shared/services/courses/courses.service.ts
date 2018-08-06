@@ -7,7 +7,7 @@ import {
   Course as CourseInterface
 } from '@shared/interfaces';
 import { CoursesServiceInterface } from './corses.service.interface';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Course } from '@shared/models/course.model';
 
 import { environment } from '@environments/environment';
@@ -119,12 +119,12 @@ export class CoursesService implements CoursesServiceInterface {
 
     return this.http.delete(url).pipe(
       map(response => {
-        if (response) {
+        if (response['result'] == 'deleted') {
           return true;
         } else {
           return false;
         }
-      })
-    );
+      }
+    ));
   }
 }

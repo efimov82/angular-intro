@@ -125,7 +125,7 @@ export class CoursesComponent implements OnInit {
     dialogRef.componentInstance.confirmMessage = 'Are you sure you want delete this course?';
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result == true) {
         this.coursesService.delete(course).subscribe(
           res => {
             if (res) {
