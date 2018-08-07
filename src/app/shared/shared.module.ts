@@ -1,3 +1,4 @@
+
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -6,6 +7,12 @@ import { StorageServiceModule } from 'angular-webstorage-service';
 
 import { MaterialsModule } from '../materials/materials.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
+// Abilities
+import { AbilityModule, CanPipe } from '@casl/angular'
+import { Ability } from '@casl/ability';
+
+// import { abilityGuest } from './abilities/abilities';
 
 import {
   BreadcrumbsComponent,
@@ -49,6 +56,7 @@ const PIPES = [
     MaterialsModule,
     RouterModule,
     StorageServiceModule,
+    AbilityModule,
   ],
   declarations: [
     ...COMPONENTS,
@@ -64,7 +72,11 @@ const PIPES = [
     ReactiveFormsModule,
     MaterialsModule,
     StorageServiceModule,
+    AbilityModule,
   ],
-  entryComponents: [ConfirmDialogComponent]
+  entryComponents: [
+    ConfirmDialogComponent
+  ],
+  providers: []
 })
 export class SharedModule { }

@@ -2,7 +2,8 @@ import { Course as CourseInterface }  from '../interfaces';
 import { FileInput } from 'ngx-material-file-input';
 
 export class Course implements CourseInterface {
-  id: number;
+  _id: number;
+  ownerId: string;
   slug: string;
   authors: string;
   dateCreation: Date;
@@ -35,6 +36,7 @@ export class Course implements CourseInterface {
     this.thumbnailFile = data.thumbnailFile;
     this.youtubeId = data.youtubeId;
     this.topRated = data.topRated;
+    this.ownerId = data.ownerId;
   }
 
   setThunmnail(thumbnail: string) {

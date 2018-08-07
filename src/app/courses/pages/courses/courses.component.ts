@@ -21,7 +21,6 @@ export class CoursesComponent implements OnInit {
   searchStr: string = '';
 
   constructor(
-    private authService: AuthService,
     private coursesService: CoursesService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -57,21 +56,6 @@ export class CoursesComponent implements OnInit {
     this.loadMore();
   }
 
-  canAddCourse(): Boolean {
-    return this.authService.isAuthenticated();
-  }
-
-  canEditCourse(course: Course): Boolean {
-    // TODO add check right to owner Course here
-
-    return this.authService.isAuthenticated();
-  }
-
-  canDeleteCourse(course: Course): Boolean {
-    // TODO add check right to owner Course here
-
-    return this.authService.isAuthenticated();
-  }
 
   addCourse() {
     let course = new Course();

@@ -1,5 +1,6 @@
 export interface Course {
-  id: number;
+  _id: number;
+  ownerId: string;
   slug: string;
   authors: string;
   dateCreation: Date;
