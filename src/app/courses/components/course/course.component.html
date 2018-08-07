@@ -13,7 +13,6 @@
         <fa *ngIf="course.topRated" name="star"></fa>
       </div>
       <div class="description">
-        {{ course.description }}
       </div>
       <div class="info">
         <div class="author">
@@ -29,7 +28,7 @@
     </div>
 
     <div fxFlex="60px" class="controls">
-      <button mat-mini-fab class="btn-edit" [disabled]="!canDelete" [ngClass]="{ 'disabled': !canDelete }" (click)="editCourse()">
+      <button mat-mini-fab class="btn-edit" [disabled]="!canEdit" [ngClass]="{ 'disabled': !canEdit }" (click)="editCourse()">
           <mat-icon aria-label="Edit">edit</mat-icon>
       </button>
       <button mat-mini-fab class="btn-delete" [disabled]="!canDelete" [ngClass]="{ 'disabled': !canDelete }" (click)="deleteCourse()">

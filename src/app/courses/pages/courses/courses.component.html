@@ -2,8 +2,7 @@
   <div class="search" fxLayout="row" fxLayoutAlign="start end">
     <app-search-course (search)="searchCourses($event)"></app-search-course>
 
-    <button mat-button *ngIf="canAddCourse()"
-      (click)="addCourse()" class="btn-add-course">
+    <button mat-button *ngIf="'Course' | can: 'create'" (click)="addCourse()" class="btn-add-course">
       <fa name="plus" class="pluss"></fa><span>Add Course</span>
     </button>
   </div>
@@ -12,11 +11,7 @@
 <div *ngIf="countAll; else notFoundCourses" class="container">
   <div class="total-count-courses">Total courses: {{ countAll }}</div>
   <div *ngFor="let course of courses; let index=index;">
-    <app-course [course]=course
-      [canEdit]=canEditCourse(course)
-      [canDelete]=canDeleteCourse(course)
-      (delete)=delete(course) (edit)=edit(course)
-      class="course-item">
+    <app-course [course]=course [canEdit]="course | can: 'update'" [canDelete]="course | can: 'delete'" (delete)=delete(course) (edit)=edit(course) class="course-item">
     </app-course>
   </div>
 
