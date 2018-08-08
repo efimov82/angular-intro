@@ -48,6 +48,7 @@ export class AuthService {
               const user = <User>{
                 id: data['id'],
                 email: email,
+                nickname: response['nickname'],
                 authToken: response['token'],
                 roles: data['roles'],
               };

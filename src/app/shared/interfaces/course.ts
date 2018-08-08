@@ -1,6 +1,9 @@
+import { User } from '@app/shared/interfaces/user';
+
 export interface Course {
   _id: number;
   ownerId: string;
+  owner: User | null;
   slug: string;
   authors: string;
   dateCreation: Date;

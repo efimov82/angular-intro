@@ -1,4 +1,3 @@
-
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -9,10 +8,7 @@ import { MaterialsModule } from '../materials/materials.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 // Abilities
-import { AbilityModule, CanPipe } from '@casl/angular'
-import { Ability } from '@casl/ability';
-
-// import { abilityGuest } from './abilities/abilities';
+import { AbilityModule } from '@casl/angular'
 
 import {
   BreadcrumbsComponent,
@@ -23,7 +19,10 @@ import {
   NotFoundComponent,
  } from './components';
 
-import { DurationPipe } from './pipes';
+import {
+  DurationPipe,
+} from './pipes';
+
 import {
   FreshCourseDirective,
   OnlyNumbersDirective,

@@ -1,9 +1,11 @@
+import { User } from '@app/shared/interfaces';
 import { Course as CourseInterface }  from '../interfaces';
 import { FileInput } from 'ngx-material-file-input';
 
 export class Course implements CourseInterface {
   _id: number;
   ownerId: string;
+  owner: User | null;
   slug: string;
   authors: string;
   dateCreation: Date;
