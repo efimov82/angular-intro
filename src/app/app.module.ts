@@ -15,7 +15,6 @@ import { NotFoundComponent } from '@shared/components';
 import { JwtInterceptor } from '@app/auth/helpers/jwt.injector';
 import { NGX_MAT_FILE_INPUT_CONFIG } from 'ngx-material-file-input';
 import { FileInputConfig } from 'ngx-material-file-input/lib/model/file-input-config.model';
-import { AuthService } from '@app/auth/services';
 import { ProfileModule } from '@app/profile/profile.module';
 
 export const config: FileInputConfig = {
