@@ -78,6 +78,13 @@ export class AuthService {
     this.currentUser.next(user);
   }
 
+  public updateCurrentUser(user: User): void {
+    user.id = this._user.id;
+    user.authToken = this._user.authToken;
+    user.avatar = environment.restEndPoint + user.avatar;
+    this.setCurrentUser(user);
+  }
+
   public isAuthenticated(): boolean {
     if (!this._user || !this._user.authToken) {
       return false;

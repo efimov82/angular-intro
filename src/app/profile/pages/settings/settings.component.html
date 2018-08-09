@@ -1,12 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-  <div class="container">
+  <div class="header">
     <h2>Settings</h2>
+  </div>
+  <div class="container">
+    <div class="currentAvatar">
+      <img [src]=currentUser.avatar class="img-avatar">
+    </div>
+
     <div class="fields">
       <mat-form-field class="row nickname">
         <input matInput formControlName="nickname" placeholder="Nickname *" autocomplete="off">
       </mat-form-field>
       <mat-form-field class="row email">
         <input matInput formControlName="email" placeholder="Email *" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field class="row avatar">
+        <ngx-mat-file-input formControlName="avatarFile" placeholder="Avatar image"></ngx-mat-file-input>
+      </mat-form-field>
+      <mat-form-field class="row">
+        <input matInput formControlName="roles" class="roles" placeholder="Role" readonly>
       </mat-form-field>
       <mat-form-field class="row password">
         <input matInput formControlName="password" placeholder="Current password *" autocomplete="off" [type]="hidePassword ? 'password' : 'text'">
@@ -19,13 +31,14 @@
       <mat-form-field class="row">
         <input matInput formControlName="newPasswordConfirm" placeholder="New password again" autocomplete="off" [type]="hideNewPasswordConfirm ? 'password' : 'text'">
         <mat-icon matSuffix (click)="hideNewPasswordConfirm = !hideNewPasswordConfirm">{{hideNewPasswordConfirm ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <div *ngIf="!form.controls['newPassword'].valid">New password not equal Confirm password</div>
       </mat-form-field>
 
     </div>
+  </div>
 
-    <div class="panel">
-      <span class="mandatory-lable"><strong>*</strong> Mandatory fields </span>
-      <button [disabled]="submitted" mat-button class="btn-save" [color]="'save'">Save</button>
-    </div>
+  <div class="panel">
+    <span class="mandatory-lable"><strong>*</strong> Mandatory fields </span>
+    <button [disabled]="submitted" mat-button class="btn-save" [color]="'save'">Save</button>
   </div>
 </form>
