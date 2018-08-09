@@ -16,6 +16,7 @@ import {
   MatInputModule,
   MatListModule,
   MatNativeDateModule,
+  MatMenuModule,
 } from '@angular/material';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
@@ -37,6 +38,7 @@ const MODULES = [
   MatListModule,
   MatNativeDateModule,
   MatToolbarModule,
+  MatMenuModule,
   LayoutModule,
   // Flex
   FlexLayoutModule,

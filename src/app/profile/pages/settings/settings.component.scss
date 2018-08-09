@@ -1,0 +1,35 @@
+@import 'src/styles/variables.scss';
+.container {
+  padding: 0 10% 50px;
+  h2 {
+    margin: 30px 0;
+  }
+  .row {
+    width: 80%;
+    @media (max-width: $screen-phone) {
+      width: 100%;
+    }
+  }
+  .panel {
+    width: 80%;
+    @media (max-width: $screen-phone) {
+      width: 100%;
+    }
+    padding: 40px 0;
+    .mandatory-lable {
+      width: 80%;
+    }
+    button {
+      margin-left: 20px;
+      float: right;
+    }
+  }
+  .mat-save {
+    background-color: $color-head-text;
+    color: #fff;
+  }
+  .mat-cancel {
+    border: 1px solid $font-color-secondary;
+    border-radius: 4px;
+  }
+}

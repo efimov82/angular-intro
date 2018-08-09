@@ -49,6 +49,7 @@ export class AuthService {
                 id: data['id'],
                 email: email,
                 nickname: response['nickname'],
+                avatar: environment.restEndPoint + response['avatar'],
                 authToken: response['token'],
                 roles: data['roles'],
               };

@@ -1,3 +1,31 @@
-<p>
-  settings works!
-</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div class="container">
+    <h2>Settings</h2>
+    <div class="fields">
+      <mat-form-field class="row nickname">
+        <input matInput formControlName="nickname" placeholder="Nickname *" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field class="row email">
+        <input matInput formControlName="email" placeholder="Email *" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field class="row password">
+        <input matInput formControlName="password" placeholder="Current password *" autocomplete="off" [type]="hidePassword ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="row">
+        <input matInput formControlName="newPassword" placeholder="New password" autocomplete="off" [type]="hideNewPassword ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hideNewPassword = !hideNewPassword">{{hideNewPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="row">
+        <input matInput formControlName="newPasswordConfirm" placeholder="New password again" autocomplete="off" [type]="hideNewPasswordConfirm ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hideNewPasswordConfirm = !hideNewPasswordConfirm">{{hideNewPasswordConfirm ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+
+    </div>
+
+    <div class="panel">
+      <span class="mandatory-lable"><strong>*</strong> Mandatory fields </span>
+      <button [disabled]="submitted" mat-button class="btn-save" [color]="'save'">Save</button>
+    </div>
+  </div>
+</form>
