@@ -1,4 +1,3 @@
-// import { CanDoPipe } from './pipes/can-do.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CanPipe } from './pipes/can.pipe';
@@ -9,8 +8,6 @@ import { CanPipe } from './pipes/can.pipe';
   ],
   declarations: [ CanPipe ],
   exports: [ CanPipe ],
-  providers: [
-
-  ]
+  providers: []
 })
 export class PermissionsModule { }

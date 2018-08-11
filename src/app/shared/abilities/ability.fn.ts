@@ -1,5 +1,5 @@
 import { User } from './../interfaces/user';
-import { AbilityBuilder, Ability } from '@app/permissions/classes';
+import { Ability, AbilityBuilder } from '@app/permissions/classes';
 
 export enum USER_ROLES {
   GUEST = 'guest',
@@ -30,5 +30,6 @@ export function defineAbilityFor(user: User) {
 
   const ab = new Ability();
   ab.update(rules);
-  return ab; //new Ability(rules)
+
+  return ab;
 }

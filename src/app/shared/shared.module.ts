@@ -1,4 +1,3 @@
-import { CanPipe } from './../permissions/pipes/can.pipe';
 import { PermissionsModule } from './../permissions/permissions.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -26,7 +25,6 @@ import {
   FreshCourseDirective,
   OnlyNumbersDirective,
 } from './directives';
-import { Ability } from '@app/permissions/classes';
 
 const COMPONENTS = [
   BreadcrumbsComponent,
@@ -78,8 +76,6 @@ const PIPES = [
     ConfirmDialogComponent
   ],
   providers: [
-    //Ability,
-    { provide: Ability, useValue: new Ability() }
   ]
 })
 export class SharedModule { }

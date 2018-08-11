@@ -1,85 +1,8 @@
 import { Injectable } from '@angular/core';
-import sift from 'sift';
 
-class ForbiddenError extends Error {
-  subject: any
-  subjectName: string
-  action: string
-  field: string
+import { ForbiddenError } from './forbidden.error';
+import { Rule } from './rule.class';
 
-  constructor(message: string, options: any = {}) {
-    super();
-
-    const subject = options.subject;
-    const subjectName = options.subjectName;
-    const action = options.action;
-    const field = options.field;
-    message = message || `Cannot execute "${action}" on "${subjectName}"`;
-  }
-}
-
-
-function wrapArray(value) {
-  return Array.isArray(value) ? value : [value];
-}
-
-class Rule {
-  actions: any;
-  subject: any;
-  fields
-  inverted: boolean;
-  conditions: any;
-  reason: any;
-  _matches: any;
-
-  constructor(params) {
-    this.actions = params.actions || params.action;
-    this.subject = params.subject;
-    this.fields = !params.fields || params.fields.length === 0 ? undefined : wrapArray(params.fields);
-    this.inverted = !!params.inverted;
-    this.conditions = params.conditions;
-    this._matches = this.conditions ? sift(this.conditions) : undefined;
-    this.reason = params.reason;
-  }
-
-  matches(object) {
-    if (!this._matches) {
-      return true;
-    }
-
-    if (typeof object === 'string') {
-      return !this.inverted;
-    }
-
-    return this._matches(object);
-  }
-
-  isRelevantFor(object, field) {
-    if (!this.fields) {
-      return true;
-    }
-
-    if (!field) {
-      return !this.inverted;
-    }
-
-    return this.fields.indexOf(field) !== -1;
-  }
-}
-
-function getSubjectName(subject) {
-  if (!subject || typeof subject === 'string') {
-    return subject;
-  }
-
-  const Type = typeof subject === 'object' ? subject.constructor : subject;
-
-  return Type.modelName || Type.name;
-}
-
-function clone(object) {
-  return JSON.parse(JSON.stringify(object));
-}
 
 const DEFAULT_ALIASES = {
   manage: ['create', 'read', 'update', 'delete']
@@ -104,13 +27,13 @@ export class Ability {
   constructor() { // rules: any = [], { RuleType = Rule, subjectName = getSubjectName } = {}
     this[PRIVATE_FIELD] = {
       //RuleType,
-      // subjectName,
-      // originalRules: rules || [],
-      // rules: rules,
+      //subjectName,
+      //originalRules: rules || [],
+      //rules: rules,
       RuleType: [],
       subjectName: getSubjectName,
       originalRules: [],
-      rules: {},
+      rules: [],
       events: {},
       aliases: clone(DEFAULT_ALIASES)
     };
@@ -132,7 +55,6 @@ export class Ability {
 
   buildIndexFor(rules) {
     const indexedRules = {};
-    // const { RuleType } = this[PRIVATE_FIELD];
 
     for (let i = 0; i < rules.length; i++) {
       const rule = new Rule(rules[i]);
@@ -172,8 +94,6 @@ export class Ability {
   }
 
   can(action, subject, field) {
-    console.log(action, subject, field);
-
     const rule = this.relevantRuleFor(action, subject, field);
 
     return !!rule && !rule.inverted;
@@ -181,7 +101,6 @@ export class Ability {
 
   relevantRuleFor(action, subject, field) {
     const rules = this.rulesFor(action, subject, field);
-    console.log(rules);
 
     for (let i = 0; i < rules.length; i++) {
       if (rules[i].matches(subject)) {
@@ -213,7 +132,6 @@ export class Ability {
     const rule = this.relevantRuleFor(action, subject, field);
 
     if (!rule || rule.inverted) {
-      // const [action, subject, field] = args;
       const subjectName = this[PRIVATE_FIELD].subjectName(subject);
 
       throw new ForbiddenError(rule ? rule.reason : null, {
@@ -253,85 +171,20 @@ export class Ability {
   }
 }
 
-function isStringOrNonEmptyArray(value) {
-  return typeof value === 'string' || Array.isArray(value) && value.length > 0;
+function wrapArray(value) {
+  return Array.isArray(value) ? value : [value];
 }
 
-function isObject(value) {
-  return value && typeof value === 'object';
+function getSubjectName(subject) {
+  if (!subject || typeof subject === 'string') {
+    return subject;
+  }
+
+  const Type = typeof subject === 'object' ? subject.constructor : subject;
+
+  return Type.modelName || Type.name;
 }
 
-class RuleBuilder {
-  rule: any;
-
-  constructor(rule) {
-    this.rule = rule;
-  }
-
-  because(reason) {
-    this.rule.reason = reason;
-    return this;
-  }
+function clone(object) {
+  return JSON.parse(JSON.stringify(object));
 }
-
-class AbilityBuilder {
-  rules: any;
-
-  // static define(params, dsl) {
-  //   const options = typeof params === 'function' ? {} : params;
-  //   const define = params === options ? dsl : params;
-  //   const builder = new this();
-  //   const result = define(builder.can.bind(builder), builder.cannot.bind(builder));
-  //   //const Ability = new Ability();
-  //   const buildAbility = () => new Ability(); //new Ability(builder.rules, options);
-
-  //   return result && typeof result.then === 'function' ? result.then(buildAbility) : buildAbility();
-  // }
-
-  static extract() {
-    const builder = new this();
-
-    return {
-      can: builder.can.bind(builder),
-      cannot: builder.cannot.bind(builder),
-      rules: builder.rules
-    };
-  }
-
-  constructor() {
-    this.rules = [];
-  }
-
-  can(actions, subject, conditionsOrFields, conditions) {
-    if (!isStringOrNonEmptyArray(actions)) {
-      throw new TypeError('AbilityBuilder#can expects the first parameter to be an action or array of actions');
-    }
-
-    if (!isStringOrNonEmptyArray(subject)) {
-      throw new TypeError('AbilityBuilder#can expects the second argument to be a subject name or array of subject names');
-    }
-
-    const rule = { actions, subject, fields: null, conditions: null };
-
-    if (Array.isArray(conditionsOrFields) || typeof conditionsOrFields === 'string') {
-      rule.fields = conditionsOrFields;
-    }
-
-    if (isObject(conditions) || !rule.fields && isObject(conditionsOrFields)) {
-      rule.conditions = conditions || conditionsOrFields;
-    }
-
-    this.rules.push(rule);
-
-    return new RuleBuilder(rule);
-  }
-
-  cannot(actions, subject, conditionsOrFields, conditions) {
-    const builder = this.can(actions, subject, conditionsOrFields, conditions);
-    builder.rule.inverted = true;
-
-    return builder;
-  }
-}
-
-export { Rule, RuleBuilder, AbilityBuilder, ForbiddenError }; // Ability,
