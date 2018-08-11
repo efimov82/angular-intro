@@ -1,6 +1,6 @@
 // import { abilityUser } from './abilities';
-import { Course } from '@shared/models/course.model';
-import { AbilityBuilder } from '@casl/ability'
+// import { Course } from '@shared/models/course.model';
+//import { AbilityBuilder } from '@casl/ability'
 
 // export const abilityGuest = AbilityBuilder.define(can => {
 //   can('read', 'all')

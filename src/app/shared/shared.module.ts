@@ -1,3 +1,5 @@
+import { CanPipe } from './../permissions/pipes/can.pipe';
+import { PermissionsModule } from './../permissions/permissions.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -6,9 +8,6 @@ import { StorageServiceModule } from 'angular-webstorage-service';
 
 import { MaterialsModule } from '../materials/materials.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
-// Abilities
-import { AbilityModule } from '@casl/angular'
 
 import {
   BreadcrumbsComponent,
@@ -27,6 +26,7 @@ import {
   FreshCourseDirective,
   OnlyNumbersDirective,
 } from './directives';
+import { Ability } from '@app/permissions/classes';
 
 const COMPONENTS = [
   BreadcrumbsComponent,
@@ -55,7 +55,8 @@ const PIPES = [
     MaterialsModule,
     RouterModule,
     StorageServiceModule,
-    AbilityModule,
+    //AbilityModule,
+    PermissionsModule
   ],
   declarations: [
     ...COMPONENTS,
@@ -71,11 +72,14 @@ const PIPES = [
     ReactiveFormsModule,
     MaterialsModule,
     StorageServiceModule,
-    AbilityModule,
+    PermissionsModule
   ],
   entryComponents: [
     ConfirmDialogComponent
   ],
-  providers: []
+  providers: [
+    //Ability,
+    { provide: Ability, useValue: new Ability() }
+  ]
 })
 export class SharedModule { }

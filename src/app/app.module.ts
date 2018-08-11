@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -47,7 +48,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: NGX_MAT_FILE_INPUT_CONFIG, useValue: config }
+    { provide: NGX_MAT_FILE_INPUT_CONFIG, useValue: config },
   ],
   bootstrap: [AppComponent]
 })
