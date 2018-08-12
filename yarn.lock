@@ -201,16 +201,6 @@
   dependencies:
     url "^0.11.0"
 
-"@casl/ability@^2.4.2":
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/@casl/ability/-/ability-2.4.2.tgz#16a161b4895281ecd678739e955dad99e394896b"
-  dependencies:
-    sift "^6.0.0"
-
-"@casl/angular@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@casl/angular/-/angular-0.3.1.tgz#217257bf13ed956fb6a0f9ad4c33f282dec5fdd1"
-
 "@ngtools/webpack@6.0.8":
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-6.0.8.tgz#a05bce526aee9da62bb230a95fba83fee99d0bca"

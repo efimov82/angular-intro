@@ -180,9 +180,18 @@ function getSubjectName(subject) {
     return subject;
   }
 
-  const Type = typeof subject === 'object' ? subject.constructor : subject;
+  let Type = undefined;
+  if (typeof subject === 'object') {
+    if (subject.modelName) {
+      Type = subject.modelName;
+    } else {
+      Type = subject.constructor.name;
+    }
+  } else {
+    Type = subject;
+  }
 
-  return Type.modelName || Type.name;
+  return Type;
 }
 
 function clone(object) {

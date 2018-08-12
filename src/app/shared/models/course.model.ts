@@ -3,6 +3,8 @@ import { Course as CourseInterface }  from '../interfaces';
 import { FileInput } from 'ngx-material-file-input';
 
 export class Course implements CourseInterface {
+  readonly modelName = 'Course';
+
   _id: number;
   ownerId: string;
   owner: User | null;
