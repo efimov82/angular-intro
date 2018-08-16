@@ -1,7 +1,7 @@
 import { User } from '@app/shared/interfaces/user';
 
 export interface Course {
-  _id: number;
+  _id: string;
   ownerId: string;
   owner: User | null;
   slug: string;

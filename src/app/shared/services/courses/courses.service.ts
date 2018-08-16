@@ -7,7 +7,7 @@ import {
   Course as CourseInterface
 } from '@shared/interfaces';
 import { CoursesServiceInterface } from './corses.service.interface';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Course } from '@shared/models/course.model';
 
 import { environment } from '@environments/environment';

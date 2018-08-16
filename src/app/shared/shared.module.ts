@@ -1,12 +1,18 @@
-import { PermissionsModule } from './../permissions/permissions.module';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'angular-webstorage-service';
 
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+
 import { MaterialsModule } from '../materials/materials.module';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { PermissionsModule } from './../permissions/permissions.module';
+//store
+import { CoursesStoreEffects } from './store/effects/courses';
+import { courseReducer } from '@app/shared/store/reducers/courses';
 
 import {
   BreadcrumbsComponent,
@@ -53,8 +59,10 @@ const PIPES = [
     MaterialsModule,
     RouterModule,
     StorageServiceModule,
-    //AbilityModule,
-    PermissionsModule
+    PermissionsModule,
+
+    StoreModule.forFeature('courses', courseReducer),
+    EffectsModule.forFeature([CoursesStoreEffects])
   ],
   declarations: [
     ...COMPONENTS,

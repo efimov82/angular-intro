@@ -1,3 +1,4 @@
+import { EffectsModule } from '@ngrx/effects';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +19,11 @@ import { NGX_MAT_FILE_INPUT_CONFIG } from 'ngx-material-file-input';
 import { FileInputConfig } from 'ngx-material-file-input/lib/model/file-input-config.model';
 import { ProfileModule } from '@app/profile/profile.module';
 
+
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+
 export const config: FileInputConfig = {
   sizeUnit: 'Octet'
 };
@@ -35,6 +41,9 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+
     // Routing
     RouterModule.forRoot(
       appRoutes,
@@ -45,6 +54,8 @@ const appRoutes: Routes = [
     CoursesModule,
     SharedModule,
     ProfileModule,
+
+    // !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
