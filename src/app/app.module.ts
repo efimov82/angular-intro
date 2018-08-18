@@ -55,7 +55,9 @@ const appRoutes: Routes = [
     SharedModule,
     ProfileModule,
 
-    // !environment.production ? StoreDevtoolsModule.instrument() : [],
+    !environment.production ? StoreDevtoolsModule.instrument({
+      maxAge: 20
+    }) : [],
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

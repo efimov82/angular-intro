@@ -1,10 +1,14 @@
 <div layout="row" class="header">
-  <div flex><app-header></app-header></div>
+  <div flex>
+    <app-header></app-header>
+  </div>
 </div>
 <!--
 <div layout="row">
   <app-breadcrumbs></app-breadcrumbs>
 </div> -->
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="ball-spin-fade"></ngx-spinner>
 
 <div layout="row" class="content">
   <router-outlet></router-outlet>

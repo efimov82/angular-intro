@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'angular-webstorage-service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -11,7 +12,9 @@ import { StoreModule } from '@ngrx/store';
 import { MaterialsModule } from '../materials/materials.module';
 import { PermissionsModule } from './../permissions/permissions.module';
 //store
-import { CoursesStoreEffects } from './store/effects/courses';
+import { CoursesEffects } from './store/effects/courses';
+import { SnackBarEffects } from './store/effects/snackBar';
+
 import { courseReducer } from '@app/shared/store/reducers/courses';
 
 import {
@@ -60,9 +63,10 @@ const PIPES = [
     RouterModule,
     StorageServiceModule,
     PermissionsModule,
-
+    NgxSpinnerModule,
     StoreModule.forFeature('courses', courseReducer),
-    EffectsModule.forFeature([CoursesStoreEffects])
+    // StoreModule.forFeature('snackBar', snackBarReducer),
+    EffectsModule.forFeature([ CoursesEffects, SnackBarEffects ]),
   ],
   declarations: [
     ...COMPONENTS,
@@ -78,7 +82,8 @@ const PIPES = [
     ReactiveFormsModule,
     MaterialsModule,
     StorageServiceModule,
-    PermissionsModule
+    PermissionsModule,
+    NgxSpinnerModule
   ],
   entryComponents: [
     ConfirmDialogComponent

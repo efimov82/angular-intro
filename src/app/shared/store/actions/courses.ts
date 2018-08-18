@@ -1,22 +1,55 @@
-import { Course } from '@shared/interfaces';
+import { EntityAdapter } from '@ngrx/entity';
+import { Course } from '@shared/models/course.model';
 import { Action } from '@ngrx/store';
 
 
 export enum ActionTypes {
-  ADD          = '[Courses] Add Request',
-  LOAD_MORE    = '[Courses] Load more',
-  LOAD_REQUEST = '[Courses] Load Request',
-  LOAD_FAILURE = '[Courses] Load Failure',
-  LOAD_SUCCESS = '[Courses] Load Success'
+  ADD                 = '[Courses] Add Request',
+  ADD_SUCCESS         = '[Courses] Add Success',
+  ADD_FAILURE         = '[Courses] Add Failure',
+  EDIT                = '[Courses] Edit Request',
+  EDIT_SUCCESS        = '[Courses] Edit Success',
+  EDIT_FAILURE        = '[Courses] Edit Failure',
+  LOAD_MORE           = '[Courses] Load more',
+  LOAD_MORE_SUCCESS   = '[Courses] Load Success',
+  LOAD_FIRST_REQUEST  = '[Courses] Load First Request',
+  LOAD_FIRST_SUCCESS  = '[Courses] Load First Success',
+  LOAD_FAILURE        = '[Courses] Load Failure',
 }
 
-export class LoadRequestAction implements Action {
-  readonly type = ActionTypes.LOAD_REQUEST;
+export class LoadFirstRequestAction implements Action {
+  readonly type = ActionTypes.LOAD_FIRST_REQUEST;
+  constructor(public payload: { count: number, search: string }) {}
 }
 
 export class AddAction implements Action {
   readonly type = ActionTypes.ADD;
-  constructor(public payload: { course: Course }) {}
+  constructor(public payload: Course) {}
+}
+
+export class AddSuccessAction implements Action {
+  readonly type = ActionTypes.ADD_SUCCESS;
+  constructor(public payload: Course) {}
+}
+
+export class AddFailureAction implements Action {
+  readonly type = ActionTypes.ADD_FAILURE;
+  constructor(public payload: { error: string }) {}
+}
+
+export class EditAction implements Action {
+  readonly type = ActionTypes.EDIT;
+  constructor(public payload: { course: Course, data: any }) {}
+}
+
+export class EditSuccessAction implements Action {
+  readonly type = ActionTypes.EDIT_SUCCESS;
+  constructor(public payload: Course) {}
+}
+
+export class EditFailureAction implements Action {
+  readonly type = ActionTypes.EDIT_FAILURE;
+  constructor(public payload: { error: string }) {}
 }
 
 export class LoadMoreAction implements Action {
@@ -24,8 +57,13 @@ export class LoadMoreAction implements Action {
   constructor(public payload: { start: number, count: number, search: string }) {}
 }
 
-export class LoadSuccessAction implements Action {
-  readonly type = ActionTypes.LOAD_SUCCESS;
+export class LoadMoreSuccessAction implements Action {
+  readonly type = ActionTypes.LOAD_MORE_SUCCESS;
+  constructor(public payload: { items: Course[], total: number }) {}
+}
+
+export class LoadFirstSuccessAction implements Action {
+  readonly type = ActionTypes.LOAD_FIRST_SUCCESS;
   constructor(public payload: { items: Course[], total: number }) {}
 }
 
@@ -34,8 +72,15 @@ export class LoadFailureAction implements Action {
   constructor(public payload: { error: string }) {}
 }
 
-export type Actions = AddAction
+export type Actions =
+  | AddAction
+  | AddSuccessAction
+  | AddFailureAction
+  | EditAction
+  | EditSuccessAction
+  | EditFailureAction
+  | LoadFirstRequestAction
+  | LoadFirstSuccessAction
   | LoadMoreAction
-  | LoadRequestAction
-  | LoadSuccessAction
+  | LoadMoreSuccessAction
   | LoadFailureAction;

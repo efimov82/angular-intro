@@ -6,11 +6,13 @@ export interface AppState {
   currentUser: User;
   totalCourses: number;
   test: string;
+  // snackBar: any;
 }
 
 export const initialState: AppState = {
   courses: [],
   currentUser: null,
   totalCourses: 0,
-  test: ''
+  test: '',
+  // snackBar: '',
 }

@@ -1,18 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AddCourseComponent } from '@app/courses/components';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { Course } from '@shared/models/course.model';
-// import { Course as CourseInterface } from '@shared/interfaces'
-// import { CoursesService } from '@shared/services';
-//import { AuthService } from '@app/auth/services';
 // Store
 import { AppState } from '@shared/store/appState';
-import { LoadMoreAction } from '@shared/store/actions/courses';
-import { getCoursesSelector } from './../../../shared/store/selectors/courses';
+import {
+  AddAction,
+  EditAction,
+  LoadFirstRequestAction,
+  LoadMoreAction
+ } from '@shared/store/actions/courses';
+import { getCoursesSelector } from '@shared/store/selectors/courses';
 
 @Component({
   selector: 'app-courses',
@@ -20,7 +22,7 @@ import { getCoursesSelector } from './../../../shared/store/selectors/courses';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit, OnDestroy {
-  coursesSub: Subscription; // Course[]
+  coursesSub: Subscription;
   courses: Course[] = [];
   countAll: number = 0;
   numStartItem: number = 0;
@@ -28,30 +30,24 @@ export class CoursesComponent implements OnInit, OnDestroy {
   searchStr: string = '';
 
   constructor(
-    // private coursesService: CoursesService,
     private store$: Store<AppState>,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
   ) {
     this.coursesSub = this.store$.select(getCoursesSelector)// 'courses' -> return ALL Store
       .subscribe(data => {
-        console.log(data);
-        const length = data.courses.length;
-        if (!length) {
-          return;
-        }
-
-        this.numStartItem += length;
+        this.numStartItem += data.courses.length;
         this.countAll = data.total;
-
-        data.courses.map(course => {
-          this.courses.push(course);
-        });
+        this.courses = data.courses;
       });
    }
 
   ngOnInit() {
-    this.loadMore();
+    const payload = {
+      count:this.countItems,
+      search: this.searchStr
+    };
+
+    this.store$.dispatch(new LoadFirstRequestAction(payload));
   }
 
   loadMore() {
@@ -60,30 +56,15 @@ export class CoursesComponent implements OnInit, OnDestroy {
       count:this.countItems,
       search: this.searchStr
     };
+
     this.store$.dispatch(new LoadMoreAction(payload));
-
-    // this.coursesService.find(this.searchStr, this.numStartItem, this.countItems).subscribe(
-    //   resp => {
-    //     if (resp.items.length == 0) {
-    //       return;
-    //     }
-
-    //     this.numStartItem += resp.items.length;
-    //     this.countAll = resp.all;
-
-    //     resp.items.map(courseData => {
-    //       const course = new Course(<CourseInterface>courseData);
-    //       this.courses.push(course);
-    //     });
-    //   }
-    // );
   }
 
   searchCourses(searchStr: string) {
     this.searchStr = searchStr;
     this.numStartItem = 0;
     this.courses = [];
-    this.loadMore();
+    this.ngOnInit();
   }
 
 
@@ -95,7 +76,12 @@ export class CoursesComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.componentInstance.onSave.subscribe(course => {
-      try {
+      this.store$.dispatch(new AddAction(course));
+      dialogRef.close();
+      // Refresh data by reset search params + pagination
+      this.searchCourses('');
+
+        //try {
         // this.coursesService.add(course).subscribe(result => {
         //   if (result instanceof Course) {
         //     this.courses.push(result);
@@ -106,9 +92,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
         //     dialogRef.componentInstance.errors = result['errors'];
         //   }
         // });
-      } catch (error) {
-        dialogRef.componentInstance.errors = error['massage'];
-      }
+      // } catch (error) {
+      //   dialogRef.componentInstance.errors = error['massage'];
+      // }
     });
   }
 
@@ -119,6 +105,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.componentInstance.onSave.subscribe(data => {
+      this.store$.dispatch(new EditAction({course, data}));
+      dialogRef.close();
       // this.coursesService.edit(data).subscribe(result => {
       //   if (result instanceof Course) {
       //     course.import(result);
