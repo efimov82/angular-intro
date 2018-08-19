@@ -15,7 +15,7 @@ import { PermissionsModule } from './../permissions/permissions.module';
 //store
 import { CoursesEffects } from './store/effects/courses';
 import { SnackBarEffects } from './store/effects/snackBar';
-
+import { DialogEffects } from "./store/effects/dialog";
 import { courseReducer } from '@app/shared/store/reducers/courses';
 
 import {
@@ -67,7 +67,7 @@ const PIPES = [
     NgxSpinnerModule,
     StoreModule.forFeature('courses', courseReducer),
     // StoreModule.forFeature('snackBar', snackBarReducer),
-    EffectsModule.forFeature([ CoursesEffects, SnackBarEffects ]),
+    EffectsModule.forFeature([ CoursesEffects, DialogEffects, SnackBarEffects ]),
   ],
   declarations: [
     ...COMPONENTS,

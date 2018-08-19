@@ -162,7 +162,7 @@ export class CoursesService implements CoursesServiceInterface {
     );
   }
 
-  delete(course: Course): Observable<boolean> {
+  delete(course: Course): Observable<boolean|any> {
     let url = `${this.endPoint}/${course.slug}`;
 
     this.spinner.show();

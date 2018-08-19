@@ -1,4 +1,3 @@
-import { LoadFirstRequestAction } from './../actions/courses';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
@@ -7,7 +6,6 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 
 import * as coursesActions from '../actions/courses';
 import { CoursesService } from '@app/shared/services';
-import { Course as CourseInterface } from '@shared/interfaces';
 import { Course } from '@app/shared/models/course.model';
 import { SnackBarShowAction } from './../actions/snackBar';
 
@@ -90,7 +88,7 @@ export class CoursesEffects {
       coursesActions.ActionTypes.EDIT
     ),
     switchMap(action => {
-      const course = action.payload.course;
+      const course = action.payload;
       return this.coursesService.edit(course)
         .pipe(
           switchMap(response => {
@@ -112,14 +110,32 @@ export class CoursesEffects {
     )
   )
 
-  // @Effect()
-  // loadFailureEffect$: Observable<Action> = this.actions$.pipe(
-  //   ofType<coursesActions.LoadFailureAction>(
-  //     coursesActions.ActionTypes.LOAD_FAILURE
-  //   ),
-  //   switchMap(action => {
-
-  //   })
-  // )
+  @Effect()
+  deleteCourseEffect$: Observable<Action> = this.actions$.pipe(
+    ofType<coursesActions.EditAction>(
+      coursesActions.ActionTypes.DELETE_COURSE
+    ),
+    switchMap(action => {
+      const course = action.payload;
+      return this.coursesService.delete(course)
+        .pipe(
+          switchMap(response => {
+            if (response) {
+              return [
+                new coursesActions.DeleteSuccessAction(course),
+                new SnackBarShowAction({message: 'Course successfully deleted.', duration: 4000})
+              ]
+            } else {
+              //  ??? return
+              new coursesActions.DeleteFailureAction(response.res['errors'])
+            }
+        }),
+          catchError(error =>
+            observableOf(new coursesActions.EditFailureAction({ error }))
+          )
+        )
+      }
+    )
+  )
 
 }

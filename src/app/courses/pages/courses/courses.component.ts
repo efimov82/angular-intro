@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -11,9 +10,16 @@ import { AppState } from '@shared/store/appState';
 import {
   AddAction,
   EditAction,
+  DeleteAction,
   LoadFirstRequestAction,
   LoadMoreAction
  } from '@shared/store/actions/courses';
+
+import {
+  OpenDialogAction,
+  CloseDialogAction
+} from "@shared/store/actions/dialog";
+
 import { getCoursesSelector } from '@shared/store/selectors/courses';
 
 @Component({
@@ -31,7 +37,6 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   constructor(
     private store$: Store<AppState>,
-    private dialog: MatDialog,
   ) {
     this.coursesSub = this.store$.select(getCoursesSelector)// 'courses' -> return ALL Store
       .subscribe(data => {
@@ -67,85 +72,56 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.ngOnInit();
   }
 
-  addCourse() {
-    let course = new Course();
-    let dialogRef = this.dialog.open(AddCourseComponent, {
-      data: { course },
-      disableClose: false,
-    });
-
-    dialogRef.componentInstance.onSave.subscribe(course => {
-      this.store$.dispatch(new AddAction(course));
-      dialogRef.close();
-      // Refresh data by reset search params + pagination
-      this.searchCourses('');
-
-        //try {
-        // this.coursesService.add(course).subscribe(result => {
-        //   if (result instanceof Course) {
-        //     this.courses.push(result);
-
-        //     dialogRef.close();
-        //     this.snackBar.open('Course successfully added.', '', { duration: 4000 });
-        //   } else {
-        //     dialogRef.componentInstance.errors = result['errors'];
-        //   }
-        // });
-      // } catch (error) {
-      //   dialogRef.componentInstance.errors = error['massage'];
-      // }
-    });
-  }
-
-  edit(course: Course) {
-    let dialogRef = this.dialog.open(AddCourseComponent, {
-      data: { course },
-      disableClose: false
-    });
-
-    dialogRef.componentInstance.onSave.subscribe(courseForUpdate => {
-      this.store$.dispatch(new EditAction({course: courseForUpdate}));
-      dialogRef.close();
-      
-      // this.coursesService.edit(data).subscribe(result => {
-      //   if (result instanceof Course) {
-      //     course.import(result);
-      //     dialogRef.close();
-      //     this.snackBar.open('Course successfully updated.', '', { duration: 4000 });
-      //   } else {
-      //     dialogRef.componentInstance.errors = result['errors'];
-      //   }
-      // });
-    });
-  }
-
-  delete(course: Course) {
-    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      disableClose: false
-    });
-
-    dialogRef.componentInstance.confirmMessage = 'Are you sure you want delete this course?';
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == true) {
-        // this.coursesService.delete(course).subscribe(
-        //   res => {
-        //     if (res) {
-        //       this.countAll--;
-        //       this.courses = this.courses.filter(item => item !== course);
-
-        //       this.snackBar.open('Course deleted.', '', { duration: 4000 });
-        //     } else {
-        //       this.snackBar.open('Error course delete.', '', { duration: 4000 });
-        //     }
-        //   },
-        //   error => {
-        //     this.snackBar.open('Error course delete: ' + error.statusText, '', { duration: 4000 });
-        //   }
-        // );
-
+  public addCourse() {
+    this.store$.dispatch(new OpenDialogAction({
+      component: AddCourseComponent,
+      data: {
+        course: new Course(),
+        disableClose: false,
+        callbackOnSave: (course) => this.onSaveCallback(course)
       }
-    });
+    }));
+  }
+
+  public onSaveCallback(course: Course) {
+    this.store$.dispatch(new AddAction(course));
+    // Refresh data by reset search params + pagination
+    this.searchCourses('');
+    this.store$.dispatch(new CloseDialogAction());
+  }
+
+  public edit(course: Course) {
+    this.store$.dispatch(new OpenDialogAction({
+      component: AddCourseComponent,
+      data: {
+        course,
+        disableClose: false,
+        callbackOnSave: (course) => this.onUpdateCallback(course)
+      }
+    }));
+  }
+
+  public onUpdateCallback(course: Course) {
+    this.store$.dispatch(new EditAction(course));
+    this.store$.dispatch(new CloseDialogAction());
+  }
+
+  public delete(course: Course) {
+    this.store$.dispatch(new OpenDialogAction({
+      component: ConfirmDialogComponent,
+      data: {
+        confirmMessage: 'Are you sure you want delete this course?',
+        object: course,
+        callbackFunction: (result, course) => this.onDeleteCallback(result, course)
+      }})
+    );
+  }
+
+  onDeleteCallback(result: boolean, course: Course) {
+    if (result == true) {
+      this.store$.dispatch(new DeleteAction(course));
+    }
+    this.store$.dispatch(new CloseDialogAction());
   }
 
   ngOnDestroy() {

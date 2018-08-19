@@ -1,7 +1,5 @@
-import { EntityAdapter } from '@ngrx/entity';
 import { Course } from '@shared/models/course.model';
 import { Action } from '@ngrx/store';
-
 
 export enum ActionTypes {
   ADD                 = '[Courses] Add Request',
@@ -10,6 +8,9 @@ export enum ActionTypes {
   EDIT                = '[Courses] Edit Request',
   EDIT_SUCCESS        = '[Courses] Edit Success',
   EDIT_FAILURE        = '[Courses] Edit Failure',
+  DELETE_COURSE       = '[Courses] Delete Request',
+  DELETE_SUCCESS      = '[Courses] Delete Success',
+  DELETE_FAILURE      = '[Courses] Delete Failure',
   LOAD_MORE           = '[Courses] Load more',
   LOAD_MORE_SUCCESS   = '[Courses] Load Success',
   LOAD_FIRST_REQUEST  = '[Courses] Load First Request',
@@ -39,7 +40,7 @@ export class AddFailureAction implements Action {
 
 export class EditAction implements Action {
   readonly type = ActionTypes.EDIT;
-  constructor(public payload: { course: Course }) {}
+  constructor(public payload: Course) {}
 }
 
 export class EditSuccessAction implements Action {
@@ -49,6 +50,21 @@ export class EditSuccessAction implements Action {
 
 export class EditFailureAction implements Action {
   readonly type = ActionTypes.EDIT_FAILURE;
+  constructor(public payload: { error: string }) {}
+}
+
+export class DeleteAction implements Action {
+  readonly type = ActionTypes.DELETE_COURSE;
+  constructor(public payload: Course) {}
+}
+
+export class DeleteSuccessAction implements Action {
+  readonly type = ActionTypes.DELETE_SUCCESS;
+  constructor(public payload: Course) {}
+}
+
+export class DeleteFailureAction implements Action {
+  readonly type = ActionTypes.DELETE_FAILURE;
   constructor(public payload: { error: string }) {}
 }
 
@@ -79,6 +95,9 @@ export type Actions =
   | EditAction
   | EditSuccessAction
   | EditFailureAction
+  | DeleteAction
+  | DeleteSuccessAction
+  | DeleteFailureAction
   | LoadFirstRequestAction
   | LoadFirstSuccessAction
   | LoadMoreAction
