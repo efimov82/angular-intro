@@ -72,9 +72,10 @@ export class CoursesEffects {
           switchMap(response => {
             console.log(response);
             return [
-            new coursesActions.AddSuccessAction(response),
-            new SnackBarShowAction({message: 'Course successfully added.', duration: 4000})
-          ]}),
+              new coursesActions.AddSuccessAction(response),
+              new SnackBarShowAction({message: 'Course successfully added.', duration: 4000})
+            ]
+          }),
           catchError(error =>
             observableOf(new coursesActions.AddFailureAction({ error }))
           )
@@ -82,5 +83,43 @@ export class CoursesEffects {
       }
     )
   )
+
+  @Effect()
+  editCourseEffect$: Observable<Action> = this.actions$.pipe(
+    ofType<coursesActions.EditAction>(
+      coursesActions.ActionTypes.EDIT
+    ),
+    switchMap(action => {
+      const course = action.payload.course;
+      return this.coursesService.edit(course)
+        .pipe(
+          switchMap(response => {
+            if (response instanceof Course) {
+              return [
+                new coursesActions.EditSuccessAction(response),
+                new SnackBarShowAction({message: 'Course successfully updated.', duration: 4000})
+              ]
+            } else {
+              //  ??? return
+              new coursesActions.EditFailureAction(response.res['errors'])
+            }
+        }),
+          catchError(error =>
+            observableOf(new coursesActions.EditFailureAction({ error }))
+          )
+        )
+      }
+    )
+  )
+
+  // @Effect()
+  // loadFailureEffect$: Observable<Action> = this.actions$.pipe(
+  //   ofType<coursesActions.LoadFailureAction>(
+  //     coursesActions.ActionTypes.LOAD_FAILURE
+  //   ),
+  //   switchMap(action => {
+
+  //   })
+  // )
 
 }

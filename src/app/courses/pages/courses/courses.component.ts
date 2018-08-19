@@ -67,7 +67,6 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.ngOnInit();
   }
 
-
   addCourse() {
     let course = new Course();
     let dialogRef = this.dialog.open(AddCourseComponent, {
@@ -104,9 +103,10 @@ export class CoursesComponent implements OnInit, OnDestroy {
       disableClose: false
     });
 
-    dialogRef.componentInstance.onSave.subscribe(data => {
-      this.store$.dispatch(new EditAction({course, data}));
+    dialogRef.componentInstance.onSave.subscribe(courseForUpdate => {
+      this.store$.dispatch(new EditAction({course: courseForUpdate}));
       dialogRef.close();
+      
       // this.coursesService.edit(data).subscribe(result => {
       //   if (result instanceof Course) {
       //     course.import(result);

@@ -39,7 +39,7 @@ export class AddFailureAction implements Action {
 
 export class EditAction implements Action {
   readonly type = ActionTypes.EDIT;
-  constructor(public payload: { course: Course, data: any }) {}
+  constructor(public payload: { course: Course }) {}
 }
 
 export class EditSuccessAction implements Action {

@@ -1,3 +1,4 @@
+import { HttpErrorHandler } from './services/http-error-handler.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -89,6 +90,7 @@ const PIPES = [
     ConfirmDialogComponent
   ],
   providers: [
+    HttpErrorHandler
   ]
 })
 export class SharedModule { }

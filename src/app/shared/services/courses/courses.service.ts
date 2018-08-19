@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError }  from 'rxjs/operators';
+import { map, catchError, retryWhen, finalize }  from 'rxjs/operators';
+import { genericRetryStrategy } from '@shared/rxjs-utils/rxjs-utils';
 
 import {
   CoursesResponse,
@@ -17,8 +18,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providedIn: 'root'
 })
 export class CoursesService implements CoursesServiceInterface {
-  endPoint = `${environment.restEndPoint}/courses`;
-  courses: Course[];
+  private endPoint = `${environment.restEndPoint}/courses`;
+  private timeLoaderHide = 600; // ms
+  private scalingDuration = 5000; // ms
+  private maxRetryAttempts = 5;
+  private excludedStatusCodes = [ 500 ];
 
   constructor(private http: HttpClient,
     private spinner: NgxSpinnerService
@@ -34,14 +38,23 @@ export class CoursesService implements CoursesServiceInterface {
           item.thumbnail = environment.restEndPoint + item.thumbnail;
         });
 
-        setTimeout(() => this.spinner.hide(), 1000);
         const courses = data['items'].map(item => new Course(item));
         return {
             items: courses,
             count: data['count'],
             all: data['all']
         };
-      })
+      }),
+      retryWhen(genericRetryStrategy({
+          scalingDuration: this.scalingDuration,
+          maxRetryAttempts: this.maxRetryAttempts,
+          excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
+      catchError(err => {
+        return throwError(err.error);
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
     );
   }
 
@@ -52,14 +65,22 @@ export class CoursesService implements CoursesServiceInterface {
     return this.http.get(url).pipe(
       map(response => {
         console.log(response);
-        setTimeout(() => this.spinner.hide(), 1000);
-
         if (response) {
           return new Course(<CourseInterface>response);
         } else {
           return null;
         }
-      })
+      }),
+      retryWhen(genericRetryStrategy({
+        scalingDuration: this.scalingDuration,
+        maxRetryAttempts: this.maxRetryAttempts,
+        excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
+      catchError(err => {
+        return throwError(err.error);
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
     );
   }
 
@@ -81,7 +102,6 @@ export class CoursesService implements CoursesServiceInterface {
       map(response => {
         const courseNew = new Course(<CourseInterface>response);
 
-        setTimeout(() => this.spinner.hide(), 1000);
         if (courseNew instanceof Course) {
           courseNew.setThunmnail(environment.restEndPoint + courseNew.thumbnail);
           return courseNew;
@@ -89,10 +109,16 @@ export class CoursesService implements CoursesServiceInterface {
           return { res: false, errors: response['message'] };
         }
       }),
+      retryWhen(genericRetryStrategy({
+        scalingDuration: this.scalingDuration,
+        maxRetryAttempts: this.maxRetryAttempts,
+        excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
       catchError(e => {
-        // console.log(e.error);
         return throwError(e.error);
-      })
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
     );
 
   }
@@ -115,8 +141,6 @@ export class CoursesService implements CoursesServiceInterface {
     return this.http.put(url, payload).pipe(
       map(response => {
         // check maybe need Try-Catch here
-        setTimeout(() => this.spinner.hide(), 1000);
-
         let courseNew = new Course(<CourseInterface>response);
         if (courseNew instanceof Course) {
           courseNew.setThunmnail(environment.restEndPoint + courseNew.thumbnail + '?v=' + Math.random());
@@ -124,7 +148,17 @@ export class CoursesService implements CoursesServiceInterface {
         } else {
           return { res: false, errors: response['message'] };
         }
-      })
+      }),
+      retryWhen(genericRetryStrategy({
+        scalingDuration: this.scalingDuration,
+        maxRetryAttempts: this.maxRetryAttempts,
+        excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
+      catchError(e => {
+        return throwError(e.error);
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
     );
   }
 
@@ -134,14 +168,22 @@ export class CoursesService implements CoursesServiceInterface {
     this.spinner.show();
     return this.http.delete(url).pipe(
       map(response => {
-        setTimeout(() => this.spinner.hide(), 1000);
-
         if (response['result'] == 'deleted') {
           return true;
         } else {
           return false;
         }
-      }
-    ));
+      }),
+      retryWhen(genericRetryStrategy({
+        scalingDuration: this.scalingDuration,
+        maxRetryAttempts: this.maxRetryAttempts,
+        excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
+      catchError(e => {
+        return throwError(e.error);
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
+    );
   }
 }
