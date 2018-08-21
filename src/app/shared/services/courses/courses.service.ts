@@ -11,6 +11,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angul
 import { Course } from '@shared/models/course.model';
 
 import { environment } from '@environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -19,17 +20,21 @@ export class CoursesService implements CoursesServiceInterface {
   endPoint = `${environment.restEndPoint}/courses`;
   courses: Course[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private spinner: NgxSpinnerService
+  ) {}
 
   find(searchString: string, start: number, countItems: number = 20): Observable<CoursesResponse> {
     let url = `${this.endPoint}?search=${searchString}&start=${start}&count=${countItems}`;
 
+    this.spinner.show();
     return this.http.get(url).pipe(
       map(data => {
         data['items'].map(item => {
           item.thumbnail = environment.restEndPoint + item.thumbnail;
         });
 
+        this.spinner.hide();
         return {
             items: data['items'],
             count: data['count'],

@@ -1,10 +1,7 @@
 <div>
   <div class="lable">Find Courses...</div>
-  <!-- <fa name="search"></fa> -->
   <div class="search-container">
-    <input type="text" class="input-search"
-      placeholder="Search by name, title, author or date"
-      [(ngModel)]="searchText" (keydown.enter)="clickSearch()">
+    <input type="text" #inputSearch (keyup)="term$.next($event.target.value)" [(ngModel)]="searchText" class="input-search" placeholder="Search by title or description">
     <button class="btn-search" (click)="clickSearch()">
       <fa name="search"></fa><span>Search</span>
     </button>

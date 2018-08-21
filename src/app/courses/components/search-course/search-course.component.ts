@@ -1,8 +1,10 @@
+import { Subject } from 'rxjs';
+import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
 import {
   Component,
-  OnInit,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 
 @Component({
@@ -10,16 +12,24 @@ import {
   templateUrl: './search-course.component.html',
   styleUrls: ['./search-course.component.scss']
 })
-export class SearchCourseComponent implements OnInit {
+export class SearchCourseComponent {
   searchText: string;
+  term$ = new Subject<string>();
+
   @Output() search: EventEmitter<string> = new EventEmitter();
 
-  ngOnInit() {
-    this.searchText = '';
+  constructor() {
+    this.term$.pipe(
+      debounceTime(500),
+      filter(value => value.length >= 3),
+      distinctUntilChanged(),
+      ).subscribe(value => {
+        console.log(value);
+        this.search.emit(value);
+      });
   }
 
   clickSearch() {
     this.search.emit(this.searchText);
   }
-
 }

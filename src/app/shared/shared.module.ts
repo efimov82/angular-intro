@@ -7,6 +7,7 @@ import { StorageServiceModule } from 'angular-webstorage-service';
 
 import { MaterialsModule } from '../materials/materials.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import {
   BreadcrumbsComponent,
@@ -53,8 +54,8 @@ const PIPES = [
     MaterialsModule,
     RouterModule,
     StorageServiceModule,
-    //AbilityModule,
-    PermissionsModule
+    PermissionsModule,
+    NgxSpinnerModule
   ],
   declarations: [
     ...COMPONENTS,
@@ -70,7 +71,8 @@ const PIPES = [
     ReactiveFormsModule,
     MaterialsModule,
     StorageServiceModule,
-    PermissionsModule
+    PermissionsModule,
+    NgxSpinnerModule
   ],
   entryComponents: [
     ConfirmDialogComponent
