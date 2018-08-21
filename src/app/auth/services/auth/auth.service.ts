@@ -1,4 +1,3 @@
-
 import { Inject, Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
@@ -27,18 +26,18 @@ export class AuthService {
     @Inject(SESSION_STORAGE) private storage: StorageService,
     private abilityService: Ability
   ){
-    let data = <User>this.storage.get(environment.storageKeyForUser);
-    if (data && data.authToken ) { // TODO add normal type checking
-      let isTokenExpired = this.jwtHelper.isTokenExpired(data.authToken);
-      if (isTokenExpired) {
-        this.logout();
-      } else {
-        this.setCurrentUser(data)
-      }
-    }
+    // let data = <User>this.storage.get(environment.storageKeyForUser);
+    // if (data && data.authToken ) { // TODO add normal type checking
+    //   let isTokenExpired = this.jwtHelper.isTokenExpired(data.authToken);
+    //   if (isTokenExpired) {
+    //     this.logout();
+    //   } else {
+    //     this.setCurrentUser(data)
+    //   }
+    // }
   }
 
-  public login(email: string, password: string): Observable<boolean> {
+  public login(email: string, password: string): Observable<User|null> {
     let url = this.endPoint + '/signin';
     return this.http.post(url, { email, password } )
       .pipe(
@@ -55,61 +54,61 @@ export class AuthService {
                 roles: data['roles'],
               };
 
-              this.setCurrentUser(user);
-              return true;
+              // this.setCurrentUser(user);
+              return user;
             } catch (e) {
-              return false;
+              return null;
             }
           } else {
-            return false;
+            return null;
           }
         })
     );
   }
 
-  public logout(): void {
-    this.setCurrentUser(null);
-  }
+  // public logout(): void {
+  //   this.setCurrentUser(null);
+  // }
 
-  protected setCurrentUser(user: User): void {
-    this.storage.set(environment.storageKeyForUser, user);
+  // protected setCurrentUser(user: User): void {
+  //   this.storage.set(environment.storageKeyForUser, user);
 
-    this._user = user;
-    this.updateAbilityRoles(user);
-    this.currentUser.next(user);
-  }
+  //   this._user = user;
+  //   this.updateAbilityRoles(user);
+  //   this.currentUser.next(user);
+  // }
 
-  public updateCurrentUser(user: User): void {
-    user.id = this._user.id;
-    user.authToken = this._user.authToken;
-    user.avatar = environment.restEndPoint + user.avatar;
-    this.setCurrentUser(user);
-  }
+  // public updateCurrentUser(user: User): void {
+  //   user.id = this._user.id;
+  //   user.authToken = this._user.authToken;
+  //   user.avatar = environment.restEndPoint + user.avatar;
+  //   this.setCurrentUser(user);
+  // }
 
-  public isAuthenticated(): boolean {
-    if (!this._user || !this._user.authToken) {
-      return false;
-    }
+  // public isAuthenticated(): boolean {
+  //   if (!this._user || !this._user.authToken) {
+  //     return false;
+  //   }
 
-    let token = this._user.authToken;
-    let isTokenExpired = this.jwtHelper.isTokenExpired(token);
-    if (isTokenExpired) {
-      this.logout();
-    }
+  //   let token = this._user.authToken;
+  //   let isTokenExpired = this.jwtHelper.isTokenExpired(token);
+  //   if (isTokenExpired) {
+  //     this.logout();
+  //   }
 
-    return !isTokenExpired;
-  }
+  //   return !isTokenExpired;
+  // }
 
-  public getAuthUser(): Observable<User> {
-    return this.currentUser;
-  }
+  // public getAuthUser(): Observable<User> {
+  //   return this.currentUser;
+  // }
 
-  protected updateAbilityRoles(user: User): Ability {
-    if (!user) {
-      return this.abilityService.update([]);
-    }
+  // protected updateAbilityRoles(user: User): Ability {
+  //   if (!user) {
+  //     return this.abilityService.update([]);
+  //   }
 
-    const ability = defineAbilityFor(user);
-    return this.abilityService.update(ability.rules);
-  }
+  //   const ability = defineAbilityFor(user);
+  //   return this.abilityService.update(ability.rules);
+  // }
 }

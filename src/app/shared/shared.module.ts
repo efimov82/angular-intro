@@ -1,4 +1,3 @@
-import { HttpErrorHandler } from './services/http-error-handler.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -12,11 +11,16 @@ import { StoreModule } from '@ngrx/store';
 
 import { MaterialsModule } from '../materials/materials.module';
 import { PermissionsModule } from './../permissions/permissions.module';
-//store
+//Effects
+import { AuthEffects } from './store/effects/auth';
 import { CoursesEffects } from './store/effects/courses';
 import { SnackBarEffects } from './store/effects/snackBar';
 import { DialogEffects } from "./store/effects/dialog";
+// Reducers
+import { authReducer } from '@app/shared/store/reducers/auth';
 import { courseReducer } from '@app/shared/store/reducers/courses';
+
+import { HttpErrorHandler } from './services/http-error-handler.service';
 
 import {
   BreadcrumbsComponent,
@@ -66,8 +70,9 @@ const PIPES = [
     PermissionsModule,
     NgxSpinnerModule,
     StoreModule.forFeature('courses', courseReducer),
+    StoreModule.forFeature('auth', authReducer),
     // StoreModule.forFeature('snackBar', snackBarReducer),
-    EffectsModule.forFeature([ CoursesEffects, DialogEffects, SnackBarEffects ]),
+    EffectsModule.forFeature([ AuthEffects, CoursesEffects, DialogEffects, SnackBarEffects ]),
   ],
   declarations: [
     ...COMPONENTS,

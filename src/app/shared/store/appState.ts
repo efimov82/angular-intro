@@ -5,14 +5,12 @@ export interface AppState {
   courses: Course[]; // Map<string,
   currentUser: User;
   totalCourses: number;
-  test: string;
-  // snackBar: any;
+  errorLoginMessage: string;
 }
 
 export const initialState: AppState = {
   courses: [],
   currentUser: null,
   totalCourses: 0,
-  test: '',
-  // snackBar: '',
+  errorLoginMessage: '',
 }
