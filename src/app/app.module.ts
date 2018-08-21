@@ -19,7 +19,6 @@ import { NGX_MAT_FILE_INPUT_CONFIG } from 'ngx-material-file-input';
 import { FileInputConfig } from 'ngx-material-file-input/lib/model/file-input-config.model';
 import { ProfileModule } from '@app/profile/profile.module';
 
-
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';

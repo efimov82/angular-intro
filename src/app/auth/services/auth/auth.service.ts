@@ -17,24 +17,26 @@ import { Ability } from '@app/permissions/classes';
 export class AuthService {
   public redirectUrl = '/';
   private endPoint = `${environment.restEndPoint}/auth`;
-  private currentUser = new BehaviorSubject<User>(null);
-  private _user: User = null;
+  //private currentUser = new BehaviorSubject<User>(null);
+  //private _user: User = null;
 
   constructor(
     public jwtHelper: JwtHelperService,
     private http: HttpClient,
     @Inject(SESSION_STORAGE) private storage: StorageService,
-    private abilityService: Ability
-  ){
-    // let data = <User>this.storage.get(environment.storageKeyForUser);
-    // if (data && data.authToken ) { // TODO add normal type checking
-    //   let isTokenExpired = this.jwtHelper.isTokenExpired(data.authToken);
-    //   if (isTokenExpired) {
-    //     this.logout();
-    //   } else {
-    //     this.setCurrentUser(data)
-    //   }
-    // }
+  ){ }
+
+  public getStorageData(): User|null {
+    let data = <User>this.storage.get(environment.storageKeyForUser);
+    if (data && data.authToken ) { // TODO add normal type checking
+      let isTokenExpired = this.jwtHelper.isTokenExpired(data.authToken);
+      if (isTokenExpired) {
+        this.storage.remove(environment.storageKeyForUser);
+        return null;
+      } else {
+        return data;
+      }
+    }
   }
 
   public login(email: string, password: string): Observable<User|null> {

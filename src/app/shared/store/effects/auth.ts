@@ -1,6 +1,4 @@
-import { User } from '@app/shared/interfaces/user';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
-import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 
 import { map, switchMap, catchError, tap } from 'rxjs/operators';
@@ -32,7 +30,6 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.login(payload.email, payload.password).pipe(
         map((user) => {
-          console.log(user);
           if (user) {
             return new LogInSuccess(user);
           } else {
@@ -60,10 +57,10 @@ export class AuthEffects {
   );
 
   //TODO: check of nessesary
-  @Effect({ dispatch: false })
-  LogInFailure: Observable<any> = this.actions$.pipe(
-    ofType(authActions.ActionTypes.LOGIN_FAILURE)
-  );
+  // @Effect({ dispatch: false })
+  // LogInFailure: Observable<any> = this.actions$.pipe(
+  //   ofType(authActions.ActionTypes.LOGIN_FAILURE)
+  // );
 
   @Effect({ dispatch: false })
   LogOut: Observable<any> = this.actions$.pipe(
@@ -71,8 +68,7 @@ export class AuthEffects {
     tap(() => {
       this.storage.remove(environment.storageKeyForUser);
       this.abilityService.update([]);
-      // this.router.navigate([this.authService.redirectUrl]);
+      this.router.navigate(['/']);
     })
   );
-
 }

@@ -26,7 +26,7 @@ export function defineAbilityFor(user: User) {
     default:
       break;
   }
-  console.log(rules);
+  //console.log(rules);
 
   const ab = new Ability();
   ab.update(rules);

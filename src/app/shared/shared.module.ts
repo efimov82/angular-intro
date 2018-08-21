@@ -71,8 +71,11 @@ const PIPES = [
     NgxSpinnerModule,
     StoreModule.forFeature('courses', courseReducer),
     StoreModule.forFeature('auth', authReducer),
-    // StoreModule.forFeature('snackBar', snackBarReducer),
-    EffectsModule.forFeature([ AuthEffects, CoursesEffects, DialogEffects, SnackBarEffects ]),
+    EffectsModule.forFeature([
+      AuthEffects,
+      CoursesEffects,
+      DialogEffects,
+      SnackBarEffects]),
   ],
   declarations: [
     ...COMPONENTS,
