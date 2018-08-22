@@ -1,8 +1,7 @@
-import { Component, OnInit, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Course } from '@app/shared/models/course.model';
-import { AuthService } from '@app/auth/services';
-import { Validators, FormBuilder, NgForm } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-add-course',
@@ -13,6 +12,7 @@ export class AddCourseComponent {
   course: Course = null;
   errors: String[];
   fileToUpload: File = null;
+  callbackOnSave: any;
 
   formCourse = this.fb.group({
     title: [null, Validators.required],
@@ -34,6 +34,7 @@ export class AddCourseComponent {
     this.course = data.course;
     this.course.thumbnailFile = null;
     this.formCourse.patchValue(this.course);
+    this.callbackOnSave = data.callbackOnSave;
    }
 
   onSubmit() {
@@ -41,7 +42,8 @@ export class AddCourseComponent {
     if (this.formCourse.valid)
     {
       this.course.import(data);
-      this.onSave.emit(this.course);
+      //this.onSave.emit(this.course);
+      this.callbackOnSave(this.course);
     } else {
       console.log(this.formCourse.errors);
     }

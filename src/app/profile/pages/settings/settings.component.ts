@@ -1,9 +1,11 @@
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Validators, FormBuilder } from '@angular/forms';
+//import { MatSnackBar } from '@angular/material';
+import { selectCurrentUser } from '@app/shared/store/selectors/auth';
+import { AppState } from '@shared/store/appState';
 import { ProfileService } from './../../services/profile.service';
 import { User } from '@app/shared/interfaces';
-import { MatSnackBar } from '@angular/material';
-import { AuthService } from '@app/auth/services';
-import { Validators, FormBuilder } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-settings',
@@ -28,18 +30,21 @@ export class SettingsComponent {
   currentUser: User = null;
 
   constructor(
-    private authService: AuthService,
     private fb: FormBuilder,
     private profileService: ProfileService,
-    private snackBar: MatSnackBar, )
+    private store$: Store<AppState>,
+    //private snackBar: MatSnackBar,
+  )
   {
-    this.authService.getAuthUser().subscribe(user => {
+    this.store$.select(selectCurrentUser).subscribe(user => {
       this.currentUser = user;
-      this.form.patchValue(user);
+      if (user) {
+        this.form.patchValue(user);
+      }
     });
    }
 
-   onSubmit() {
+  onSubmit() {
     if (this.form.invalid) {
       return;
     }
@@ -65,16 +70,16 @@ export class SettingsComponent {
     }
 
     this.submitted = true;
-    this.profileService.updateProfile(payload)
-      .subscribe(
-        response => {
-          this.authService.updateCurrentUser(<User>response);
+  //   this.profileService.updateProfile(payload)
+  //     .subscribe(
+  //       response => {
+  //         this.authService.updateCurrentUser(<User>response);
 
-          this.snackBar.open('Settings successfully updated.', '', { duration: 4000 });
-          this.submitted = false;
-        },
-        error => {
-          this.submitted = false;
-        });
-   }
+  //         this.snackBar.open('Settings successfully updated.', '', { duration: 4000 });
+  //         this.submitted = false;
+  //       },
+  //       error => {
+  //         this.submitted = false;
+  //       });
+  }
 }

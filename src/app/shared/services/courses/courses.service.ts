@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError }  from 'rxjs/operators';
+import { map, catchError, retryWhen, finalize }  from 'rxjs/operators';
+import { genericRetryStrategy } from '@shared/rxjs-utils/rxjs-utils';
 
 import {
   CoursesResponse,
   Course as CourseInterface
 } from '@shared/interfaces';
 import { CoursesServiceInterface } from './corses.service.interface';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Course } from '@shared/models/course.model';
 
 import { environment } from '@environments/environment';
@@ -17,8 +18,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providedIn: 'root'
 })
 export class CoursesService implements CoursesServiceInterface {
-  endPoint = `${environment.restEndPoint}/courses`;
-  courses: Course[];
+  private endPoint = `${environment.restEndPoint}/courses`;
+  private timeLoaderHide = 600; // ms
+  private scalingDuration = 5000; // ms
+  private maxRetryAttempts = 5;
+  private excludedStatusCodes = [ 500 ];
 
   constructor(private http: HttpClient,
     private spinner: NgxSpinnerService
@@ -34,33 +38,53 @@ export class CoursesService implements CoursesServiceInterface {
           item.thumbnail = environment.restEndPoint + item.thumbnail;
         });
 
-        this.spinner.hide();
+        const courses = data['items'].map(item => new Course(item));
         return {
-            items: data['items'],
+            items: courses,
             count: data['count'],
             all: data['all']
-          };
-      })
+        };
+      }),
+      retryWhen(genericRetryStrategy({
+          scalingDuration: this.scalingDuration,
+          maxRetryAttempts: this.maxRetryAttempts,
+          excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
+      catchError(err => {
+        return throwError(err.error);
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
     );
   }
 
   findBySlug(slug: string): Observable<Course|null> {
     let url = `${this.endPoint}/${slug}`;
 
+    this.spinner.show();
     return this.http.get(url).pipe(
       map(response => {
         console.log(response);
-        let data = <CourseInterface>response;
-        if (data) {
-          return new Course(data);
+        if (response) {
+          return new Course(<CourseInterface>response);
         } else {
           return null;
         }
-      })
+      }),
+      retryWhen(genericRetryStrategy({
+        scalingDuration: this.scalingDuration,
+        maxRetryAttempts: this.maxRetryAttempts,
+        excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
+      catchError(err => {
+        return throwError(err.error);
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
     );
   }
 
-  add(course: Course): any {
+  add(course: Course): Observable<Course| any> {
     let payload = new FormData();
     payload.append('authors', course.authors);
     payload.append('duration', course.duration.toString());
@@ -72,22 +96,29 @@ export class CoursesService implements CoursesServiceInterface {
       payload.append('thumbnail', course.thumbnailFile.files[0], course.thumbnailFile.files[0].name);
     }
 
+    this.spinner.show();
+
     return this.http.post(this.endPoint, payload).pipe(
       map(response => {
-        let courseNew = new Course(<CourseInterface>response);
+        const courseNew = new Course(<CourseInterface>response);
+
         if (courseNew instanceof Course) {
           courseNew.setThunmnail(environment.restEndPoint + courseNew.thumbnail);
-          // console.log(courseNew);
-
           return courseNew;
         } else {
           return { res: false, errors: response['message'] };
         }
       }),
+      retryWhen(genericRetryStrategy({
+        scalingDuration: this.scalingDuration,
+        maxRetryAttempts: this.maxRetryAttempts,
+        excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
       catchError(e => {
-        // console.log(e.error);
         return throwError(e.error);
-      })
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
     );
 
   }
@@ -105,6 +136,8 @@ export class CoursesService implements CoursesServiceInterface {
       payload.append('thumbnail', course.thumbnailFile.files[0], course.thumbnailFile.files[0].name);
     }
 
+    this.spinner.show();
+
     return this.http.put(url, payload).pipe(
       map(response => {
         // check maybe need Try-Catch here
@@ -115,13 +148,24 @@ export class CoursesService implements CoursesServiceInterface {
         } else {
           return { res: false, errors: response['message'] };
         }
-      })
+      }),
+      retryWhen(genericRetryStrategy({
+        scalingDuration: this.scalingDuration,
+        maxRetryAttempts: this.maxRetryAttempts,
+        excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
+      catchError(e => {
+        return throwError(e.error);
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
     );
   }
 
-  delete(course: Course): Observable<boolean> {
+  delete(course: Course): Observable<boolean|any> {
     let url = `${this.endPoint}/${course.slug}`;
 
+    this.spinner.show();
     return this.http.delete(url).pipe(
       map(response => {
         if (response['result'] == 'deleted') {
@@ -129,7 +173,17 @@ export class CoursesService implements CoursesServiceInterface {
         } else {
           return false;
         }
-      }
-    ));
+      }),
+      retryWhen(genericRetryStrategy({
+        scalingDuration: this.scalingDuration,
+        maxRetryAttempts: this.maxRetryAttempts,
+        excludedStatusCodes: this.excludedStatusCodes
+        })
+      ),
+      catchError(e => {
+        return throwError(e.error);
+      }),
+      finalize(() => setTimeout(() => this.spinner.hide(), this.timeLoaderHide))
+    );
   }
 }
