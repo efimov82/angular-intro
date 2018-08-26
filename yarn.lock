@@ -4007,6 +4007,19 @@ next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
+ng2-material-dropdown@0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/ng2-material-dropdown/-/ng2-material-dropdown-0.10.1.tgz#0120ce1bbabfb065c62610fe3b572cd09f61b1e1"
+  dependencies:
+    tslib "^1.9.0"
+
+ngx-chips@^1.9.5:
+  version "1.9.5"
+  resolved "https://registry.yarnpkg.com/ngx-chips/-/ngx-chips-1.9.5.tgz#92fabcf843b61db5501dfefcd33b8b6b9bd0d75a"
+  dependencies:
+    ng2-material-dropdown "0.10.1"
+    tslib "^1.9.0"
+
 ngx-material-file-input@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/ngx-material-file-input/-/ngx-material-file-input-0.2.0.tgz#dd18c3a4ddde9d033472f1009fc6bd19b9b0c893"
