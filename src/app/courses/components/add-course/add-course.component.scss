@@ -1,60 +1,53 @@
 @import 'src/styles/variables.scss';
-
 .container {
   width: 500px;
   padding: 15px 20px 30px;
-
   .header {
     height: 35px;
-
     .title {
       font-size: $font-size-big;
       font-weight: bold;
     }
-
     .btn-close {
       font-weight: bold;
       cursor: pointer;
       float: right;
     }
   }
-
   .row {
     width: 100%;
   }
-
   .date {
     width: 180px;
   }
-
   .duration {
     margin: 0 0 0 30px;
     width: 100px;
   }
-
-  .youtube-id{
+  .youtube-id {
     width: 200px;
   }
-
   .fields {
     margin: 15px 0 20px 0;
   }
-
   .panel {
     .mandatory-lable {
       width: 80%;
     }
-
     button {
       margin-left: 20px;
       float: right;
     }
   }
-
 }
 
 .mat-save {
   background-color: $color-head-text;
+  color: #fff;
+}
+
+.mat-dis {
+  border: 1px solid $font-color-secondary;
   color: #fff;
 }
 

@@ -8,10 +8,10 @@
 
     <div class="fields">
       <mat-form-field class="row title">
-        <input matInput formControlName="title" placeholder="Title *" autocomplete="off">
+        <input matInput formControlName="title" placeholder="Title *" autocomplete="off" maxlength="50">
       </mat-form-field>
       <mat-form-field class="row details">
-        <textarea matInput formControlName="description" placeholder="Details *" rows="4" autocomplete="off"></textarea>
+        <textarea matInput formControlName="description" placeholder="Details *" rows="4" autocomplete="off" maxlength="500"></textarea>
       </mat-form-field>
       <mat-form-field class="date">
         <input matInput [matDatepicker]="picker" formControlName="dateCreation" placeholder="Date *">
@@ -38,7 +38,7 @@
     <div class="panel">
 
       <span class="mandatory-lable"><strong>*</strong> Mandatory fields </span>
-      <button mat-button class="btn-save" [color]="'save'">Save</button>
+      <button mat-button class="btn-save" [color]="!formCourse.valid ? 'dis':'save'" [disabled]="!formCourse.valid">Save</button>
       <button mat-button (click)="cancel()" [color]="'cancel'">Cancel</button>
     </div>
 
