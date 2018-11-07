@@ -42,7 +42,6 @@ export class AddCourseComponent {
     if (this.formCourse.valid)
     {
       this.course.import(data);
-      //this.onSave.emit(this.course);
       this.callbackOnSave(this.course);
     } else {
       console.log(this.formCourse.errors);

@@ -9,6 +9,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+// import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MaterialsModule } from '../materials/materials.module';
 import { PermissionsModule } from './../permissions/permissions.module';
 //Effects
@@ -61,6 +64,7 @@ const PIPES = [
 @NgModule({
   imports: [
     AngularFontAwesomeModule,
+    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -69,6 +73,7 @@ const PIPES = [
     StorageServiceModule,
     PermissionsModule,
     NgxSpinnerModule,
+    // TagInputModule,
     StoreModule.forFeature('courses', courseReducer),
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([
@@ -92,7 +97,8 @@ const PIPES = [
     MaterialsModule,
     StorageServiceModule,
     PermissionsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    // TagInputModule
   ],
   entryComponents: [
     ConfirmDialogComponent
